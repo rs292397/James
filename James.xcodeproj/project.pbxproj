@@ -1,0 +1,746 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9302F89E1961F40900BAAAF4 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 9302F89D1961F40900BAAAF4 /* rocket.png */; };
+		9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */; };
+		9307EAAA195B590D0050BBEC /* rcktAreasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9307EAA9195B590D0050BBEC /* rcktAreasViewController.m */; };
+		9307EAAD195B5C5F0050BBEC /* rcktArea2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9307EAAC195B5C5F0050BBEC /* rcktArea2TableViewCell.m */; };
+		9307EAB1195B6B480050BBEC /* rcktLightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9307EAB0195B6B480050BBEC /* rcktLightsViewController.m */; };
+		93082D9D1979B1BD00465F68 /* rckt.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082D9C1979B1BD00465F68 /* rckt.m */; };
+		93082D9F1979B91100465F68 /* light_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082D9E1979B91100465F68 /* light_icon.png */; };
+		93082DA11979B91B00465F68 /* scene_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA01979B91B00465F68 /* scene_icon.png */; };
+		93082DA31979B92400465F68 /* switch_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA21979B92400465F68 /* switch_icon.png */; };
+		93082DA51979B93200465F68 /* scenario_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA41979B93200465F68 /* scenario_icon.png */; };
+		93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DA71979C40E00465F68 /* rcktLabelTableViewCell.m */; };
+		93082DB21979CE9E00465F68 /* rcktSettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DB11979CE9E00465F68 /* rcktSettingsDetailViewController.m */; };
+		93082DB51979D53200465F68 /* rcktLightsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DB41979D53200465F68 /* rcktLightsDetailViewController.m */; };
+		93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DBD1979D55E00465F68 /* rcktScenariosDetailViewController.m */; };
+		9308E8F719B39E8C00756CC6 /* rcktLightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9308E8F619B39E8C00756CC6 /* rcktLightTableViewCell.m */; };
+		930BAE6219B8D0D3008447E3 /* rcktSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 930BAE6119B8D0D3008447E3 /* rcktSceneTableViewCell.m */; };
+		930D6FB4197851810073D6BD /* rcktStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FB3197851810073D6BD /* rcktStringTableViewCell.m */; };
+		930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FBC197873730073D6BD /* rcktRootTableViewController.m */; };
+		930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */; };
+		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
+		9378AA6C195A027200E70473 /* rcktAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378AA6B195A027200E70473 /* rcktAreasTableViewController.m */; };
+		9378AA6F195A030F00E70473 /* rcktAreaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378AA6E195A030F00E70473 /* rcktAreaTableViewCell.m */; };
+		93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */; };
+		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
+		93F6730019AFA277009DE745 /* area_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93F672FF19AFA277009DE745 /* area_icon.png */; };
+		93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD5BC519B64E6D00C45491 /* rcktColorFormsheet.m */; };
+		93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */; };
+		93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD5C8419B6656F00C45491 /* drcolorpicker-brightnessguide.png */; };
+		93FE276119576A1C00977594 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276019576A1C00977594 /* Foundation.framework */; };
+		93FE276319576A1C00977594 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276219576A1C00977594 /* CoreGraphics.framework */; };
+		93FE276519576A1C00977594 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276419576A1C00977594 /* UIKit.framework */; };
+		93FE276B19576A1C00977594 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE276919576A1C00977594 /* InfoPlist.strings */; };
+		93FE276D19576A1C00977594 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE276C19576A1C00977594 /* main.m */; };
+		93FE277119576A1C00977594 /* rcktAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE277019576A1C00977594 /* rcktAppDelegate.m */; };
+		93FE277419576A1C00977594 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93FE277219576A1C00977594 /* Main.storyboard */; };
+		93FE277919576A1C00977594 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93FE277819576A1C00977594 /* Images.xcassets */; };
+		93FE278019576A1C00977594 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE277F19576A1C00977594 /* XCTest.framework */; };
+		93FE278119576A1C00977594 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276019576A1C00977594 /* Foundation.framework */; };
+		93FE278219576A1C00977594 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276419576A1C00977594 /* UIKit.framework */; };
+		93FE278A19576A1C00977594 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE278819576A1C00977594 /* InfoPlist.strings */; };
+		93FE278C19576A1C00977594 /* JamesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE278B19576A1C00977594 /* JamesTests.m */; };
+		93FE279719576ED200977594 /* rcktShowAreasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE279619576ED200977594 /* rcktShowAreasViewController.m */; };
+		93FE27A01957783E00977594 /* rcktTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE279F1957783E00977594 /* rcktTestViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		93FE278319576A1C00977594 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93FE275519576A1C00977594 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93FE275C19576A1C00977594;
+			remoteInfo = James;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9302F89D1961F40900BAAAF4 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket.png; path = ../../../../../Pictures/rocket.png; sourceTree = "<group>"; };
+		9303E9D01960997E00BAF3B2 /* rcktSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSplashViewController.h; sourceTree = "<group>"; };
+		9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSplashViewController.m; sourceTree = "<group>"; };
+		9307EAA8195B590D0050BBEC /* rcktAreasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAreasViewController.h; sourceTree = "<group>"; };
+		9307EAA9195B590D0050BBEC /* rcktAreasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAreasViewController.m; sourceTree = "<group>"; };
+		9307EAAB195B5C5F0050BBEC /* rcktArea2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktArea2TableViewCell.h; sourceTree = "<group>"; };
+		9307EAAC195B5C5F0050BBEC /* rcktArea2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktArea2TableViewCell.m; sourceTree = "<group>"; };
+		9307EAAF195B6B480050BBEC /* rcktLightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLightsViewController.h; sourceTree = "<group>"; };
+		9307EAB0195B6B480050BBEC /* rcktLightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLightsViewController.m; sourceTree = "<group>"; };
+		93082D9B1979B1BD00465F68 /* rckt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rckt.h; sourceTree = "<group>"; };
+		93082D9C1979B1BD00465F68 /* rckt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rckt.m; sourceTree = "<group>"; };
+		93082D9E1979B91100465F68 /* light_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_icon.png; path = ../../../../../Pictures/light_icon.png; sourceTree = "<group>"; };
+		93082DA01979B91B00465F68 /* scene_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scene_icon.png; path = ../../../../../Pictures/scene_icon.png; sourceTree = "<group>"; };
+		93082DA21979B92400465F68 /* switch_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_icon.png; path = ../../../../../Pictures/switch_icon.png; sourceTree = "<group>"; };
+		93082DA41979B93200465F68 /* scenario_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scenario_icon.png; path = ../../../../../Pictures/scenario_icon.png; sourceTree = "<group>"; };
+		93082DA61979C40E00465F68 /* rcktLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLabelTableViewCell.h; sourceTree = "<group>"; };
+		93082DA71979C40E00465F68 /* rcktLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLabelTableViewCell.m; sourceTree = "<group>"; };
+		93082DB01979CE9E00465F68 /* rcktSettingsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDetailViewController.h; sourceTree = "<group>"; };
+		93082DB11979CE9E00465F68 /* rcktSettingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSettingsDetailViewController.m; sourceTree = "<group>"; };
+		93082DB31979D53200465F68 /* rcktLightsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLightsDetailViewController.h; sourceTree = "<group>"; };
+		93082DB41979D53200465F68 /* rcktLightsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLightsDetailViewController.m; sourceTree = "<group>"; };
+		93082DBC1979D55E00465F68 /* rcktScenariosDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktScenariosDetailViewController.h; sourceTree = "<group>"; };
+		93082DBD1979D55E00465F68 /* rcktScenariosDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktScenariosDetailViewController.m; sourceTree = "<group>"; };
+		9308BED919771E7B003EE093 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9308E8F519B39E8C00756CC6 /* rcktLightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLightTableViewCell.h; sourceTree = "<group>"; };
+		9308E8F619B39E8C00756CC6 /* rcktLightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLightTableViewCell.m; sourceTree = "<group>"; };
+		930BAE6019B8D0D3008447E3 /* rcktSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSceneTableViewCell.h; sourceTree = "<group>"; };
+		930BAE6119B8D0D3008447E3 /* rcktSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSceneTableViewCell.m; sourceTree = "<group>"; };
+		930D6FB2197851810073D6BD /* rcktStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktStringTableViewCell.h; sourceTree = "<group>"; };
+		930D6FB3197851810073D6BD /* rcktStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktStringTableViewCell.m; sourceTree = "<group>"; };
+		930D6FBB197873730073D6BD /* rcktRootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktRootTableViewController.h; sourceTree = "<group>"; };
+		930D6FBC197873730073D6BD /* rcktRootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktRootTableViewController.m; sourceTree = "<group>"; };
+		930FEF2F19B78B9C001AC958 /* rcktColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktColorPickerView.h; sourceTree = "<group>"; };
+		930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorPickerView.m; sourceTree = "<group>"; };
+		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
+		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
+		9378AA6A195A027200E70473 /* rcktAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAreasTableViewController.h; sourceTree = "<group>"; };
+		9378AA6B195A027200E70473 /* rcktAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAreasTableViewController.m; sourceTree = "<group>"; };
+		9378AA6D195A030F00E70473 /* rcktAreaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAreaTableViewCell.h; sourceTree = "<group>"; };
+		9378AA6E195A030F00E70473 /* rcktAreaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAreaTableViewCell.m; sourceTree = "<group>"; };
+		93ECE38919B792E0007A92EC /* rcktDeviceTokenFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDeviceTokenFormsheet.h; sourceTree = "<group>"; };
+		93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDeviceTokenFormsheet.m; sourceTree = "<group>"; };
+		93F672FC19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktMasterNavAreasTableViewController.h; sourceTree = "<group>"; };
+		93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktMasterNavAreasTableViewController.m; sourceTree = "<group>"; };
+		93F672FF19AFA277009DE745 /* area_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = area_icon.png; path = ../../../../../Pictures/area_icon.png; sourceTree = "<group>"; };
+		93FD5BC419B64E6D00C45491 /* rcktColorFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktColorFormsheet.h; sourceTree = "<group>"; };
+		93FD5BC519B64E6D00C45491 /* rcktColorFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorFormsheet.m; sourceTree = "<group>"; };
+		93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drcolorpicker-colormap.png"; sourceTree = "<group>"; };
+		93FD5C8419B6656F00C45491 /* drcolorpicker-brightnessguide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drcolorpicker-brightnessguide.png"; sourceTree = "<group>"; };
+		93FE275D19576A1C00977594 /* James.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = James.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		93FE276019576A1C00977594 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		93FE276219576A1C00977594 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		93FE276419576A1C00977594 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		93FE276819576A1C00977594 /* James-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "James-Info.plist"; sourceTree = "<group>"; };
+		93FE276A19576A1C00977594 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		93FE276C19576A1C00977594 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		93FE276E19576A1C00977594 /* James-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "James-Prefix.pch"; sourceTree = "<group>"; };
+		93FE276F19576A1C00977594 /* rcktAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcktAppDelegate.h; sourceTree = "<group>"; };
+		93FE277019576A1C00977594 /* rcktAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rcktAppDelegate.m; sourceTree = "<group>"; };
+		93FE277319576A1C00977594 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		93FE277819576A1C00977594 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		93FE277E19576A1C00977594 /* JamesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JamesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		93FE277F19576A1C00977594 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		93FE278719576A1C00977594 /* JamesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JamesTests-Info.plist"; sourceTree = "<group>"; };
+		93FE278919576A1C00977594 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		93FE278B19576A1C00977594 /* JamesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JamesTests.m; sourceTree = "<group>"; };
+		93FE279519576ED200977594 /* rcktShowAreasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShowAreasViewController.h; sourceTree = "<group>"; };
+		93FE279619576ED200977594 /* rcktShowAreasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShowAreasViewController.m; sourceTree = "<group>"; };
+		93FE279E1957783E00977594 /* rcktTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktTestViewController.h; sourceTree = "<group>"; };
+		93FE279F1957783E00977594 /* rcktTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktTestViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		93FE275A19576A1C00977594 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93FE276319576A1C00977594 /* CoreGraphics.framework in Frameworks */,
+				93FE276519576A1C00977594 /* UIKit.framework in Frameworks */,
+				93FE276119576A1C00977594 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93FE277B19576A1C00977594 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93FE278019576A1C00977594 /* XCTest.framework in Frameworks */,
+				93FE278219576A1C00977594 /* UIKit.framework in Frameworks */,
+				93FE278119576A1C00977594 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9303E9CF1960995C00BAF3B2 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				9303E9D01960997E00BAF3B2 /* rcktSplashViewController.h */,
+				9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */,
+			);
+			name = Splash;
+			sourceTree = "<group>";
+		};
+		9303E9D319609B1700BAF3B2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				93FD5C8419B6656F00C45491 /* drcolorpicker-brightnessguide.png */,
+				93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */,
+				93F672FF19AFA277009DE745 /* area_icon.png */,
+				93082DA41979B93200465F68 /* scenario_icon.png */,
+				93082DA21979B92400465F68 /* switch_icon.png */,
+				93082DA01979B91B00465F68 /* scene_icon.png */,
+				93082D9E1979B91100465F68 /* light_icon.png */,
+				9302F89D1961F40900BAAAF4 /* rocket.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		9307EAA3195B52540050BBEC /* James */ = {
+			isa = PBXGroup;
+			children = (
+				93FD5BC319B64E4400C45491 /* Formsheets */,
+				93082DA91979CB3E00465F68 /* DetailViews */,
+				93082D9A1979B1A300465F68 /* Handlers */,
+				930D6FBA1978733D0073D6BD /* Navigation */,
+				930D6FB1197851450073D6BD /* TableViewCells */,
+				9303E9D319609B1700BAF3B2 /* Images */,
+				9303E9CF1960995C00BAF3B2 /* Splash */,
+				9307EAAE195B6B260050BBEC /* Lights */,
+				9307EAA4195B52600050BBEC /* Areas */,
+			);
+			name = James;
+			sourceTree = "<group>";
+		};
+		9307EAA4195B52600050BBEC /* Areas */ = {
+			isa = PBXGroup;
+			children = (
+				9307EAA8195B590D0050BBEC /* rcktAreasViewController.h */,
+				9307EAA9195B590D0050BBEC /* rcktAreasViewController.m */,
+				9307EAAB195B5C5F0050BBEC /* rcktArea2TableViewCell.h */,
+				9307EAAC195B5C5F0050BBEC /* rcktArea2TableViewCell.m */,
+			);
+			name = Areas;
+			sourceTree = "<group>";
+		};
+		9307EAAE195B6B260050BBEC /* Lights */ = {
+			isa = PBXGroup;
+			children = (
+				9307EAAF195B6B480050BBEC /* rcktLightsViewController.h */,
+				9307EAB0195B6B480050BBEC /* rcktLightsViewController.m */,
+			);
+			name = Lights;
+			sourceTree = "<group>";
+		};
+		93082D9A1979B1A300465F68 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				93082D9B1979B1BD00465F68 /* rckt.h */,
+				93082D9C1979B1BD00465F68 /* rckt.m */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
+		93082DA91979CB3E00465F68 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				93082DB31979D53200465F68 /* rcktLightsDetailViewController.h */,
+				93082DB41979D53200465F68 /* rcktLightsDetailViewController.m */,
+				93082DBC1979D55E00465F68 /* rcktScenariosDetailViewController.h */,
+				93082DBD1979D55E00465F68 /* rcktScenariosDetailViewController.m */,
+				93082DB01979CE9E00465F68 /* rcktSettingsDetailViewController.h */,
+				93082DB11979CE9E00465F68 /* rcktSettingsDetailViewController.m */,
+			);
+			name = DetailViews;
+			sourceTree = "<group>";
+		};
+		930D6FB1197851450073D6BD /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				930D6FB2197851810073D6BD /* rcktStringTableViewCell.h */,
+				930D6FB3197851810073D6BD /* rcktStringTableViewCell.m */,
+				93082DA61979C40E00465F68 /* rcktLabelTableViewCell.h */,
+				93082DA71979C40E00465F68 /* rcktLabelTableViewCell.m */,
+				9308E8F519B39E8C00756CC6 /* rcktLightTableViewCell.h */,
+				9308E8F619B39E8C00756CC6 /* rcktLightTableViewCell.m */,
+				930BAE6019B8D0D3008447E3 /* rcktSceneTableViewCell.h */,
+				930BAE6119B8D0D3008447E3 /* rcktSceneTableViewCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		930D6FBA1978733D0073D6BD /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				930D6FBB197873730073D6BD /* rcktRootTableViewController.h */,
+				930D6FBC197873730073D6BD /* rcktRootTableViewController.m */,
+				93F672FC19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.h */,
+				93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		93F7CE481975A8E600F4E8C7 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		93FD5BC319B64E4400C45491 /* Formsheets */ = {
+			isa = PBXGroup;
+			children = (
+				93FD5BC419B64E6D00C45491 /* rcktColorFormsheet.h */,
+				93FD5BC519B64E6D00C45491 /* rcktColorFormsheet.m */,
+				930FEF2F19B78B9C001AC958 /* rcktColorPickerView.h */,
+				930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */,
+				93ECE38919B792E0007A92EC /* rcktDeviceTokenFormsheet.h */,
+				93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */,
+				9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */,
+				9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */,
+			);
+			name = Formsheets;
+			sourceTree = "<group>";
+		};
+		93FE275419576A1C00977594 = {
+			isa = PBXGroup;
+			children = (
+				93FE276619576A1C00977594 /* rckt */,
+				93FE278519576A1C00977594 /* JamesTests */,
+				93FE275F19576A1C00977594 /* Frameworks */,
+				93FE275E19576A1C00977594 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		93FE275E19576A1C00977594 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				93FE275D19576A1C00977594 /* James.app */,
+				93FE277E19576A1C00977594 /* JamesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		93FE275F19576A1C00977594 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9308BED919771E7B003EE093 /* QuartzCore.framework */,
+				93FE276019576A1C00977594 /* Foundation.framework */,
+				93FE276219576A1C00977594 /* CoreGraphics.framework */,
+				93FE276419576A1C00977594 /* UIKit.framework */,
+				93FE277F19576A1C00977594 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93FE276619576A1C00977594 /* rckt */ = {
+			isa = PBXGroup;
+			children = (
+				93F7CE481975A8E600F4E8C7 /* Library */,
+				9307EAA3195B52540050BBEC /* James */,
+				93FE276F19576A1C00977594 /* rcktAppDelegate.h */,
+				93FE277019576A1C00977594 /* rcktAppDelegate.m */,
+				93FE277219576A1C00977594 /* Main.storyboard */,
+				93FE277819576A1C00977594 /* Images.xcassets */,
+				93FE276719576A1C00977594 /* Supporting Files */,
+				93FE279519576ED200977594 /* rcktShowAreasViewController.h */,
+				93FE279619576ED200977594 /* rcktShowAreasViewController.m */,
+				93FE279E1957783E00977594 /* rcktTestViewController.h */,
+				93FE279F1957783E00977594 /* rcktTestViewController.m */,
+				9378AA6A195A027200E70473 /* rcktAreasTableViewController.h */,
+				9378AA6B195A027200E70473 /* rcktAreasTableViewController.m */,
+				9378AA6D195A030F00E70473 /* rcktAreaTableViewCell.h */,
+				9378AA6E195A030F00E70473 /* rcktAreaTableViewCell.m */,
+			);
+			name = rckt;
+			path = James;
+			sourceTree = "<group>";
+		};
+		93FE276719576A1C00977594 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				93FE276819576A1C00977594 /* James-Info.plist */,
+				93FE276919576A1C00977594 /* InfoPlist.strings */,
+				93FE276C19576A1C00977594 /* main.m */,
+				93FE276E19576A1C00977594 /* James-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		93FE278519576A1C00977594 /* JamesTests */ = {
+			isa = PBXGroup;
+			children = (
+				93FE278B19576A1C00977594 /* JamesTests.m */,
+				93FE278619576A1C00977594 /* Supporting Files */,
+			);
+			path = JamesTests;
+			sourceTree = "<group>";
+		};
+		93FE278619576A1C00977594 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				93FE278719576A1C00977594 /* JamesTests-Info.plist */,
+				93FE278819576A1C00977594 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		93FE275C19576A1C00977594 /* James */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93FE278F19576A1C00977594 /* Build configuration list for PBXNativeTarget "James" */;
+			buildPhases = (
+				93FE275919576A1C00977594 /* Sources */,
+				93FE275A19576A1C00977594 /* Frameworks */,
+				93FE275B19576A1C00977594 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = James;
+			productName = James;
+			productReference = 93FE275D19576A1C00977594 /* James.app */;
+			productType = "com.apple.product-type.application";
+		};
+		93FE277D19576A1C00977594 /* JamesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93FE279219576A1C00977594 /* Build configuration list for PBXNativeTarget "JamesTests" */;
+			buildPhases = (
+				93FE277A19576A1C00977594 /* Sources */,
+				93FE277B19576A1C00977594 /* Frameworks */,
+				93FE277C19576A1C00977594 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93FE278419576A1C00977594 /* PBXTargetDependency */,
+			);
+			name = JamesTests;
+			productName = JamesTests;
+			productReference = 93FE277E19576A1C00977594 /* JamesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		93FE275519576A1C00977594 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = rckt;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Rckt;
+				TargetAttributes = {
+					93FE277D19576A1C00977594 = {
+						TestTargetID = 93FE275C19576A1C00977594;
+					};
+				};
+			};
+			buildConfigurationList = 93FE275819576A1C00977594 /* Build configuration list for PBXProject "James" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ar,
+				da,
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				nl,
+				pl,
+				pt,
+				ru,
+				sv,
+				"zh-Hans",
+				"zh-Hant",
+			);
+			mainGroup = 93FE275419576A1C00977594;
+			productRefGroup = 93FE275E19576A1C00977594 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				93FE275C19576A1C00977594 /* James */,
+				93FE277D19576A1C00977594 /* JamesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		93FE275B19576A1C00977594 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
+				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
+				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
+				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
+				93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */,
+				93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */,
+				93082DA31979B92400465F68 /* switch_icon.png in Resources */,
+				93FE277919576A1C00977594 /* Images.xcassets in Resources */,
+				93082DA51979B93200465F68 /* scenario_icon.png in Resources */,
+				93FE276B19576A1C00977594 /* InfoPlist.strings in Resources */,
+				93FE277419576A1C00977594 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93FE277C19576A1C00977594 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93FE278A19576A1C00977594 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		93FE275919576A1C00977594 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93082DB51979D53200465F68 /* rcktLightsDetailViewController.m in Sources */,
+				9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */,
+				93082D9D1979B1BD00465F68 /* rckt.m in Sources */,
+				93FE277119576A1C00977594 /* rcktAppDelegate.m in Sources */,
+				930D6FB4197851810073D6BD /* rcktStringTableViewCell.m in Sources */,
+				930BAE6219B8D0D3008447E3 /* rcktSceneTableViewCell.m in Sources */,
+				93FE276D19576A1C00977594 /* main.m in Sources */,
+				93082DB21979CE9E00465F68 /* rcktSettingsDetailViewController.m in Sources */,
+				93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */,
+				9307EAAA195B590D0050BBEC /* rcktAreasViewController.m in Sources */,
+				930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */,
+				9378AA6C195A027200E70473 /* rcktAreasTableViewController.m in Sources */,
+				9307EAB1195B6B480050BBEC /* rcktLightsViewController.m in Sources */,
+				93FE27A01957783E00977594 /* rcktTestViewController.m in Sources */,
+				93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */,
+				930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */,
+				9307EAAD195B5C5F0050BBEC /* rcktArea2TableViewCell.m in Sources */,
+				9308E8F719B39E8C00756CC6 /* rcktLightTableViewCell.m in Sources */,
+				9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */,
+				9378AA6F195A030F00E70473 /* rcktAreaTableViewCell.m in Sources */,
+				93FE279719576ED200977594 /* rcktShowAreasViewController.m in Sources */,
+				93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */,
+				93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */,
+				93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93FE277A19576A1C00977594 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93FE278C19576A1C00977594 /* JamesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		93FE278419576A1C00977594 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93FE275C19576A1C00977594 /* James */;
+			targetProxy = 93FE278319576A1C00977594 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		93FE276919576A1C00977594 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				93FE276A19576A1C00977594 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		93FE277219576A1C00977594 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				93FE277319576A1C00977594 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+			usesTabs = 0;
+		};
+		93FE278819576A1C00977594 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				93FE278919576A1C00977594 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		93FE278D19576A1C00977594 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		93FE278E19576A1C00977594 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		93FE279019576A1C00977594 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
+				INFOPLIST_FILE = "James/James-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		93FE279119576A1C00977594 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
+				INFOPLIST_FILE = "James/James-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		93FE279319576A1C00977594 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/James.app/James";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "JamesTests/JamesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		93FE279419576A1C00977594 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/James.app/James";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
+				INFOPLIST_FILE = "JamesTests/JamesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		93FE275819576A1C00977594 /* Build configuration list for PBXProject "James" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93FE278D19576A1C00977594 /* Debug */,
+				93FE278E19576A1C00977594 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93FE278F19576A1C00977594 /* Build configuration list for PBXNativeTarget "James" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93FE279019576A1C00977594 /* Debug */,
+				93FE279119576A1C00977594 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93FE279219576A1C00977594 /* Build configuration list for PBXNativeTarget "JamesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93FE279319576A1C00977594 /* Debug */,
+				93FE279419576A1C00977594 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 93FE275519576A1C00977594 /* Project object */;
+}
