@@ -9,6 +9,7 @@
 #import "rcktSaveSceneFormsheet.h"
 #import "rcktLightsDetailViewController.h"
 #import "rcktStringTableViewCell.h"
+#import "rcktPickerTableViewCell.h"
 #import "rckt.h"
 
 @interface rcktSaveSceneFormsheet () 
@@ -30,18 +31,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //initialize new mutable data
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+ 
     UINavigationItem *navitm = self.navbaritem;
     UIBarButtonItem *bl = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cmdCancel)];
     navitm.leftBarButtonItem = bl;
     UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(cmdSaveScene)];
     navitm.rightBarButtonItem = br;
     [self fetchScenesData:self.areaID];
-    settings = @{@"New Scene" : @[
-                         @[@"NAME", @"Name", @"all off"]
+    self.sceneSelectedID=@"0";
+    settings = @{@"" : @[
+                         @[@"SCENE", @"Select", @"New scene", @"pickerTableViewCell"],
+                         @[@"NAME", @"New name", @"all off", @"stringTableViewCell"]
                          ]
                  };
     settingSectionTitles = [[settings allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
+ 
 }
 
 - (void)setParams:(NSString*) areaID; {
@@ -84,31 +91,19 @@
 
 
 - (void)cmdSaveScene {
-    
-    NSString *urlServer = [[rckt alloc] GetServerURL];
-    NSString *postData;
 
-    if ([self.picker selectedRowInComponent:0] == 0) {
-        if (self.picker.hidden==NO) {
-            self.valuesTableView.hidden = NO;
-            self.picker.hidden = YES;
-        } else {
-            NSArray *cells = [_valuesTableView visibleCells];
-            for (rcktStringTableViewCell *cell in cells) {
-                if ([cell.key.text isEqualToString:@"NAME"]) {
-                    postData = [NSString stringWithFormat:@"{\"description\":\"%@\", \"area\":\"%@\"}", cell.txt.text, self.areaID];
-                    NSString *url = [NSString stringWithFormat:@"%@/saveScene/0", urlServer];
-                    [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
-
-                }
+    NSArray *cells = [self.valuesTableView visibleCells];
+    for (UITableViewCell *cell in cells) {
+        if ([cell isKindOfClass:[rcktStringTableViewCell class]]) {
+            rcktStringTableViewCell *rcktCell = (rcktStringTableViewCell*) cell;
+            if ([rcktCell.key.text isEqualToString:@"NAME"]) {
+                self.sceneNewName = [NSString stringWithFormat:@"%@", rcktCell.txt.text];
+                NSString *urlServer = [[rckt alloc] GetServerURL];
+                NSString *postData = [NSString stringWithFormat:@"{\"description\":\"%@\", \"area\":\"%@\"}", self.sceneNewName, self.areaID];
+                NSString *url = [NSString stringWithFormat:@"%@/saveScene/%@", urlServer, self.sceneSelectedID];
+                [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
             }
         }
-    } else {
-        NSDictionary *item = [self.scenesArray objectAtIndex:[self.picker selectedRowInComponent:0]];
-        postData = [NSString stringWithFormat:@"{\"description\":\"%@\", \"area\":\"%@\"}", item[@"description"], self.areaID];
-        NSString *url = [NSString stringWithFormat:@"%@/saveScene/%@", urlServer, item[@"ID"]];
-        [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
-
     }
 }
 
@@ -129,11 +124,7 @@
     //NSLog(@"%@", url.absoluteString);
     //NSLog(@"%@", postData);
     
-    //initialize new mutable data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
-    
-    //initialize url that is going to be fetched.
+     //initialize url that is going to be fetched.
     
     //initialize a request from url
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -179,17 +170,24 @@
     return item[@"description"];//[component];
 }
 
-/*
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    if (row==0) {
-        
-    } else {
-        NSDictionary *item = [self.scenesArray objectAtIndex:row];
-        NSLog(@"%@", item[@"description"]);//[component];
+    NSDictionary *item = [self.scenesArray objectAtIndex:row];
+    NSIndexPath *index = [NSIndexPath indexPathForRow:self.scenePickerIndexPath.row-1 inSection:self.scenePickerIndexPath.section];
+    UITableViewCell* cell = [self.valuesTableView cellForRowAtIndexPath:index];
+    if ([cell isKindOfClass:[rcktPickerTableViewCell class]]) {
+        rcktPickerTableViewCell *rcktCell = (rcktPickerTableViewCell*)cell;
+        self.sceneSelectedID = item[@"ID"];
+        rcktCell.txt.text = item[@"description"];
+    }
+    index = [NSIndexPath indexPathForRow:self.scenePickerIndexPath.row+1 inSection:self.scenePickerIndexPath.section];
+    cell = [self.valuesTableView cellForRowAtIndexPath:index];
+    if ([cell isKindOfClass:[rcktStringTableViewCell class]]) {
+        rcktStringTableViewCell *rcktCell = (rcktStringTableViewCell*)cell;
+        if (rcktCell.txt.text.length==0)
+            rcktCell.txt.text = item[@"description"];
     }
 }
-*/
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -206,26 +204,83 @@
     // Return the number of rows in the section.
     NSString *sectionTitle = [settingSectionTitles objectAtIndex:section];
     NSArray *sectionSettings = [settings objectForKey:sectionTitle];
-    return [sectionSettings count];
+    NSInteger numberOfRows = [sectionSettings count];
+    if ([self scenePickerIsShown])
+        numberOfRows ++;
+    return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"stringTableViewCell";
-    rcktStringTableViewCell *cell = [tableView
-                                     dequeueReusableCellWithIdentifier:CellIdentifier
-                                     forIndexPath:indexPath];
+    if ([self scenePickerIsShown] && self.scenePickerIndexPath.row == indexPath.row) {
+        static NSString *CellIdentifier = @"pickerValuesTableViewCell";
+        UITableViewCell *cell = [tableView
+                                         dequeueReusableCellWithIdentifier:CellIdentifier
+                                         forIndexPath:indexPath];
+        //UIPickerView *targetedPicker = (UIPickerView*) [cell viewWithTag:1];
+        //targetedPicker =
+        return cell;
+    } else {
+        NSString *sectionTitle = [settingSectionTitles objectAtIndex:indexPath.section];
+        NSArray *sectionSettings = [settings objectForKey:sectionTitle];
+        NSArray *sectionSetting = [sectionSettings objectAtIndex:indexPath.row];
+
+        NSString *CellIdentifier = [sectionSetting objectAtIndex:3];
+        UITableViewCell *cell = [tableView
+                                         dequeueReusableCellWithIdentifier:CellIdentifier
+                                         forIndexPath:indexPath];
+        
+        if ([cell isKindOfClass:[rcktStringTableViewCell class]]) {
+            rcktStringTableViewCell *rcktCell = (rcktStringTableViewCell*) cell;
+            rcktCell.key.text = [sectionSetting objectAtIndex:0];
+            rcktCell.lbl.text = [sectionSetting objectAtIndex:1];
+            rcktCell.txt.placeholder = [sectionSetting objectAtIndex:2];
+            rcktCell.txt.text = NULL;
+            return rcktCell;
+        } else if ([cell isKindOfClass:[rcktPickerTableViewCell class]]) {
+            rcktPickerTableViewCell *rcktCell = (rcktPickerTableViewCell*) cell;
+            rcktCell.key.text = [sectionSetting objectAtIndex:0];
+            rcktCell.lbl.text = [sectionSetting objectAtIndex:1];
+            rcktCell.txt.text = [sectionSetting objectAtIndex:2];
+            return rcktCell;
+        } else
+            return cell;
+    }
     
-    NSString *sectionTitle = [settingSectionTitles objectAtIndex:indexPath.section];
-    NSArray *sectionSettings = [settings objectForKey:sectionTitle];
-    NSArray *sectionSetting = [sectionSettings objectAtIndex:indexPath.row];
-    
-    cell.key.text = [sectionSetting objectAtIndex:0];
-    cell.lbl.text = [sectionSetting objectAtIndex:1];
-    cell.txt.placeholder = [sectionSetting objectAtIndex:2];
-    cell.txt.text = NULL;
-    return cell;
 }
+
+- (void)tableView: (UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView beginUpdates];
+    if ([self scenePickerIsShown]) {
+        if (indexPath.row != self.scenePickerIndexPath.row) {
+            NSArray *indexPaths = @[[NSIndexPath indexPathForRow:self.scenePickerIndexPath.row inSection:0]];
+            [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+            self.scenePickerIndexPath = nil;
+        }
+    } else {
+        self.scenePickerIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        NSArray *indexPaths = @[[NSIndexPath indexPathForRow:self.scenePickerIndexPath.row inSection:0]];
+        [tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    }
+    [tableView endUpdates];
+}
+
+- (CGFloat)tableView: (UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat rowHeight = tableView.rowHeight;
+    if ([self scenePickerIsShown] && self.scenePickerIndexPath.row == indexPath.row) {
+        rowHeight = 162.0;
+    }
+    return rowHeight;
+}
+
+- (BOOL)scenePickerIsShown{
+    return self.scenePickerIndexPath != nil;
+}
+
+
+
 
 /*
 #pragma mark - Navigation
@@ -243,6 +298,9 @@
  */
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [self.receivedData appendData:data];
+}
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
 }
 /*
  if there is an error occured, this method will be called by connection
@@ -266,7 +324,14 @@
 
     UISplitViewController *svc = (UISplitViewController*)[self presentingViewController];
     rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)[svc.viewControllers objectAtIndex:1];
-    [vc viewDidAppearScenes];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[NSString stringWithFormat:@"%@", self.sceneSelectedID] forKey:@"ID"];
+    [dic setObject:[NSString stringWithFormat:@"%@", self.sceneNewName] forKey:@"description"];
+    if ([self.sceneSelectedID isEqualToString:@"0"])
+        [vc didSaveScene:dic];
+    else
+        [vc didSaveScene:nil];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }

@@ -13,10 +13,7 @@
 #import "rcktLightTableViewCell.h"
 #import "rckt.h" 
 
-@interface rcktLightsDetailViewController () {
-    UIRefreshControl *refreshControl;
-    NSString *urlServer;
-}
+@interface rcktLightsDetailViewController ()
 
 @end
 
@@ -52,6 +49,11 @@
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     //self.areaID = [self getFirstArea];
     //[self fetchData];
+    //initialize new mutable data
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
+
 }
 
 
@@ -64,9 +66,18 @@
 - (void) viewDidAppearLights {
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
 }
-- (void) viewDidAppearScenes {
+
+- (void)didSaveScene:(NSMutableDictionary*)itm {
     seg.selectedSegmentIndex = 0;
     [self fetchData];
+    if (itm!=nil) {
+        [self.scenesArray addObject:itm];
+        [self.lightsTableView beginUpdates];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.scenesArray count]-1 inSection:0];
+        NSArray *indexPaths = @[index];
+        [self.lightsTableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        [self.lightsTableView endUpdates];
+    }
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
 }
 
@@ -194,14 +205,21 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    NSInteger numberOfRows = 0;
     if (seg.selectedSegmentIndex==0)
-        return _scenesArray.count;
+        numberOfRows = _scenesArray.count;
     else if (seg.selectedSegmentIndex==1)
-        return _lightsArray.count;
-    else
-        return 0;
+        numberOfRows = _lightsArray.count;
+    return numberOfRows;
 }
 
+-(UITableViewCellEditingStyle) tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (seg.selectedSegmentIndex==0)
+        return UITableViewCellEditingStyleDelete;
+    else
+        return UITableViewCellEditingStyleNone;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -217,15 +235,15 @@
                                         forIndexPath:indexPath];
         cell.description.text = [NSString stringWithFormat:@"%@", item[@"description"]];
         cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
-
-        __weak rcktSceneTableViewCell *weakCell=cell;
+        //__weak rcktSceneTableViewCell *weakCell=cell;
 
         [cell setDidTapSceneBlock:^(id sender) {
+            /*
             [self.actionIndicator startAnimating];
             NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, weakCell.key.text];
             [self doAPIrequest: [NSURL URLWithString:url]];
+        */
         }];
-
         return cell;
     
     //LIGHTS SELECTED
@@ -283,17 +301,18 @@
         }];
         
         [cell setDidTapColorBlock:^(id sender) {
-            UIColor *c = weakCell.color.backgroundColor;
-            CGFloat h;
-            CGFloat s;
-            [c getHue:&h saturation:&s brightness:NULL alpha:NULL];
-     
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            rcktColorFormsheet *vc = (rcktColorFormsheet*)[storyboard instantiateViewControllerWithIdentifier:@"ColorFormsheet"];
-            [vc setParams:weakCell.key.text cHue:h cSat:s];
-            [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-            [self presentViewController:vc animated:YES completion:nil];
-
+            if (model==3) {
+                UIColor *c = weakCell.color.backgroundColor;
+                CGFloat h;
+                CGFloat s;
+                [c getHue:&h saturation:&s brightness:NULL alpha:NULL];
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                rcktColorFormsheet *vc = (rcktColorFormsheet*)[storyboard instantiateViewControllerWithIdentifier:@"ColorFormsheet"];
+                [vc setParams:weakCell.key.text cHue:h cSat:s];
+                [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                [self presentViewController:vc animated:YES completion:nil];
+            }
         }];
         
         
@@ -310,10 +329,6 @@
 
 - (void) doAPIrequest: (NSURL *)url {
     //NSLog(@"%@", url.absoluteString);
-    
-    //initialize new mutable data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
     
     //initialize url that is going to be fetched.
     
@@ -332,9 +347,6 @@
 
     //NSLog(@"%@", url.absoluteString);
     
-    //initialize new mutable data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
     
     //initialize url that is going to be fetched.
     
@@ -366,6 +378,10 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [self.receivedData appendData:data];
 }
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
+}
 /*
  if there is an error occured, this method will be called by connection
  */
@@ -385,8 +401,6 @@
     NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
                                               encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", htmlSTR);
-    //NSLog(@"%@", connection.originalRequest.URL.absoluteString);
-    //NSLog(@"%@", connection.currentRequest.URL.absoluteString);
     
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getAll",urlServer]]) {
@@ -401,7 +415,11 @@
         [self fetchData];
     } else {
         if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/deleteScene",urlServer]]) {
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
+            NSError* error;
+            NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+            if ([[json objectForKey:@"code"] intValue]<0)
+                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
         } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/controlScene",urlServer]]) {
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         }
@@ -417,22 +435,28 @@
  }
 
 
-
  // Override to support editing the table view.
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-     
-     if (editingStyle == UITableViewCellEditingStyleDelete) {
-         // Delete the row from the data source
-         
-         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-         if (cell.class == [rcktSceneTableViewCell class]) {
-             NSString *key = [NSString stringWithFormat:@"%@",((rcktSceneTableViewCell*)cell).key.text];
-             [self.actionIndicator startAnimating];
-             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", urlServer,key]]];
-         }
 
-     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     if (seg.selectedSegmentIndex==0) {
+         if (editingStyle == UITableViewCellEditingStyleDelete) {
+             // Delete the row from the data source
+             
+             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+             if (cell.class == [rcktSceneTableViewCell class]) {
+                 [tableView beginUpdates];
+                 NSArray *indexPaths = @[indexPath];
+                 [self.scenesArray removeObjectAtIndex:indexPath.row];
+                 [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+                 [tableView endUpdates];
+                 NSString *key = [NSString stringWithFormat:@"%@",((rcktSceneTableViewCell*)cell).key.text];
+                 [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", urlServer,key]]];
+                 
+                 
+             }
+         } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+         }
      }
  }
 
@@ -441,6 +465,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (seg.selectedSegmentIndex==0) {
+        NSDictionary *itm = [self.scenesArray objectAtIndex:indexPath.row];
+        [self.actionIndicator startAnimating];
+        NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, itm[@"ID"]];
+        [self doAPIrequest: [NSURL URLWithString:url]];
+    }
 }
 
 @end

@@ -35,6 +35,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //initialize new mutable data
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
     if (self.wheelView == nil)
     {
         self.wheelView = [[rcktColorPickerView alloc] initWithFrame:self.hueWheel.bounds];
@@ -129,10 +132,6 @@
     
     //NSLog(@"%@", url.absoluteString);
     
-    //initialize new mutable data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
-    
     //initialize url that is going to be fetched.
     
     //initialize a request from url
@@ -152,6 +151,9 @@
  */
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [self.receivedData appendData:data];
+}
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
 }
 /*
  if there is an error occured, this method will be called by connection

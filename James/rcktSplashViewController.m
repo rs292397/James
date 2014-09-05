@@ -32,6 +32,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //initialize new mutable data
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+    
     [_splashActivityIndicatorView startAnimating];
     _splashActivityIndicatorView.hidesWhenStopped = TRUE;
     
@@ -82,10 +86,6 @@
     
     //NSLog(@"%@", url.absoluteString);
 
-    //initialize new mutable data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
-    
     //initialize url that is going to be fetched.
     
     //initialize a request from url
@@ -105,6 +105,9 @@
  */
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [self.receivedData appendData:data];
+}
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
 }
 /*
  if there is an error occured, this method will be called by connection
@@ -126,7 +129,7 @@
                                               encoding:NSUTF8StringEncoding];
     
     
-    
+    //NSLog(@"%@", htmlSTR);
     NSString *urlServer = [[rckt alloc] GetServerURL];
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@",urlConnection);

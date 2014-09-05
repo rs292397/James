@@ -78,20 +78,20 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return _areasArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _areasArray.count;
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Fetch Item
-    NSDictionary *item = [self.areasArray objectAtIndex:indexPath.row];
+    NSDictionary *item = [self.areasArray objectAtIndex:indexPath.section];
     
     static NSString *CellIdentifier = @"labelTableViewCell";
     rcktLabelTableViewCell *cell = [tableView

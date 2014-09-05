@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface rcktScenariosDetailViewController : UIViewController
+@interface rcktScenariosDetailViewController : UIViewController {
+    NSString *urlServer;
+    UIRefreshControl *refreshControl;
+}
+
+@property (nonatomic, strong) NSMutableArray *scenariosArray;
+@property (strong, nonatomic) IBOutlet UITableView *scenariosTableView;
+
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *receivedData;
 
 @end

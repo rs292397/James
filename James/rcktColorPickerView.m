@@ -52,6 +52,10 @@ CGFloat const rcktColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
 
 - (void) createViews
 {
+    //initialize new mutable data
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+    
     UIColor* borderColor = [UIColor colorWithWhite:0.0f alpha:0.1f];
     _colorPreviewView = [[UIView alloc] init];
     _colorPreviewView.layer.borderWidth = 1.0f;
@@ -180,10 +184,6 @@ CGFloat const rcktColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
     
     //NSLog(@"%@", url.absoluteString);
     
-    //initialize new mutable data
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
-    
     //initialize url that is going to be fetched.
     
     //initialize a request from url
@@ -215,6 +215,9 @@ CGFloat const rcktColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
  */
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     [self.receivedData appendData:data];
+}
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
 }
 /*
  if there is an error occured, this method will be called by connection

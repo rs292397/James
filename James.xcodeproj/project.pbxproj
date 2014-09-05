@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93010E3A19BA168D00751375 /* rcktPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93010E3919BA168D00751375 /* rcktPickerTableViewCell.m */; };
 		9302F89E1961F40900BAAAF4 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 9302F89D1961F40900BAAAF4 /* rocket.png */; };
 		9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */; };
-		9307EAAA195B590D0050BBEC /* rcktAreasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9307EAA9195B590D0050BBEC /* rcktAreasViewController.m */; };
-		9307EAAD195B5C5F0050BBEC /* rcktArea2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9307EAAC195B5C5F0050BBEC /* rcktArea2TableViewCell.m */; };
-		9307EAB1195B6B480050BBEC /* rcktLightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9307EAB0195B6B480050BBEC /* rcktLightsViewController.m */; };
 		93082D9D1979B1BD00465F68 /* rckt.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082D9C1979B1BD00465F68 /* rckt.m */; };
 		93082D9F1979B91100465F68 /* light_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082D9E1979B91100465F68 /* light_icon.png */; };
 		93082DA11979B91B00465F68 /* scene_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA01979B91B00465F68 /* scene_icon.png */; };
@@ -27,8 +25,6 @@
 		930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FBC197873730073D6BD /* rcktRootTableViewController.m */; };
 		930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
-		9378AA6C195A027200E70473 /* rcktAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378AA6B195A027200E70473 /* rcktAreasTableViewController.m */; };
-		9378AA6F195A030F00E70473 /* rcktAreaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378AA6E195A030F00E70473 /* rcktAreaTableViewCell.m */; };
 		93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */; };
 		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
 		93F6730019AFA277009DE745 /* area_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93F672FF19AFA277009DE745 /* area_icon.png */; };
@@ -48,8 +44,6 @@
 		93FE278219576A1C00977594 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276419576A1C00977594 /* UIKit.framework */; };
 		93FE278A19576A1C00977594 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE278819576A1C00977594 /* InfoPlist.strings */; };
 		93FE278C19576A1C00977594 /* JamesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE278B19576A1C00977594 /* JamesTests.m */; };
-		93FE279719576ED200977594 /* rcktShowAreasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE279619576ED200977594 /* rcktShowAreasViewController.m */; };
-		93FE27A01957783E00977594 /* rcktTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE279F1957783E00977594 /* rcktTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,15 +57,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		93010E3819BA168D00751375 /* rcktPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktPickerTableViewCell.h; sourceTree = "<group>"; };
+		93010E3919BA168D00751375 /* rcktPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktPickerTableViewCell.m; sourceTree = "<group>"; };
 		9302F89D1961F40900BAAAF4 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket.png; path = ../../../../../Pictures/rocket.png; sourceTree = "<group>"; };
 		9303E9D01960997E00BAF3B2 /* rcktSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSplashViewController.h; sourceTree = "<group>"; };
 		9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSplashViewController.m; sourceTree = "<group>"; };
-		9307EAA8195B590D0050BBEC /* rcktAreasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAreasViewController.h; sourceTree = "<group>"; };
-		9307EAA9195B590D0050BBEC /* rcktAreasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAreasViewController.m; sourceTree = "<group>"; };
-		9307EAAB195B5C5F0050BBEC /* rcktArea2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktArea2TableViewCell.h; sourceTree = "<group>"; };
-		9307EAAC195B5C5F0050BBEC /* rcktArea2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktArea2TableViewCell.m; sourceTree = "<group>"; };
-		9307EAAF195B6B480050BBEC /* rcktLightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLightsViewController.h; sourceTree = "<group>"; };
-		9307EAB0195B6B480050BBEC /* rcktLightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLightsViewController.m; sourceTree = "<group>"; };
 		93082D9B1979B1BD00465F68 /* rckt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rckt.h; sourceTree = "<group>"; };
 		93082D9C1979B1BD00465F68 /* rckt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rckt.m; sourceTree = "<group>"; };
 		93082D9E1979B91100465F68 /* light_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_icon.png; path = ../../../../../Pictures/light_icon.png; sourceTree = "<group>"; };
@@ -99,10 +89,6 @@
 		930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorPickerView.m; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
-		9378AA6A195A027200E70473 /* rcktAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAreasTableViewController.h; sourceTree = "<group>"; };
-		9378AA6B195A027200E70473 /* rcktAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAreasTableViewController.m; sourceTree = "<group>"; };
-		9378AA6D195A030F00E70473 /* rcktAreaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAreaTableViewCell.h; sourceTree = "<group>"; };
-		9378AA6E195A030F00E70473 /* rcktAreaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAreaTableViewCell.m; sourceTree = "<group>"; };
 		93ECE38919B792E0007A92EC /* rcktDeviceTokenFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDeviceTokenFormsheet.h; sourceTree = "<group>"; };
 		93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDeviceTokenFormsheet.m; sourceTree = "<group>"; };
 		93F672FC19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktMasterNavAreasTableViewController.h; sourceTree = "<group>"; };
@@ -129,10 +115,6 @@
 		93FE278719576A1C00977594 /* JamesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JamesTests-Info.plist"; sourceTree = "<group>"; };
 		93FE278919576A1C00977594 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		93FE278B19576A1C00977594 /* JamesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JamesTests.m; sourceTree = "<group>"; };
-		93FE279519576ED200977594 /* rcktShowAreasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShowAreasViewController.h; sourceTree = "<group>"; };
-		93FE279619576ED200977594 /* rcktShowAreasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShowAreasViewController.m; sourceTree = "<group>"; };
-		93FE279E1957783E00977594 /* rcktTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktTestViewController.h; sourceTree = "<group>"; };
-		93FE279F1957783E00977594 /* rcktTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,30 +175,8 @@
 				930D6FB1197851450073D6BD /* TableViewCells */,
 				9303E9D319609B1700BAF3B2 /* Images */,
 				9303E9CF1960995C00BAF3B2 /* Splash */,
-				9307EAAE195B6B260050BBEC /* Lights */,
-				9307EAA4195B52600050BBEC /* Areas */,
 			);
 			name = James;
-			sourceTree = "<group>";
-		};
-		9307EAA4195B52600050BBEC /* Areas */ = {
-			isa = PBXGroup;
-			children = (
-				9307EAA8195B590D0050BBEC /* rcktAreasViewController.h */,
-				9307EAA9195B590D0050BBEC /* rcktAreasViewController.m */,
-				9307EAAB195B5C5F0050BBEC /* rcktArea2TableViewCell.h */,
-				9307EAAC195B5C5F0050BBEC /* rcktArea2TableViewCell.m */,
-			);
-			name = Areas;
-			sourceTree = "<group>";
-		};
-		9307EAAE195B6B260050BBEC /* Lights */ = {
-			isa = PBXGroup;
-			children = (
-				9307EAAF195B6B480050BBEC /* rcktLightsViewController.h */,
-				9307EAB0195B6B480050BBEC /* rcktLightsViewController.m */,
-			);
-			name = Lights;
 			sourceTree = "<group>";
 		};
 		93082D9A1979B1A300465F68 /* Handlers */ = {
@@ -252,6 +212,8 @@
 				9308E8F619B39E8C00756CC6 /* rcktLightTableViewCell.m */,
 				930BAE6019B8D0D3008447E3 /* rcktSceneTableViewCell.h */,
 				930BAE6119B8D0D3008447E3 /* rcktSceneTableViewCell.m */,
+				93010E3819BA168D00751375 /* rcktPickerTableViewCell.h */,
+				93010E3919BA168D00751375 /* rcktPickerTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -330,14 +292,6 @@
 				93FE277219576A1C00977594 /* Main.storyboard */,
 				93FE277819576A1C00977594 /* Images.xcassets */,
 				93FE276719576A1C00977594 /* Supporting Files */,
-				93FE279519576ED200977594 /* rcktShowAreasViewController.h */,
-				93FE279619576ED200977594 /* rcktShowAreasViewController.m */,
-				93FE279E1957783E00977594 /* rcktTestViewController.h */,
-				93FE279F1957783E00977594 /* rcktTestViewController.m */,
-				9378AA6A195A027200E70473 /* rcktAreasTableViewController.h */,
-				9378AA6B195A027200E70473 /* rcktAreasTableViewController.m */,
-				9378AA6D195A030F00E70473 /* rcktAreaTableViewCell.h */,
-				9378AA6E195A030F00E70473 /* rcktAreaTableViewCell.m */,
 			);
 			name = rckt;
 			path = James;
@@ -503,18 +457,12 @@
 				93FE276D19576A1C00977594 /* main.m in Sources */,
 				93082DB21979CE9E00465F68 /* rcktSettingsDetailViewController.m in Sources */,
 				93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */,
-				9307EAAA195B590D0050BBEC /* rcktAreasViewController.m in Sources */,
 				930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */,
-				9378AA6C195A027200E70473 /* rcktAreasTableViewController.m in Sources */,
-				9307EAB1195B6B480050BBEC /* rcktLightsViewController.m in Sources */,
-				93FE27A01957783E00977594 /* rcktTestViewController.m in Sources */,
 				93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */,
+				93010E3A19BA168D00751375 /* rcktPickerTableViewCell.m in Sources */,
 				930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */,
-				9307EAAD195B5C5F0050BBEC /* rcktArea2TableViewCell.m in Sources */,
 				9308E8F719B39E8C00756CC6 /* rcktLightTableViewCell.m in Sources */,
 				9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */,
-				9378AA6F195A030F00E70473 /* rcktAreaTableViewCell.m in Sources */,
-				93FE279719576ED200977594 /* rcktShowAreasViewController.m in Sources */,
 				93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */,
 				93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */,
 				93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */,

@@ -19,11 +19,16 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
 @property (weak, nonatomic) IBOutlet UIPickerView *picker;
 @property (strong, nonatomic) IBOutlet UITableView *valuesTableView;
+@property (strong, nonatomic) NSIndexPath *scenePickerIndexPath;
+
 
 @property (nonatomic, strong) NSMutableArray *scenesArray;
+@property (strong, nonatomic) NSString *sceneSelectedID;
+@property (strong, nonatomic) NSString *sceneNewName;
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
 
 - (void)setParams:(NSString*) areaID;
+
 
 @end

@@ -10,6 +10,8 @@
 
 @interface rcktLightsDetailViewController : UIViewController {
     IBOutlet UISegmentedControl *seg;
+    UIRefreshControl *refreshControl;
+    NSString *urlServer;
 }
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
@@ -29,6 +31,6 @@
 - (void) reload: (NSString*)id description:(NSString*) description;
 - (IBAction)segChange:(id)sender;
 - (void) viewDidAppearLights;
-- (void) viewDidAppearScenes;
+- (void) didSaveScene:(NSMutableDictionary*)itm;
 
 @end

@@ -1,14 +1,14 @@
 //
-//  rcktAreaTableViewCell.m
+//  rcktPickerTableViewCell.m
 //  James
 //
-//  Created by Modesty & Roland on 24/06/14.
+//  Created by Modesty & Roland on 05/09/14.
 //  Copyright (c) 2014 Rckt. All rights reserved.
 //
 
-#import "rcktAreaTableViewCell.h"
+#import "rcktPickerTableViewCell.h"
 
-@implementation rcktAreaTableViewCell
+@implementation rcktPickerTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -30,5 +30,4 @@
 
     // Configure the view for the selected state
 }
-
 @end
