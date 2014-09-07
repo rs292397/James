@@ -43,7 +43,7 @@
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
 
-}
+    }
 
 - (void)didReceiveMemoryWarning
 {
@@ -132,6 +132,7 @@
                                     forIndexPath:indexPath];
     cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
     cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
+    cell.img.image = [UIImage imageNamed:@"scenario_icon.png"];
     if ([item[@"state"] isEqualToString:@"true"])
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     else
@@ -140,14 +141,19 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+}
+
 #pragma mark - TableView delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+ 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *itm = [self.scenariosArray objectAtIndex:indexPath.row];
     NSString *url = [NSString stringWithFormat:@"%@/controlButton/%@", urlServer, itm[@"ID"]];
     [self doAPIrequest:[NSURL URLWithString:url]];
-    
+ 
     for (UITableViewCell* cell in [self.scenariosTableView visibleCells]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }

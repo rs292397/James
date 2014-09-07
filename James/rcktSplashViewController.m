@@ -146,7 +146,7 @@
                 NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
                 [prefs setObject:[NSString stringWithFormat:@"%@", [json valueForKey:@"message"]] forKey:@"DEVICETOKEN"];
                 [prefs synchronize];
-                NSLog(@"%@",htmlSTR);
+                //NSLog(@"%@",htmlSTR);
                 
                 NSString *urlServer = [[rckt alloc] GetServerURL];
                 //Get All Objects

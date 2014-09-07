@@ -9,7 +9,7 @@
 #import "rcktLightsDetailViewController.h"
 #import "rcktColorFormsheet.h"
 #import "rcktSaveSceneFormsheet.h"
-#import "rcktSceneTableViewCell.h"
+#import "rcktLabelTableViewCell.h"
 #import "rcktLightTableViewCell.h"
 #import "rckt.h" 
 
@@ -53,7 +53,7 @@
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
-
+    
 }
 
 
@@ -230,20 +230,13 @@
         // Fetch Item
         NSDictionary *item = [self.scenesArray objectAtIndex:indexPath.row];
         CellIdentifier = @"sceneTableViewCell";
-        rcktSceneTableViewCell *cell = [tableView
+        rcktLabelTableViewCell *cell = [tableView
                                         dequeueReusableCellWithIdentifier:CellIdentifier
                                         forIndexPath:indexPath];
-        cell.description.text = [NSString stringWithFormat:@"%@", item[@"description"]];
         cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
-        //__weak rcktSceneTableViewCell *weakCell=cell;
+        cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
+        cell.img.image = [UIImage imageNamed:@"switch_icon.png"];
 
-        [cell setDidTapSceneBlock:^(id sender) {
-            /*
-            [self.actionIndicator startAnimating];
-            NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, weakCell.key.text];
-            [self doAPIrequest: [NSURL URLWithString:url]];
-        */
-        }];
         return cell;
     
     //LIGHTS SELECTED
@@ -269,10 +262,11 @@
             [cell.onOff setOn:NO];
         [cell.slider setValue:[item[@"bri"] floatValue] animated:YES];
         UIView* square = cell.color;
+        square.layer.borderColor = tableView.layer.backgroundColor;
+        square.layer.borderWidth = 1.0f;
         square.backgroundColor = [UIColor colorWithHue:[item[@"hue"] floatValue]/360.0 saturation:[item[@"sat"] floatValue]/100.0 brightness:1.0 alpha:1.0];
         square.autoresizingMask= 0x3f;
 
-        
         
         __weak rcktLightTableViewCell *weakCell=cell;
 
@@ -319,13 +313,19 @@
         return cell;
     }
     else {
-        rcktSceneTableViewCell *cell = [tableView
+        rcktLabelTableViewCell *cell = [tableView
                                         dequeueReusableCellWithIdentifier:CellIdentifier
                                         forIndexPath:indexPath];
         
         return cell;
     }
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+}
+
 
 - (void) doAPIrequest: (NSURL *)url {
     //NSLog(@"%@", url.absoluteString);
@@ -443,13 +443,13 @@
              // Delete the row from the data source
              
              UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-             if (cell.class == [rcktSceneTableViewCell class]) {
+             if (cell.class == [rcktLabelTableViewCell class]) {
                  [tableView beginUpdates];
                  NSArray *indexPaths = @[indexPath];
                  [self.scenesArray removeObjectAtIndex:indexPath.row];
                  [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
                  [tableView endUpdates];
-                 NSString *key = [NSString stringWithFormat:@"%@",((rcktSceneTableViewCell*)cell).key.text];
+                 NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
                  [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", urlServer,key]]];
                  
                  

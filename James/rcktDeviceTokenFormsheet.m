@@ -8,6 +8,7 @@
 
 #import "rcktDeviceTokenFormsheet.h"
 #import "rcktStringTableViewCell.h"
+#import "rckt.h"
 
 @interface rcktDeviceTokenFormsheet () 
 
@@ -123,5 +124,11 @@
         cell.txt.text = keyValue;
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+}
+
 
 @end
