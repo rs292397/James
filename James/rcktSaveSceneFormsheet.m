@@ -184,8 +184,7 @@
     cell = [self.valuesTableView cellForRowAtIndexPath:index];
     if ([cell isKindOfClass:[rcktStringTableViewCell class]]) {
         rcktStringTableViewCell *rcktCell = (rcktStringTableViewCell*)cell;
-        if (rcktCell.txt.text.length==0)
-            rcktCell.txt.text = item[@"description"];
+        rcktCell.txt.text = item[@"description"];
     }
 }
 
@@ -253,13 +252,23 @@
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView beginUpdates];
+    NSIndexPath *indexPicker;
     if ([self scenePickerIsShown]) {
         if (indexPath.row != self.scenePickerIndexPath.row) {
+            for (UITableViewCell* c in [tableView visibleCells]) {
+                if ([c isKindOfClass:[rcktPickerTableViewCell class]]) {
+                    rcktPickerTableViewCell *rcktCell = (rcktPickerTableViewCell*)c;
+                    rcktCell.txt.textColor = [UIColor blackColor];
+                }
+            }
             NSArray *indexPaths = @[[NSIndexPath indexPathForRow:self.scenePickerIndexPath.row inSection:0]];
             [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
             self.scenePickerIndexPath = nil;
         }
-    } else {
+    } else if (indexPath.row == 0) {
+        indexPicker = [NSIndexPath indexPathForRow:self.scenePickerIndexPath.row inSection:0];
+        rcktPickerTableViewCell *rcktCell = (rcktPickerTableViewCell*) [tableView cellForRowAtIndexPath:indexPicker];
+        rcktCell.txt.textColor = self.view.tintColor;
         self.scenePickerIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
         NSArray *indexPaths = @[[NSIndexPath indexPathForRow:self.scenePickerIndexPath.row inSection:0]];
         [tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
