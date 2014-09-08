@@ -24,6 +24,10 @@
 		930D6FB4197851810073D6BD /* rcktStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FB3197851810073D6BD /* rcktStringTableViewCell.m */; };
 		930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FBC197873730073D6BD /* rcktRootTableViewController.m */; };
 		930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */; };
+		9322AA2119BE34D400026422 /* JamesTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = 93FE277E19576A1C00977594 /* JamesTests.xctest */; };
+		9322AA2819BE35D400026422 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9322AA2419BE35D400026422 /* InfoPlist.strings */; };
+		9322AA2919BE35D400026422 /* JamesTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9322AA2619BE35D400026422 /* JamesTests-Info.plist */; };
+		9322AA2A19BE35D400026422 /* JamesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9322AA2719BE35D400026422 /* JamesTests.m */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
 		93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */; };
 		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
@@ -42,8 +46,6 @@
 		93FE278019576A1C00977594 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE277F19576A1C00977594 /* XCTest.framework */; };
 		93FE278119576A1C00977594 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276019576A1C00977594 /* Foundation.framework */; };
 		93FE278219576A1C00977594 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE276419576A1C00977594 /* UIKit.framework */; };
-		93FE278A19576A1C00977594 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93FE278819576A1C00977594 /* InfoPlist.strings */; };
-		93FE278C19576A1C00977594 /* JamesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FE278B19576A1C00977594 /* JamesTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,9 @@
 		930D6FBC197873730073D6BD /* rcktRootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktRootTableViewController.m; sourceTree = "<group>"; };
 		930FEF2F19B78B9C001AC958 /* rcktColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktColorPickerView.h; sourceTree = "<group>"; };
 		930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorPickerView.m; sourceTree = "<group>"; };
+		9322AA2519BE35D400026422 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		9322AA2619BE35D400026422 /* JamesTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "JamesTests-Info.plist"; path = "JamesTests/JamesTests-Info.plist"; sourceTree = "<group>"; };
+		9322AA2719BE35D400026422 /* JamesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JamesTests.m; path = JamesTests/JamesTests.m; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
 		93ECE38919B792E0007A92EC /* rcktDeviceTokenFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDeviceTokenFormsheet.h; sourceTree = "<group>"; };
@@ -112,9 +117,6 @@
 		93FE277819576A1C00977594 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		93FE277E19576A1C00977594 /* JamesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JamesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93FE277F19576A1C00977594 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		93FE278719576A1C00977594 /* JamesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JamesTests-Info.plist"; sourceTree = "<group>"; };
-		93FE278919576A1C00977594 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		93FE278B19576A1C00977594 /* JamesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JamesTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,25 @@
 			name = Navigation;
 			sourceTree = "<group>";
 		};
+		9322AA2219BE35AF00026422 /* JamesTests */ = {
+			isa = PBXGroup;
+			children = (
+				9322AA2319BE35D400026422 /* en.lproj */,
+				9322AA2619BE35D400026422 /* JamesTests-Info.plist */,
+				9322AA2719BE35D400026422 /* JamesTests.m */,
+			);
+			name = JamesTests;
+			sourceTree = "<group>";
+		};
+		9322AA2319BE35D400026422 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				9322AA2419BE35D400026422 /* InfoPlist.strings */,
+			);
+			name = en.lproj;
+			path = JamesTests/en.lproj;
+			sourceTree = "<group>";
+		};
 		93F7CE481975A8E600F4E8C7 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,8 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				93FE276619576A1C00977594 /* rckt */,
-				93FE278519576A1C00977594 /* JamesTests */,
 				93FE275F19576A1C00977594 /* Frameworks */,
+				9322AA2219BE35AF00026422 /* JamesTests */,
 				93FE275E19576A1C00977594 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -304,24 +325,6 @@
 				93FE276919576A1C00977594 /* InfoPlist.strings */,
 				93FE276C19576A1C00977594 /* main.m */,
 				93FE276E19576A1C00977594 /* James-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		93FE278519576A1C00977594 /* JamesTests */ = {
-			isa = PBXGroup;
-			children = (
-				93FE278B19576A1C00977594 /* JamesTests.m */,
-				93FE278619576A1C00977594 /* Supporting Files */,
-			);
-			path = JamesTests;
-			sourceTree = "<group>";
-		};
-		93FE278619576A1C00977594 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				93FE278719576A1C00977594 /* JamesTests-Info.plist */,
-				93FE278819576A1C00977594 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -374,6 +377,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Rckt;
 				TargetAttributes = {
+					93FE275C19576A1C00977594 = {
+						DevelopmentTeam = X98Q75H3K8;
+					};
 					93FE277D19576A1C00977594 = {
 						TestTargetID = 93FE275C19576A1C00977594;
 					};
@@ -419,7 +425,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9322AA2919BE35D400026422 /* JamesTests-Info.plist in Resources */,
 				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
+				9322AA2819BE35D400026422 /* InfoPlist.strings in Resources */,
 				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
 				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
 				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
@@ -437,7 +445,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93FE278A19576A1C00977594 /* InfoPlist.strings in Resources */,
+				9322AA2119BE34D400026422 /* JamesTests.xctest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +474,7 @@
 				93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */,
 				93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */,
 				93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */,
+				9322AA2A19BE35D400026422 /* JamesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +482,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93FE278C19576A1C00977594 /* JamesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +496,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9322AA2419BE35D400026422 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9322AA2519BE35D400026422 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		93FE276919576A1C00977594 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -504,14 +520,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 			usesTabs = 0;
-		};
-		93FE278819576A1C00977594 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				93FE278919576A1C00977594 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
@@ -593,7 +601,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
@@ -608,7 +616,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
