@@ -141,12 +141,10 @@
     return cell;
 }
 
-/*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
 }
-*/
 
 #pragma mark - TableView delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

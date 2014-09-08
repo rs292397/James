@@ -50,9 +50,8 @@
     count = 0;
     
     NSString *urlServer = [[rckt alloc] GetServerURL];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
-    if (url!=nil)
-        [self doAPIrequest: url];
+    if ([self validateUrl:urlServer])
+        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]]];
     else
         [self presentForm];
 }
@@ -74,6 +73,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (BOOL) validateUrl: (NSString *) candidate {
+    //NSString *urlRegEx =
+    //@"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    // NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", candidate]];
+    return (url!=nil);
+    //return [urlTest evaluateWithObject:candidate];
+}
 
 - (void) doAPIrequest: (NSURL *)url {
     
@@ -108,7 +115,6 @@
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     NSLog(@"%@" , error);
-    [self presentForm];
 }
 
 /*
@@ -174,15 +180,9 @@
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"StartSplitViewController"];
             rcktAppDelegate *app = (rcktAppDelegate*) [[UIApplication sharedApplication] delegate];
-            //UIViewController *currentcontroller = app.window.rootViewController;
-            
-            
-            //app.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            // UIViewController *currentcontroller = app.window.rootViewController;
             //app.window.rootViewController = controller;
-            //[app.window makeKeyAndVisible];
-
-            //app.window.rootViewController = controller;
-            //app.window.rootViewController = currentcontroller;
+            // app.window.rootViewController = currentcontroller;
             [UIView transitionWithView:self.navigationController.view.window duration:0.5 options:UIViewAnimationOptionOverrideInheritedOptions animations:^{app.window.rootViewController=controller;} completion:nil];
             
         }

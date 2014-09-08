@@ -28,7 +28,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(tintColor)]) {
-        CGFloat cornerRadius = 5.0f;
+        CGFloat cornerRadius = 10.f; //5.0f;
         cell.backgroundColor = UIColor.clearColor;
         CAShapeLayer *layer = [[CAShapeLayer alloc] init];
         CGMutablePathRef pathRef = CGPathCreateMutable();
