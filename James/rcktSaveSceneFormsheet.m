@@ -160,7 +160,7 @@
 // The number of rows of data
 - (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return self.scenesArray.count;
+    return (int)self.scenesArray.count;
 }
 
 // The data to return for the row and component (column) that's being passed in

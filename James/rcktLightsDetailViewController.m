@@ -320,12 +320,12 @@
         return cell;
     }
 }
-
+/*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
 }
-
+*/
 
 - (void) doAPIrequest: (NSURL *)url {
     //NSLog(@"%@", url.absoluteString);

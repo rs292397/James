@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface rcktRootTableViewController : UITableViewController
+@interface rcktRootTableViewController : UITableViewController {
+    NSDictionary *rootItems;
+    NSArray *rootItemSectionTitles;
+}
 
 @property (strong, nonatomic) IBOutlet UITableView *rootTableView;
 

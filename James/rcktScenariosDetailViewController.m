@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     urlServer = [[rckt alloc] GetServerURL];
     //initialize new mutable data
@@ -42,8 +43,10 @@
     [self.scenariosTableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
+}
 
-    }
+- (void) viewDidAppear:(BOOL)animated {
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -140,12 +143,12 @@
     
     return cell;
 }
-
+/*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
 }
-
+*/
 #pragma mark - TableView delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
  

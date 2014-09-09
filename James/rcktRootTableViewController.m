@@ -10,10 +10,8 @@
 #import "rcktLabelTableViewCell.h"
 #import "rcktSettingsDetailViewController.h"
 
-@interface rcktRootTableViewController (){
-    NSDictionary *rootItems;
-    NSArray *rootItemSectionTitles;
-}
+@interface rcktRootTableViewController ()
+
 
 @end
 
