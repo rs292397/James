@@ -13,6 +13,7 @@
 
 @interface rcktSplashViewController () {
     int count;
+    int countToDo;
 }
 
 @end
@@ -33,6 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //initialize new mutable data
+    countToDo = 1;
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
     
@@ -156,6 +158,9 @@
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"AREAS"];
+            if ([prefs objectForKey:@"SCENARIOS"]==nil) {
+                countToDo=4;
+            }
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllLights",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"LIGHTS"];
@@ -168,7 +173,7 @@
         }
         [prefs synchronize];
  
-        if (count ==1) {
+        if (count == countToDo) {
             
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

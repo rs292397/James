@@ -283,11 +283,12 @@
     }
     return rowHeight;
 }
+/*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
 }
-
+*/
 - (BOOL)scenePickerIsShown{
     return self.scenePickerIndexPath != nil;
 }

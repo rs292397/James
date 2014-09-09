@@ -34,7 +34,6 @@
     //initialize new mutable data
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
-    [self fetchData];
     
     //Refresh control tableview
     refreshControl = [[UIRefreshControl alloc] init];
@@ -46,6 +45,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    [self fetchData];
 }
 
 - (void)didReceiveMemoryWarning

@@ -40,10 +40,10 @@
                           ],
                   @"Scenarios" : @[
                           @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
-                          ],
-                  @"Settings" : @[
-                          @[@"SETTINGS_DETAILVIEW", @"Settings", @"switch_icon.png"]
-                          ]
+                          ]//,
+//                  @"Settings" : @[
+//                          @[@"SETTINGS_DETAILVIEW", @"Settings", @"switch_icon.png"]
+//                          ]
                   };
 
     rootItemSectionTitles = [[rootItems allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];

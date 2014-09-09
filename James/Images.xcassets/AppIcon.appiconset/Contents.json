@@ -70,8 +70,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "Logo-144.png",
       "scale" : "2x"
     },
     {
@@ -81,8 +82,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "Logo-152.png",
       "scale" : "2x"
     }
   ],
