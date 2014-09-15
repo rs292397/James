@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h"
 
-@interface rcktSplashViewController : UIViewController
+@interface rcktSplashViewController : UIViewController {
+    rckt *r;
+}
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView* splashActivityIndicatorView;
 @property (retain, nonatomic) NSURLConnection *connection;

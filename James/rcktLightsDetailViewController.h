@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h"
 
 @interface rcktLightsDetailViewController : UIViewController {
     IBOutlet UISegmentedControl *seg;
     UIRefreshControl *refreshControl;
     NSString *urlServer;
+    rckt *r;
 }
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;

@@ -9,6 +9,7 @@
 #import "rcktSplashViewController.h"
 #import "rcktAppDelegate.h"
 #import "rcktDeviceTokenFormsheet.h"
+#import "rcktRootTableViewController.h"
 #import "rckt.h"
 
 @interface rcktSplashViewController () {
@@ -51,10 +52,11 @@
 
     count = 0;
     
-    NSString *urlServer = [[rckt alloc] GetServerURL];
+    r = [[rckt alloc] init];
+    NSString *urlServer = [r GetServerURL];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
     if (url != nil)
-        [self doAPIrequest: url];
+        [self doAPIrequest:url];
     else
         [self presentForm];
 }
@@ -175,22 +177,34 @@
  
         if (count == countToDo) {
             
-            
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"StartSplitViewController"];
-            rcktAppDelegate *app = (rcktAppDelegate*) [[UIApplication sharedApplication] delegate];
-            // UIViewController *currentcontroller = app.window.rootViewController;
-            //app.window.rootViewController = controller;
-            // app.window.rootViewController = currentcontroller;
-            [UIView transitionWithView:self.navigationController.view.window duration:0.5 options:UIViewAnimationOptionOverrideInheritedOptions animations:^{app.window.rootViewController=controller;} completion:nil];
-            
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"StartSplitViewController"];
+                rcktAppDelegate *app = (rcktAppDelegate*) [[UIApplication sharedApplication] delegate];
+                // UIViewController *currentcontroller = app.window.rootViewController;
+                //app.window.rootViewController = controller;
+                // app.window.rootViewController = currentcontroller;
+                [UIView transitionWithView:self.navigationController.view.window duration:0.5 options:UIViewAnimationOptionOverrideInheritedOptions animations:^{app.window.rootViewController=controller;} completion:nil];
+            }
+            else {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+                UINavigationController *vc = (UINavigationController*)[storyboard instantiateViewControllerWithIdentifier:@"ROOT_NAVIGATION"];
+                [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                [self presentViewController:vc animated:YES completion:nil];
+                
+            }
+ 
         }
     }
     
 }
 
 -(void) presentForm {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    else
+        storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     rcktDeviceTokenFormsheet *vc = (rcktDeviceTokenFormsheet*)[storyboard instantiateViewControllerWithIdentifier:@"DeviceTokenFormsheet"];
     [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     [self presentViewController:vc animated:YES completion:nil];

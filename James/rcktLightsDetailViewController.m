@@ -33,6 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    r = [[rckt alloc] init];
     urlServer = [[rckt alloc] GetServerURL];
 
     self.actionIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -418,8 +419,13 @@
             NSError* error;
             NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-            if ([[json objectForKey:@"code"] intValue]<0)
-                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
+            if ([[json objectForKey:@"code"] intValue]<0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not delete the scene because of references." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                alert.alertViewStyle = UIAlertViewStyleDefault;
+                [alert show];
+            }
+
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
         } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/controlScene",urlServer]]) {
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         }
