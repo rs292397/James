@@ -305,31 +305,38 @@
             </objects>
             <point key="canvasLocation" x="-1586" y="217"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wi6-3l-gOj">
+            <objects>
+                <navigationController storyboardIdentifier="SCENARIOS_DETAILVIEW" definesPresentationContext="YES" id="yoq-LP-ii7" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Kjf-vU-qox">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UEj-b9-Gbe" kind="relationship" relationship="rootViewController" id="dob-lK-2DT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e1U-PU-hFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3939" y="451"/>
+        </scene>
         <!--Rckt Scenarios Detail View Controller-->
         <scene sceneID="zSS-gX-jgq">
             <objects>
-                <viewController storyboardIdentifier="SCENARIOS_DETAILVIEW" id="UEj-b9-Gbe" customClass="rcktScenariosDetailViewController" sceneMemberID="viewController">
+                <viewController id="UEj-b9-Gbe" customClass="rcktScenariosDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Xz-F3-1vt"/>
                         <viewControllerLayoutGuide type="bottom" id="COs-CZ-Y94"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="caR-xQ-8ny">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="64" width="703" height="704"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRb-XK-ZpW">
-                                <rect key="frame" x="0.0" y="19" width="703" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Scenarios" id="snj-Gy-nMU"/>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="grouped" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="NFu-nq-ZlR">
-                                <rect key="frame" x="20" y="75" width="663" height="650"/>
+                                <rect key="frame" x="20" y="8" width="663" height="653"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -375,16 +382,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="aRb-XK-ZpW" firstAttribute="top" secondItem="caR-xQ-8ny" secondAttribute="top" constant="19" id="S58-1V-dbd"/>
+                            <constraint firstItem="NFu-nq-ZlR" firstAttribute="top" secondItem="2Xz-F3-1vt" secondAttribute="bottom" constant="20" symbolic="YES" id="5iS-Q9-1nk"/>
                             <constraint firstItem="COs-CZ-Y94" firstAttribute="top" secondItem="NFu-nq-ZlR" secondAttribute="bottom" constant="43" id="a4P-7T-g9p"/>
-                            <constraint firstItem="NFu-nq-ZlR" firstAttribute="top" secondItem="aRb-XK-ZpW" secondAttribute="bottom" constant="12" id="cjX-mN-DaI"/>
-                            <constraint firstItem="aRb-XK-ZpW" firstAttribute="leading" secondItem="caR-xQ-8ny" secondAttribute="leading" id="eVR-jg-j8B"/>
-                            <constraint firstAttribute="trailing" secondItem="aRb-XK-ZpW" secondAttribute="trailing" id="nNP-m8-A4l"/>
                             <constraint firstAttribute="trailing" secondItem="NFu-nq-ZlR" secondAttribute="trailing" constant="20" symbolic="YES" id="suD-9k-xRP"/>
                             <constraint firstItem="NFu-nq-ZlR" firstAttribute="leading" secondItem="caR-xQ-8ny" secondAttribute="leading" constant="20" symbolic="YES" id="y5Y-iv-aP8"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="jzP-Bk-VaH"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -393,22 +398,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRM-eE-9Dv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3180" y="223"/>
+            <point key="canvasLocation" x="-2996" y="435"/>
         </scene>
         <!--Rckt Lights Detail View Controller - rolandje-->
         <scene sceneID="YfU-Ha-QFq">
             <objects>
-                <viewController storyboardIdentifier="LIGHTS_DETAILVIEW" title="rolandje" id="zxP-QL-QPL" customClass="rcktLightsDetailViewController" sceneMemberID="viewController">
+                <viewController title="rolandje" id="zxP-QL-QPL" customClass="rcktLightsDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eNp-4f-x5V"/>
                         <viewControllerLayoutGuide type="bottom" id="9kV-wc-POB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x6i-PS-KdC">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="64" width="703" height="704"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="7tT-wL-yCI">
-                                <rect key="frame" x="20" y="107" width="663" height="653"/>
+                                <rect key="frame" x="20" y="44" width="663" height="652"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -561,7 +566,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3L5-td-c7T">
-                                <rect key="frame" x="187" y="71" width="329" height="29"/>
+                                <rect key="frame" x="187" y="8" width="329" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="329" id="aAl-Vn-tEQ"/>
@@ -574,41 +579,29 @@
                                     <action selector="segChange:" destination="zxP-QL-QPL" eventType="valueChanged" id="g1u-n1-Jl8"/>
                                 </connections>
                             </segmentedControl>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCa-gV-p2M">
-                                <rect key="frame" x="0.0" y="19" width="703" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Scenes" id="OhG-l6-TOd"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7tT-wL-yCI" secondAttribute="trailing" constant="20" symbolic="YES" id="9xD-kc-vVc"/>
                             <constraint firstItem="9kV-wc-POB" firstAttribute="top" secondItem="7tT-wL-yCI" secondAttribute="bottom" constant="20" symbolic="YES" id="AEk-8Q-ph6"/>
-                            <constraint firstItem="3L5-td-c7T" firstAttribute="top" secondItem="RCa-gV-p2M" secondAttribute="bottom" constant="8" id="Els-r8-3WV"/>
-                            <constraint firstAttribute="trailing" secondItem="RCa-gV-p2M" secondAttribute="trailing" id="FfA-Rz-ZKY"/>
                             <constraint firstItem="7tT-wL-yCI" firstAttribute="top" secondItem="3L5-td-c7T" secondAttribute="bottom" constant="8" id="UQF-Mt-HKY"/>
+                            <constraint firstItem="3L5-td-c7T" firstAttribute="top" secondItem="eNp-4f-x5V" secondAttribute="bottom" constant="20" symbolic="YES" id="XRm-bz-bi2"/>
                             <constraint firstItem="7tT-wL-yCI" firstAttribute="leading" secondItem="x6i-PS-KdC" secondAttribute="leading" constant="20" symbolic="YES" id="mds-py-vUG"/>
-                            <constraint firstItem="RCa-gV-p2M" firstAttribute="top" secondItem="x6i-PS-KdC" secondAttribute="top" constant="19" id="ord-Ui-vuV"/>
                             <constraint firstAttribute="centerX" secondItem="3L5-td-c7T" secondAttribute="centerX" id="qZW-HT-fmc"/>
-                            <constraint firstItem="RCa-gV-p2M" firstAttribute="leading" secondItem="x6i-PS-KdC" secondAttribute="leading" id="w7F-56-Ly3"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Cjv-ih-I1m"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="lightsTableView" destination="7tT-wL-yCI" id="HW5-5C-wTd"/>
-                        <outlet property="navbaritem" destination="OhG-l6-TOd" id="iE2-Jl-88D"/>
                         <outlet property="seg" destination="3L5-td-c7T" id="QdK-og-3WS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DQp-M1-2Hj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2368" y="223"/>
+            <point key="canvasLocation" x="-2088" y="1379"/>
         </scene>
         <!--Rckt Color Formsheet-->
         <scene sceneID="27Q-K5-aNQ">
@@ -796,12 +789,32 @@
                     <navigationItem key="navigationItem" id="m5b-Ac-kZc"/>
                     <connections>
                         <segue destination="heo-E9-HMc" kind="relationship" relationship="masterViewController" id="w9l-f7-fPT"/>
-                        <segue destination="UEj-b9-Gbe" kind="relationship" relationship="detailViewController" id="WFh-9e-9cy"/>
+                        <segue destination="yoq-LP-ii7" kind="relationship" relationship="detailViewController" id="gJA-Ke-Auk"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23p-Jn-IcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4722" y="-779"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HSl-cQ-4Ww">
+            <objects>
+                <navigationController storyboardIdentifier="LIGHTS_DETAILVIEW" definesPresentationContext="YES" id="n7X-lF-urD" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="wzV-9f-7iB">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zxP-QL-QPL" kind="relationship" relationship="rootViewController" id="2kq-PP-iD2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dXj-jB-1jA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2996" y="1379"/>
         </scene>
     </scenes>
     <resources>

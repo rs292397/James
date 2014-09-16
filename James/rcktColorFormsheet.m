@@ -99,10 +99,26 @@
 
 
 - (void) cmdDone {
-    UISplitViewController *svc = (UISplitViewController*)[self presentingViewController];
-    rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)[svc.viewControllers objectAtIndex:1];
-    [vc viewDidAppearLights];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UISplitViewController *svc = (UISplitViewController*)[self presentingViewController];
+        UINavigationController *nav = [svc.viewControllers objectAtIndex:1];
+        if ([nav.topViewController isKindOfClass:[rcktLightsDetailViewController class]]) {
+            rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)nav.topViewController;
+            [vc viewDidAppearLights];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
+    else {
+        UINavigationController *nav = (UINavigationController*) self.presentingViewController;
+        if ([[nav.childViewControllers objectAtIndex:2] isKindOfClass:[rcktLightsDetailViewController class]]) {
+            rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)[nav.childViewControllers objectAtIndex:2];
+            [vc viewDidAppearLights];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

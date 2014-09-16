@@ -103,7 +103,7 @@
         NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
         //NSLog(@"Selected: %@",key);
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *sfvc = [storyboard instantiateViewControllerWithIdentifier:key];
+        UINavigationController *sfvc = (UINavigationController*)[storyboard instantiateViewControllerWithIdentifier:key];
         UINavigationController *nav = (UINavigationController*) self.parentViewController;
         UISplitViewController *svc = (UISplitViewController*) nav.parentViewController;
 

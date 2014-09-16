@@ -42,6 +42,7 @@
     [self.scenariosTableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
+    [self navigationItem].title = @"Scenarios";
 }
 
 - (void) viewDidAppear:(BOOL)animated {

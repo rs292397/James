@@ -335,9 +335,18 @@
     //NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
     //                                          encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", htmlSTR);
-
-    UISplitViewController *svc = (UISplitViewController*)[self presentingViewController];
-    rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)[svc.viewControllers objectAtIndex:1];
+    rcktLightsDetailViewController *vc;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UISplitViewController *svc = (UISplitViewController*)[self presentingViewController];
+        UINavigationController *nav = [svc.viewControllers objectAtIndex:1];
+        vc = (rcktLightsDetailViewController*)nav.topViewController;
+    }
+    else {
+        UINavigationController *nav = (UINavigationController*) self.presentingViewController;
+        if ([[nav.childViewControllers objectAtIndex:2] isKindOfClass:[rcktLightsDetailViewController class]])
+            vc = (rcktLightsDetailViewController*)[nav.childViewControllers objectAtIndex:2];
+    }
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[NSString stringWithFormat:@"%@", self.sceneSelectedID] forKey:@"ID"];
     [dic setObject:[NSString stringWithFormat:@"%@", self.sceneNewName] forKey:@"description"];
@@ -349,6 +358,5 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
-
 
 @end

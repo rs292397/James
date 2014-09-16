@@ -67,9 +67,13 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-    [self.areasTableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
-    [self tableView:self.areasTableView didSelectRowAtIndexPath:indexPath];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        [self.areasTableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
+        [self tableView:self.areasTableView didSelectRowAtIndexPath:indexPath];
+    }
+
     
 }
 
@@ -78,20 +82,30 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return _areasArray.count;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        return _areasArray.count;
+    else
+        return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return 1;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        return 1;
+    else
+        return _areasArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Fetch Item
-    NSDictionary *item = [self.areasArray objectAtIndex:indexPath.section];
+    NSDictionary *item;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        item = [self.areasArray objectAtIndex:indexPath.section];
+    else
+        item = [self.areasArray objectAtIndex:indexPath.row];
+    
     
     static NSString *CellIdentifier = @"labelTableViewCell";
     rcktLabelTableViewCell *cell = [tableView
@@ -100,6 +114,9 @@
     cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
     cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
     cell.img.image = [UIImage imageNamed:@"area_icon.png"];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     return cell;
 }
 
@@ -112,11 +129,25 @@
     if (cell.class == [rcktLabelTableViewCell class]) {
         NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
         NSString *description = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).lbl.text];
-        UINavigationController *nav = (UINavigationController*) self.parentViewController;
-        UISplitViewController *svc = (UISplitViewController*) nav.parentViewController;
-        rcktLightsDetailViewController *vc = [svc.viewControllers objectAtIndex:1];
-        [vc reload:key description:description];
-//      cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UINavigationController *nav = (UINavigationController*) self.parentViewController;
+            UISplitViewController *svc = (UISplitViewController*) nav.parentViewController;
+            UINavigationController *nav2 = [svc.viewControllers objectAtIndex:1];
+            rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)nav2.topViewController;
+            //rcktLightsDetailViewController *vc = [svc.viewControllers objectAtIndex:1];
+            [vc reload:key description:description];
+        }
+        else {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+            UIViewController *sfvc = [storyboard instantiateViewControllerWithIdentifier:@"LIGHTS_VIEW"];
+            if ([sfvc isKindOfClass:[rcktLightsDetailViewController class]]) {
+                rcktLightsDetailViewController *vc = (rcktLightsDetailViewController*)sfvc;
+                [vc reload:key description:description];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
+
     }
 }
 

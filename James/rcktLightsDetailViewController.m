@@ -160,14 +160,13 @@
 }
 
 - (void)fetchData {
-    UINavigationItem *navitm = self.navbaritem;
+    UINavigationItem *navitm = [self navigationItem];
+    navitm.title = [NSString stringWithFormat:@"%@", _areaDescription];
     if (seg.selectedSegmentIndex == 0) {
-        navitm.title = [NSString stringWithFormat:@"Scenes"];
         navitm.rightBarButtonItem = nil;
         [self fetchScenesData:self.areaID];
     }
     else if (seg.selectedSegmentIndex == 1) {
-        navitm.title = [NSString stringWithFormat:@"Lights"];
         UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(cmdSaveScene)];
         navitm.rightBarButtonItem = br;
         [self fetchLightsData:self.areaID];
@@ -175,7 +174,12 @@
 }
 
 - (void)cmdSaveScene {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    else
+        storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+
     rcktSaveSceneFormsheet *vc = (rcktSaveSceneFormsheet*)[storyboard instantiateViewControllerWithIdentifier:@"SaveSceneFormsheet"];
     [vc setParams:self.areaID];
     [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
@@ -199,7 +203,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return _areaDescription;
+    return nil; //_areaDescription;
 }
 
 
@@ -302,7 +306,12 @@
                 CGFloat s;
                 [c getHue:&h saturation:&s brightness:NULL alpha:NULL];
                 
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UIStoryboard *storyboard;
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                else
+                    storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+                
                 rcktColorFormsheet *vc = (rcktColorFormsheet*)[storyboard instantiateViewControllerWithIdentifier:@"ColorFormsheet"];
                 [vc setParams:weakCell.key.text cHue:h cSat:s];
                 [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];

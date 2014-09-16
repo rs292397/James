@@ -16,8 +16,6 @@
     rckt *r;
 }
 
-@property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
-
 @property (nonatomic, strong) NSString *areaID;
 @property (nonatomic, strong) NSString *areaDescription;
 

@@ -30,10 +30,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     rootItems = @[
-                  @[@"LIGHTS_DETAILVIEW", @"Lights", @"light_icon.png"],
+                  @[@"AREAS_VIEW", @"Lights", @"light_icon.png"],
                   @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
                   ];
-    
+    self.navigationItem.title = @"James";
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,11 +80,12 @@
     __weak rcktLabelCollectionViewCell *weakCell=cell;
     
     [cell setDidTapBlock:^(id sender) {
-        NSLog(@"%@", weakCell.key.text);
-//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-//            rcktColorFormsheet *vc = (rcktColorFormsheet*)[storyboard instantiateViewControllerWithIdentifier:@"ColorFormsheet"];
-//            [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-//            [self presentViewController:vc animated:YES completion:nil];
+        
+        NSString *key = weakCell.key.text;
+        //NSLog(@"Selected: %@",key);
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        UIViewController *sfvc = [storyboard instantiateViewControllerWithIdentifier:key];
+        [self.navigationController pushViewController:sfvc animated:YES];
     }];
 
     return cell;
