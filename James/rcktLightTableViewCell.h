@@ -11,7 +11,7 @@
 @interface rcktLightTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *key;
-@property (weak, nonatomic) IBOutlet UILabel *description;
+@property (weak, nonatomic) IBOutlet UILabel *txt;
 //@property (weak, nonatomic) IBOutlet UIButton *action;
 @property (weak, nonatomic) IBOutlet UISwitch *onOff;
 @property (weak, nonatomic) IBOutlet UISlider *slider;

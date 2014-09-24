@@ -259,7 +259,7 @@
                                         dequeueReusableCellWithIdentifier:CellIdentifier
 
                                         forIndexPath:indexPath];
-        cell.description.text = [NSString stringWithFormat:@"%@", item[@"description"]];
+        cell.txt.text = [NSString stringWithFormat:@"%@", item[@"description"]];
         cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
         if ([item[@"onOff"] isEqualToString:@"true"])
             [cell.onOff setOn:YES];
