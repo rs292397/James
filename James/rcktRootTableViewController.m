@@ -38,12 +38,15 @@
     rootItems = @{@"Lights" : @[
                           @[@"LIGHTS_DETAILVIEW", @"Lights", @"light_icon.png"]
                           ],
+                  @"Cameras" : @[
+                          @[@"CAMERAS_DETAILVIEW", @"Cameras", @"scenario_icon.png"]
+                          ],
                   @"Scenarios" : @[
                           @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
-                          ]//,
-//                  @"Settings" : @[
-//                          @[@"SETTINGS_DETAILVIEW", @"Settings", @"switch_icon.png"]
-//                          ]
+                          ],
+                  @"Settings" : @[
+                          @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
+                          ]
                   };
 
     rootItemSectionTitles = [[rootItems allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
@@ -55,7 +58,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewDidAppear:(BOOL)animated {
-    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:2];
     [self tableView:self.rootTableView didSelectRowAtIndexPath:index];
 
 }
@@ -97,7 +100,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.class == [rcktLabelTableViewCell class]) {
         NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];

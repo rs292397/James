@@ -14,7 +14,7 @@
 		<string>https://github.com/rs292397/James.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>James.xcodeproj/project.xcworkspace</string>
+	<string>James.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>7E9032EF8BC5C16652AB408D80C2FB53BF3B7C33</key>

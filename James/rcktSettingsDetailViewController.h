@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface rcktSettingsDetailViewController : UIViewController
+@interface rcktSettingsDetailViewController : UIViewController {
+    
+    NSDictionary *settingsItems;
+    NSArray *settingsItemSectionTitles;
+}
+
+@property (strong, nonatomic) IBOutlet UITableView *settingsTableView;
 
 @end

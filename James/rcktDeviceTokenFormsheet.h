@@ -14,6 +14,7 @@
 
 }
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
 @property (strong, nonatomic) IBOutlet UITableView *settingsTableView;
 
 @end

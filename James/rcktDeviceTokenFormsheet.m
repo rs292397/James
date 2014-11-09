@@ -43,15 +43,10 @@
 }
 
 - (void)buildNavbar {
-    
-    UINavigationBar *navbar = [[UINavigationBar alloc] init];
-    navbar.frame = CGRectMake(0,0,self.view.frame.size.width, 64);
-    [navbar setAutoresizingMask: UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin];
-    UIBarButtonItem *b = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(saveSettings)];
-    UINavigationItem *navitm = [[UINavigationItem alloc] initWithTitle:@"Device Settings"];
-    navitm.rightBarButtonItem = b;
-    [navbar pushNavigationItem:navitm animated:YES];
-    [self.view addSubview:navbar];
+
+    UINavigationItem *navitm = self.navbaritem;
+    UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(saveSettings)];
+    navitm.rightBarButtonItem = br;
 }
 
 - (void)saveSettings {

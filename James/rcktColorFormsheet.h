@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 //#import "DRColorPickerBaseViewController.h"
 
-@interface rcktColorFormsheet : UIViewController
+@interface rcktColorFormsheet : UIViewController {
+    NSString *lid;
+    float fHue;
+    float fSat;
+}
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
 @property (weak, nonatomic) IBOutlet UIView *hueWheel;

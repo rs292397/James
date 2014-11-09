@@ -11,11 +11,8 @@
 #import "rcktLightsDetailViewController.h"
 #import "rckt.h"
 
-@interface rcktColorFormsheet () {
-    NSString* lid;
-    float fHue;
-    float fSat;
-}
+@interface rcktColorFormsheet ()
+
 @property (nonatomic, strong) rcktColorPickerView* wheelView;
 
 @end

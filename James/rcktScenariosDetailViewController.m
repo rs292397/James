@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Do any additional setup after loading the view.
     urlServer = [[rckt alloc] GetServerURL];
     //initialize new mutable data

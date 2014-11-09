@@ -7,6 +7,8 @@
 //
 
 #import "rcktSettingsDetailViewController.h"
+#import "rckt.h"
+#import "rcktLabelTableViewCell.h"
 
 @interface rcktSettingsDetailViewController ()
 
@@ -27,7 +29,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self buildNavbar];
+    [self navigationItem].title = @"Settings";
+    settingsItems = @{@"Physical Devices" : @[
+                          @[@"segueSettingsDevices", @"Devices", @"*.png"]
+                          ]//,
+                  };
+    
+    settingsItemSectionTitles = [[settingsItems allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,16 +55,69 @@
 }
 */
 
-- (void)buildNavbar {
-    
-    UINavigationBar *navbar = [[UINavigationBar alloc] init];
-    navbar.frame = CGRectMake(0,0,self.view.frame.size.width, 64);
-    [navbar setAutoresizingMask: UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin];
-    //UIBarButtonItem *b = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveSettings)];
-    UINavigationItem *navitm = [[UINavigationItem alloc] initWithTitle:@"Settings"];
-    //navitm.rightBarButtonItem = b;
-    [navbar pushNavigationItem:navitm animated:YES];
-    [self.view addSubview:navbar];
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return [settingsItemSectionTitles count];
 }
+
+
+- (NSString*) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section {
+    return [settingsItemSectionTitles objectAtIndex:section];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    NSString *sectionTitle = [settingsItemSectionTitles objectAtIndex:section];
+    NSArray *sectionSettingsItems = [settingsItems objectForKey:sectionTitle];
+    return [sectionSettingsItems count];
+}
+/*
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+}
+*/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    rcktLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"labelTableViewCell" forIndexPath:indexPath];
+    
+    NSString *sectionTitle = [settingsItemSectionTitles objectAtIndex:indexPath.section];
+    NSArray *sectionSettingsItems = [settingsItems objectForKey:sectionTitle];
+    NSArray *sectionSettingsItem = [sectionSettingsItems objectAtIndex:indexPath.row];
+    
+    
+    // Configure the cell...
+    cell.key.text = [sectionSettingsItem objectAtIndex:0];
+    cell.lbl.text = [sectionSettingsItem objectAtIndex:1];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //cell.img.image = [UIImage imageNamed:[sectionSettingsItem objectAtIndex:2]];
+    
+    return cell;
+    
+}
+
+/*
+ - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+ }
+ */
+#pragma mark - TableView delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.class == [rcktLabelTableViewCell class]) {
+        NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
+        [self performSegueWithIdentifier:key sender:@"me"];
+    }
+}
+
+
 
 @end

@@ -54,7 +54,6 @@
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
-    
 }
 
 
@@ -65,7 +64,6 @@
 }
 
 - (void) viewDidAppearLights {
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
 }
 
 - (void)didSaveScene:(NSMutableDictionary*)itm {
@@ -89,7 +87,6 @@
         [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
     else if (seg.selectedSegmentIndex == 1)
         [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
-
 }
 
 - (void) reload:(NSString *)id description:(NSString *)description {
@@ -155,8 +152,8 @@
 }
 - (IBAction)segChange:(id)sender {
     [self fetchData];
-    if (seg.selectedSegmentIndex == 1)
-        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
+//    if (seg.selectedSegmentIndex == 0)
+//        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
 }
 
 - (void)fetchData {
@@ -411,8 +408,8 @@
     NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
                                               encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", htmlSTR);
-    
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
+    //NSLog(@"%@", urlConnection );
     if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getAll",urlServer]]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         if ([urlConnection isEqualToString:[NSString stringWithFormat:@"%@/getAllScenes",urlServer]])
@@ -433,9 +430,8 @@
                 alert.alertViewStyle = UIAlertViewStyleDefault;
                 [alert show];
             }
-
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
-        } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/controlScene",urlServer]]) {
+        } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/control",urlServer]]) {
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         }
         [self.actionIndicator stopAnimating];
