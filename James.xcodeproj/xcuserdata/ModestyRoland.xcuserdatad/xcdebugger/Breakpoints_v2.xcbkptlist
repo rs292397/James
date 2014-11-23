@@ -548,11 +548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "James/rcktCamerasViewController.m"
-            timestampString = "437261943.60451"
+            timestampString = "438464232.674054"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-btnStreamClick:"
             landmarkType = "5">
          </BreakpointContent>

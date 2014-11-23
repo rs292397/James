@@ -26,6 +26,8 @@
 		930F101719E190AC00C9AF32 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930F101619E190AC00C9AF32 /* settings_icon.png */; };
 		930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */; };
 		93206CE21A0F9E8200784062 /* rcktCamerasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93206CE11A0F9E8200784062 /* rcktCamerasViewController.m */; };
+		932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932D79E41A1FD473004721C1 /* AVFoundation.framework */; };
+		933059AD1A221272004016BA /* ring.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933059AC1A221272004016BA /* ring.caf */; };
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
@@ -35,6 +37,11 @@
 		93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */; };
 		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
 		93F6730019AFA277009DE745 /* area_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93F672FF19AFA277009DE745 /* area_icon.png */; };
+		93FD20381A221D6C009746C5 /* rcktDoorbellFormSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */; };
+		93FD203A1A222CF8009746C5 /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 93FD20391A222CF8009746C5 /* ring2.caf */; };
+		93FD20411A2245E0009746C5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FD20401A2245E0009746C5 /* CFNetwork.framework */; };
+		93FD20441A224B66009746C5 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20431A224B66009746C5 /* GCDAsyncUdpSocket.m */; };
+		93FD20471A224E09009746C5 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20461A224E09009746C5 /* DDLog.m */; };
 		93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD5BC519B64E6D00C45491 /* rcktColorFormsheet.m */; };
 		93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */; };
 		93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD5C8419B6656F00C45491 /* drcolorpicker-brightnessguide.png */; };
@@ -95,6 +102,8 @@
 		930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorPickerView.m; sourceTree = "<group>"; };
 		93206CE01A0F9E8200784062 /* rcktCamerasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktCamerasViewController.h; sourceTree = "<group>"; };
 		93206CE11A0F9E8200784062 /* rcktCamerasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktCamerasViewController.m; sourceTree = "<group>"; };
+		932D79E41A1FD473004721C1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		933059AC1A221272004016BA /* ring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring.caf; sourceTree = "<group>"; };
 		9342C23D19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDevicesViewController.h; sourceTree = "<group>"; };
 		9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSettingsDevicesViewController.m; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
@@ -111,6 +120,15 @@
 		93F672FC19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktMasterNavAreasTableViewController.h; sourceTree = "<group>"; };
 		93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktMasterNavAreasTableViewController.m; sourceTree = "<group>"; };
 		93F672FF19AFA277009DE745 /* area_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = area_icon.png; path = ../../../../../Pictures/area_icon.png; sourceTree = "<group>"; };
+		93FD20361A221D6C009746C5 /* rcktDoorbellFormSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDoorbellFormSheet.h; sourceTree = "<group>"; };
+		93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDoorbellFormSheet.m; sourceTree = "<group>"; };
+		93FD20391A222CF8009746C5 /* ring2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring2.caf; sourceTree = "<group>"; };
+		93FD20401A2245E0009746C5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		93FD20421A224B66009746C5 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		93FD20431A224B66009746C5 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		93FD20451A224E09009746C5 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		93FD20461A224E09009746C5 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		93FD20481A225BB3009746C5 /* James.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = James.entitlements; path = James/James.entitlements; sourceTree = "<group>"; };
 		93FD5BC419B64E6D00C45491 /* rcktColorFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktColorFormsheet.h; sourceTree = "<group>"; };
 		93FD5BC519B64E6D00C45491 /* rcktColorFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorFormsheet.m; sourceTree = "<group>"; };
 		93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drcolorpicker-colormap.png"; sourceTree = "<group>"; };
@@ -136,6 +154,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FD20411A2245E0009746C5 /* CFNetwork.framework in Frameworks */,
+				932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */,
 				93FE276319576A1C00977594 /* CoreGraphics.framework in Frameworks */,
 				93FE276519576A1C00977594 /* UIKit.framework in Frameworks */,
 				93FE276119576A1C00977594 /* Foundation.framework in Frameworks */,
@@ -275,6 +295,26 @@
 			name = Library;
 			sourceTree = "<group>";
 		};
+		93FD203B1A2233ED009746C5 /* Ringtones */ = {
+			isa = PBXGroup;
+			children = (
+				93FD20391A222CF8009746C5 /* ring2.caf */,
+				933059AC1A221272004016BA /* ring.caf */,
+			);
+			name = Ringtones;
+			sourceTree = "<group>";
+		};
+		93FD203C1A22360B009746C5 /* TCP */ = {
+			isa = PBXGroup;
+			children = (
+				93FD20451A224E09009746C5 /* DDLog.h */,
+				93FD20461A224E09009746C5 /* DDLog.m */,
+				93FD20421A224B66009746C5 /* GCDAsyncUdpSocket.h */,
+				93FD20431A224B66009746C5 /* GCDAsyncUdpSocket.m */,
+			);
+			name = TCP;
+			sourceTree = "<group>";
+		};
 		93FD5BC319B64E4400C45491 /* Formsheets */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +328,8 @@
 				9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */,
 				93C90F8D19D4B931002E21A2 /* rcktDeviceFormsheet.h */,
 				93C90F8E19D4B931002E21A2 /* rcktDeviceFormsheet.m */,
+				93FD20361A221D6C009746C5 /* rcktDoorbellFormSheet.h */,
+				93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */,
 			);
 			name = Formsheets;
 			sourceTree = "<group>";
@@ -295,6 +337,7 @@
 		93FE275419576A1C00977594 = {
 			isa = PBXGroup;
 			children = (
+				93FD20481A225BB3009746C5 /* James.entitlements */,
 				93FE276619576A1C00977594 /* rckt */,
 				93FE275F19576A1C00977594 /* Frameworks */,
 				93FE275E19576A1C00977594 /* Products */,
@@ -313,6 +356,8 @@
 		93FE275F19576A1C00977594 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93FD20401A2245E0009746C5 /* CFNetwork.framework */,
+				932D79E41A1FD473004721C1 /* AVFoundation.framework */,
 				9308BED919771E7B003EE093 /* QuartzCore.framework */,
 				93FE276019576A1C00977594 /* Foundation.framework */,
 				93FE276219576A1C00977594 /* CoreGraphics.framework */,
@@ -325,6 +370,8 @@
 		93FE276619576A1C00977594 /* rckt */ = {
 			isa = PBXGroup;
 			children = (
+				93FD203C1A22360B009746C5 /* TCP */,
+				93FD203B1A2233ED009746C5 /* Ringtones */,
 				93F7CE481975A8E600F4E8C7 /* Library */,
 				9307EAA3195B52540050BBEC /* James */,
 				93FE276F19576A1C00977594 /* rcktAppDelegate.h */,
@@ -400,7 +447,13 @@
 					93FE275C19576A1C00977594 = {
 						DevelopmentTeam = X98Q75H3K8;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
 								enabled = 0;
 							};
 						};
@@ -447,10 +500,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FD203A1A222CF8009746C5 /* ring2.caf in Resources */,
 				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
 				930F101719E190AC00C9AF32 /* settings_icon.png in Resources */,
 				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
 				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
+				933059AD1A221272004016BA /* ring.caf in Resources */,
 				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
 				93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */,
 				93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */,
@@ -483,6 +538,7 @@
 				93082D9D1979B1BD00465F68 /* rckt.m in Sources */,
 				9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */,
 				93FE277119576A1C00977594 /* rcktAppDelegate.m in Sources */,
+				93FD20441A224B66009746C5 /* GCDAsyncUdpSocket.m in Sources */,
 				930D6FB4197851810073D6BD /* rcktStringTableViewCell.m in Sources */,
 				939DB44C19C771BD00BAE483 /* rcktRootCollectionViewController.m in Sources */,
 				930BAE6219B8D0D3008447E3 /* rcktSceneTableViewCell.m in Sources */,
@@ -496,9 +552,11 @@
 				930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */,
 				9308E8F719B39E8C00756CC6 /* rcktLightTableViewCell.m in Sources */,
 				9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */,
+				93FD20471A224E09009746C5 /* DDLog.m in Sources */,
 				93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */,
 				93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */,
 				93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */,
+				93FD20381A221D6C009746C5 /* rcktDoorbellFormSheet.m in Sources */,
 				939DB45019C774B800BAE483 /* rcktLabelCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,14 +676,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Roland Schneiders (2F9Z89WEWU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roland Schneiders (2F9Z89WEWU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f6aa518a-2263-45da-810c-520f3f0d223b";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -636,14 +694,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Roland Schneiders (X98Q75H3K8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roland Schneiders (X98Q75H3K8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5ffdbea3-c5c8-4161-b62f-035503329b55";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

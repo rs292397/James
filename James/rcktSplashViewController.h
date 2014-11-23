@@ -11,6 +11,7 @@
 
 @interface rcktSplashViewController : UIViewController {
     rckt *r;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView* splashActivityIndicatorView;

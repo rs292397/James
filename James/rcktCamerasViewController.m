@@ -8,8 +8,11 @@
 
 #import "rcktCamerasViewController.h"
 #import "rckt.h"
+#import "CoreGraphics/CoreGraphics.h"
 
-@interface rcktCamerasViewController ()    
+
+@interface rcktCamerasViewController ()  
+
 @end
 
 
@@ -40,7 +43,10 @@
         endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
     }
     */
-    [self btnLoginClick:nil];
+    //[self btnLoginClick:nil];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,9 +63,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
 -(IBAction)btnLoginClick:(id)sender {
-//    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi"];
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Login&version=2&account=roland&passwd=levi&session=SurveillanceStation"];
+
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    [mainScreen setBrightness:0];
+    
+    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi"];
+    //NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Login&version=2&account=roland&passwd=levi&session=SurveillanceStation"];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
 //    NSString *urlServer = [[rckt alloc] GetServerURL];
     
@@ -180,5 +192,7 @@
     
 
 }
+
+
 
 @end

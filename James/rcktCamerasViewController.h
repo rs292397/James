@@ -15,6 +15,7 @@
      */
 }
 
+
 @property (strong, nonatomic) IBOutlet UIButton *btnLogin;
 @property (strong, nonatomic) IBOutlet UIButton *btnStream;
 @property (strong, nonatomic) IBOutlet UIButton *btnCloseStream;

@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GCDAsyncUdpSocket.h"
 
-@interface rcktAppDelegate : UIResponder <UIApplicationDelegate>
+@interface rcktAppDelegate : UIResponder <UIApplicationDelegate, NSURLSessionDelegate> {
+    BOOL isRunning;
+}
 
+@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, copy) void(^backgroundTransferCompletionHandler)();
+
+@property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIAlertView *uialert;
 
 @end
