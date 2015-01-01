@@ -7,32 +7,46 @@
 //
 
 #import "rcktAppDelegate.h"
-#import "rcktDoorbellFormSheet.h"
-#import "GCDAsyncUdpSocket.h"
 #import "rckt.h"
+#import "rcktDoorbellFormSheet.h"
+#import "rcktSplashViewController.h"
+
 
 @implementation rcktAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
-//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
-//    }
     
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        [application registerForRemoteNotifications];
+        NSLog(@"Remote notifications registration request...");
     }
-    
-    [application setMinimumBackgroundFetchInterval:40000];
-    
-    
-    _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-    NSLog(@"udp allocated");
-    [self startStop];
-
 
     return YES;
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+//    [[MyModel sharedModel] setApnsToken:];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:[NSString stringWithFormat:@"%@", hexToken] forKey:@"NOTIFICATION_TOKEN"];
+    [prefs synchronize];
+
+    NSLog(@"Remote notification registered succesfully: %@", hexToken);
+    UIViewController *vc = self.window.rootViewController;
+    if ([vc isKindOfClass:[rcktSplashViewController class]]) {
+        [(rcktSplashViewController*) vc initialize];
+    }
+    
+}
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Remote notification registration failed! Error: %@", error);
 }
 
 - (NSUInteger)application:(UIApplication*)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -44,15 +58,64 @@
     return orientations;
     
 }
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
+    if ([userInfo objectForKey:@"category"]) {
+        if ([[userInfo objectForKey:@"category"] isEqualToString:@"Doorbell"]) {
+            [self showDoorbellFormsheet: (application.applicationState == UIApplicationStateActive)];
+        }
+    }
     
+    /*
+    if ( application.applicationState == UIApplicationStateActive)
+    {
+        NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+        
+        NSString *alertMsg = @"";
+        NSString *badge = @"";
+        NSString *sound = @"";
+        NSString *custom = @"";
+        NSString *x;
+        
+        if( [userInfo objectForKey:@"acme2"] != NULL)
+        {
+            x = [userInfo objectForKey:@"acme2"];
+        }
+        
+        if( [apsInfo objectForKey:@"alert"] != NULL)
+        {
+            alertMsg = [apsInfo objectForKey:@"alert"];
+        }
+        
+        
+        if( [apsInfo objectForKey:@"badge"] != NULL)
+        {
+            badge = [apsInfo objectForKey:@"badge"];
+        }
+        
+        
+        if( [apsInfo objectForKey:@"sound"] != NULL)
+        {
+            sound = [apsInfo objectForKey:@"sound"];
+        }
+        
+        if( [userInfo objectForKey:@"Type"] != NULL)
+        {
+            custom = [userInfo objectForKey:@"Type"];
+        }
+
+        NSLog(@"%@", custom);
+        NSLog(@"%@", alertMsg);
+    }
+     */
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-
     
     
 }
@@ -62,25 +125,9 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    NSLog(@"Start urlsessionrequest");
-    [self URLrequest];
     
-    //NSURLRequest *request = [NSURLRequest requestWithURL:downloadURL];
-    //NSURLSessionDownloadTask *task = [[self backgroundURLSession] downloadTaskWithRequest:request];
-    //task.taskDescription = [NSString stringWithFormat:@"test"];
-    //[task resume];
-    
-   // self.backgroundTransferCompletionHandler = completionHandler;
-    //self.backgroundTransferCompletionHandler(UIBackgroundFetchResultNewData);
-    
-    //[self notificationDoorbell:application];
-    //[self showDoorbellFormsheet:application];
 }
 
--(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler{
-    self.backgroundTransferCompletionHandler = completionHandler;
-    
-}
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -93,7 +140,6 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     //[self showDoorbellFormsheet:application];
-
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -101,86 +147,6 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(void)URLrequest {
-    NSString *urlServer = [[rckt alloc] GetServerURL];
-    NSString *downloadURLString = [NSString stringWithFormat:@"%@/getAllAreas", urlServer];
-    NSURL* downloadURL = [NSURL URLWithString:downloadURLString];
-    
-    NSString *idf = [NSString stringWithFormat:@"%@", [NSDate date]];
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:idf];
-    sessionConfiguration.HTTPMaximumConnectionsPerHost = 5;
-    self.session = [NSURLSession sessionWithConfiguration:sessionConfiguration
-                                                 delegate:self
-                                            delegateQueue:[NSOperationQueue mainQueue]];
-    [[self.session downloadTaskWithURL:downloadURL] resume];
-
-}
-
--(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
-
-
-    NSError *error;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if ([fileManager fileExistsAtPath:[location path]]) {
-        NSLog(@"%@", [[NSString alloc] initWithContentsOfURL:location encoding:NSUTF8StringEncoding error:&error]);
-        if (error)
-            NSLog(@"%@", error);
-        [fileManager removeItemAtURL:location error:nil];
-    }
-    [NSTimer scheduledTimerWithTimeInterval:5.0
-                                     target:self
-                                   selector:@selector(URLrequest)
-                                   userInfo:nil
-                                    repeats:NO];
-    
-//    [self URLrequest];
-
-    // The main act...
-    //NSLog(@"%@",[[NSString alloc] initWithData:[NSData dataWithContentsOfFile:fileAtPath] encoding:NSUTF8StringEncoding]);
-
-    
-}
-
-/*
-- (void)         URLSession:(NSURLSession *)session
-               downloadTask:(NSURLSessionDownloadTask *)downloadTask
-  didFinishDownloadingToURL:(NSURL *)location
-{
-    NSLog(@"downloadTask:%@ didFinishDownloadingToURL:%@", downloadTask.taskDescription, location);
-    
-    // Copy file to your app's storage with NSFileManager
-    // ...
-    
-    // Notify your UI
-}
-
-- (void)  URLSession:(NSURLSession *)session
-        downloadTask:(NSURLSessionDownloadTask *)downloadTask
-   didResumeAtOffset:(int64_t)fileOffset
-  expectedTotalBytes:(int64_t)expectedTotalBytes
-{
-}
-
-- (void)         URLSession:(NSURLSession *)session
-               downloadTask:(NSURLSessionDownloadTask *)downloadTask
-               didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten
-  totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
-{
-}
-*/
-
-
--(void) application:(UIApplication *)application performFetchWithCompletionHandler: (void (^)(UIBackgroundFetchResult))completionHandler {
-    
-    NSLog(@"Background fetch started...");
-    
-    //---do background fetch here---
-    // You have up to 30 seconds to perform the fetch
-    
-    
-    NSLog(@"Background fetch completed...");
-}
 
 
 -(void)notificationDoorbell: (UIApplication*) application {
@@ -194,17 +160,17 @@
     [application scheduleLocalNotification:localNotification];
 }
 
--(void)showDoorbellFormsheet: (UIApplication *)application {
+-(void)showDoorbellFormsheet: (Boolean) playMusic{
+    UIApplication *application = [UIApplication sharedApplication];
     
     if ([[application keyWindow].rootViewController isKindOfClass:[UISplitViewController class]]) {
         UISplitViewController *svc = (UISplitViewController*)[application keyWindow].rootViewController;
         UIViewController *pvc = svc.presentedViewController;
+        rcktDoorbellFormSheet *fs = nil;
         
-        if ([pvc isKindOfClass:[rcktDoorbellFormSheet class]]) {
-            rcktDoorbellFormSheet *fs = (rcktDoorbellFormSheet*) pvc;
-            [fs playDoorbellSound];
-            
-        }
+        
+        if ([pvc isKindOfClass:[rcktDoorbellFormSheet class]])
+            fs = (rcktDoorbellFormSheet*) pvc;
         else {
             UIViewController *vc = svc.viewControllers[1];
             UIStoryboard *storyboard;
@@ -213,84 +179,17 @@
             else
                 storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
             
-            rcktDoorbellFormSheet *fs = (rcktDoorbellFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellFormsheet"];
+            fs = (rcktDoorbellFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellFormsheet"];
             [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
             [vc presentViewController:fs animated:YES completion:nil];
         }
+        
+        if (playMusic)
+            [fs playDoorbellSound];
 
     }
 }
 
-- (void)startStop
-{
-    if (isRunning)
-    {
-        // STOP udp echo server
-        
-        [_udpSocket close];
-        
-        NSLog(@"Stopped Udp Echo server");
-        isRunning = false;
-        
-    }
-    else
-    {
-        // START udp echo server
-        
-        int port = 23;
-        if (port < 0 || port > 65535)
-        {
-            port = 0;
-        }
-        
-        NSError *error = nil;
-        
-        if (![_udpSocket bindToPort:port error:&error])
-        {
-            NSLog(@"Error starting server (bind): %@", error);
-            return;
-        }
-        
-        if (![_udpSocket beginReceiving:&error])
-            
-        {
-            [_udpSocket close];
-            
-            NSLog(@"Error starting server (recv): %@", error);
-            return;
-        }
-        
-        NSLog(@"Udp Echo server started on port %hu", [_udpSocket localPort]);
-        isRunning = YES;
-        
-    }
-}
-
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
-      fromAddress:(NSData *)address withFilterContext:(id)filterContext
-{
-    if (!isRunning) return;
-    
-    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (msg)
-    {
-        /* If you want to get a display friendly version of the IPv4 or IPv6 address, you could do this:
-         
-         NSString *host = nil;
-         uint16_t port = 0;
-         [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
-         
-         */
-        
-        NSLog(@"%@",msg);
-    }
-    else
-    {
-        NSLog(@"Error converting received data into UTF-8 String");
-    }
-    
-    [_udpSocket sendData:data toAddress:address withTimeout:-1 tag:0];
-}
 
 
 @end

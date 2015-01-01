@@ -9,6 +9,7 @@
 #import "rcktDeviceTokenFormsheet.h"
 #import "rcktStringTableViewCell.h"
 #import "rckt.h"
+#import "rcktSplashViewController.h"
 
 @interface rcktDeviceTokenFormsheet () 
 
@@ -16,6 +17,7 @@
 @end
 
 @implementation rcktDeviceTokenFormsheet
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,6 +64,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"rcktSplash"];
     [self presentViewController:controller animated:NO completion:nil];
+    [(rcktSplashViewController *)controller initialize];
     
 }
 

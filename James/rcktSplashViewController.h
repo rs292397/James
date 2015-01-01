@@ -18,4 +18,6 @@
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
 
+-(void)initialize;
+
 @end

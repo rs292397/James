@@ -49,8 +49,7 @@
 
 - (void)playDoorbellSound {
     
-    NSLog(@"playSound");
-    NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"ring.caf"];
+    NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"ring2.caf"];
     NSError* error;
     
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&error];

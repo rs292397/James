@@ -33,32 +33,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
-    //initialize new mutable data
-    countToDo = 1;
-    NSMutableData *data = [[NSMutableData alloc] init];
-    self.receivedData = data;
-    
     [_splashActivityIndicatorView startAnimating];
     _splashActivityIndicatorView.hidesWhenStopped = TRUE;
     
 }
 - (void)viewDidAppear:(BOOL)animated {
- 
-    NSString *deviceName = [[UIDevice currentDevice] name];
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:[NSString stringWithFormat:@"%@", [deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"]] forKey:@"DEVICEID"];
-    [prefs synchronize];
 
-    count = 0;
-    
-    r = [[rckt alloc] init];
-    NSString *urlServer = [r GetServerURL];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
-    if (url != nil)
-        [self doAPIrequest:url];
-    else
-        [self presentForm];
+
 }
 
 
@@ -66,6 +49,32 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)initialize {
+    //initialize new mutable data
+    NSLog(@"Initialize James...");
+    countToDo = 1;
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+    
+    NSString *deviceName = [[UIDevice currentDevice] name];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:[NSString stringWithFormat:@"%@", [deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"]] forKey:@"DEVICEID"];
+    [prefs synchronize];
+    
+    count = 0;
+    
+    r = [[rckt alloc] init];
+    NSString *urlServer = [r GetServerURL];
+//    NSString *postData = [NSString stringWithFormat:@"{\"deviceToken\":\"%@\", \"notifyDoorbell\":\"%hhd\"}", [prefs objectForKey:@"NOTIFICATION_TOKEN"], [prefs boolForKey:@"NOTIFICATION_DOORBELL"]];
+    NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":\"%hhd\"}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],YES];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
+    if (url != nil)
+        [self doAPIrequestPUT:url postData:postData];
+    else
+        [self presentForm];
+
 }
 
 /*
@@ -87,6 +96,34 @@
     
     //initialize a request from url
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //initialize a connection from request
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    self.connection = connection;
+    
+    //start the connection
+    [connection start];
+    
+}
+
+- (void) doAPIrequestPUT: (NSURL*) url postData:(NSString*) postData{
+    
+    //NSLog(@"%@", url.absoluteString);
+    
+    //initialize url that is going to be fetched.
+    
+    //initialize a request from url
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //set http method
+    [request setHTTPMethod:@"PUT"];
+    //initialize a post data
+    //NSString *postData = [NSString stringWithFormat:@"j_username=role&j_password=tomcat"];
+    //set request content type we MUST set this value.
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    //set post data of request
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
     
     //initialize a connection from request
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -176,6 +213,7 @@
         [prefs synchronize];
  
         if (count == countToDo) {
+            NSLog(@"Done initializing");
             
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

@@ -29,6 +29,7 @@
 		932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932D79E41A1FD473004721C1 /* AVFoundation.framework */; };
 		933059AD1A221272004016BA /* ring.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933059AC1A221272004016BA /* ring.caf */; };
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
+		934445CF1A2B8286002CC4EB /* ring3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934445CE1A2B8286002CC4EB /* ring3.caf */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
 		939DB44C19C771BD00BAE483 /* rcktRootCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */; };
@@ -106,6 +107,7 @@
 		933059AC1A221272004016BA /* ring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring.caf; sourceTree = "<group>"; };
 		9342C23D19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDevicesViewController.h; sourceTree = "<group>"; };
 		9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSettingsDevicesViewController.m; sourceTree = "<group>"; };
+		934445CE1A2B8286002CC4EB /* ring3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring3.caf; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
 		939DB44819C76B5300BAE483 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 		93FD203B1A2233ED009746C5 /* Ringtones */ = {
 			isa = PBXGroup;
 			children = (
+				934445CE1A2B8286002CC4EB /* ring3.caf */,
 				93FD20391A222CF8009746C5 /* ring2.caf */,
 				933059AC1A221272004016BA /* ring.caf */,
 			);
@@ -504,6 +507,7 @@
 				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
 				930F101719E190AC00C9AF32 /* settings_icon.png in Resources */,
 				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
+				934445CF1A2B8286002CC4EB /* ring3.caf in Resources */,
 				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
 				933059AD1A221272004016BA /* ring.caf in Resources */,
 				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
@@ -676,14 +680,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roland Schneiders (2F9Z89WEWU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "38674020-13f7-490c-b806-daa0b349a391";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -694,14 +698,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roland Schneiders (X98Q75H3K8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "132362f7-0593-49a3-8455-54fa5337d007";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

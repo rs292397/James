@@ -16,7 +16,8 @@
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, copy) void(^backgroundTransferCompletionHandler)();
 
-@property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
+@property (strong, nonatomic) GCDAsyncUdpSocket *udpSocketForeGround;
+@property (strong, nonatomic) GCDAsyncUdpSocket *udpSocketBackGround;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIAlertView *uialert;
 

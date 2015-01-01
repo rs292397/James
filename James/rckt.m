@@ -22,6 +22,7 @@
     //NSString *deviceName = [[UIDevice currentDevice] name];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"],[prefs objectForKey:@"DEVICETOKEN"]];
+//    return [NSString stringWithFormat:@"http://192.168.1.115:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
     return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
 }
 
