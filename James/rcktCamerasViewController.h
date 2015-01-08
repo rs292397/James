@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h"
 
 @interface rcktCamerasViewController : UIViewController {
     NSString *sid;
-    /*UIImageView
-     NSData *endMarkerData;
-     */
+    /*
+    NSData *endMarkerData;
+    */
+    rckt *r;
 }
 
 

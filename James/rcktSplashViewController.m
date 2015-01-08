@@ -35,10 +35,27 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    [_splashActivityIndicatorView startAnimating];
-    _splashActivityIndicatorView.hidesWhenStopped = TRUE;
-    
+    //   [_splashActivityIndicatorView startAnimating];
+    //_splashActivityIndicatorView.hidesWhenStopped = TRUE;
+    _progressView.progress = 0.0f;
+    countToDo = 6;
+    [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
 }
+
+- (void)animateProgressBar {
+    
+    if (count < countToDo) {
+        float progress = (float)count/(float)countToDo;
+        _progressView.progress = (float) progress;
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateProgressBar) userInfo:nil repeats:NO];
+        
+    }
+    else {
+        
+    }
+  
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 
 
@@ -54,7 +71,6 @@
 -(void)initialize {
     //initialize new mutable data
     NSLog(@"Initialize James...");
-    countToDo = 1;
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
     
@@ -169,6 +185,8 @@
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@",urlConnection);
     //NSLog(@"%@", urlServer);
+    count += 1;
+
     if ([urlServer isEqualToString:urlConnection]) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.receivedData options:kNilOptions error:&error];
         NSString *keyCode = [json valueForKey:@"code"];
@@ -181,7 +199,7 @@
                 NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
                 [prefs setObject:[NSString stringWithFormat:@"%@", [json valueForKey:@"message"]] forKey:@"DEVICETOKEN"];
                 [prefs synchronize];
-                //NSLog(@"%@",htmlSTR);
+                NSLog(@"%@",htmlSTR);
                 
                 NSString *urlServer = [[rckt alloc] GetServerURL];
                 //Get All Objects
@@ -193,16 +211,15 @@
             NSLog(@"Wrong URL");
         }
     } else {
-        count += 1;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"AREAS"];
-            if ([prefs objectForKey:@"SCENARIOS"]==nil) {
-                countToDo=4;
-            }
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllLights",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"LIGHTS"];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllShades", urlServer]]];
+        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllShades",urlServer]]) {
+            [prefs setObject:htmlSTR forKey:@"SHADES"];
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllScenes",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"SCENES"];
@@ -211,7 +228,9 @@
             [prefs setObject:htmlSTR forKey:@"SCENARIOS"];
         }
         [prefs synchronize];
- 
+
+        
+        
         if (count == countToDo) {
             NSLog(@"Done initializing");
             

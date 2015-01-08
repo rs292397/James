@@ -7,6 +7,8 @@
 //
 
 #import "rcktDoorbellFormSheet.h"
+#import "rckt.h"
+#import "CoreGraphics/CoreGraphics.h"
 
 @interface rcktDoorbellFormSheet ()
 
@@ -17,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+    r = [[rckt alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,11 +29,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewDidDisappear:(BOOL)animated {
+    [self closeCam];
+}
+
 - (void) viewDidAppear:(BOOL)animated {
     UINavigationItem *navitm = self.navbaritem;
     UIBarButtonItem *bl = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(cmdCancel)];
     navitm.leftBarButtonItem = bl;
     //[self playDoorbellSound];
+    [self showCam];
 }
 
 
@@ -41,6 +51,23 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)showCam {
+    
+ //   UIScreen *mainScreen = [UIScreen mainScreen];
+ //   [mainScreen setBrightness:0];
+    NSString *urlServer = [r GetServerURL];
+    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/getSID", urlServer];
+    //NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Login&version=2&account=roland&passwd=levi&session=SurveillanceStation"];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+    //    NSString *urlServer = [[rckt alloc] GetServerURL];
+    
+}
+
+-(void)closeCam {
+    NSString *str = [NSString stringWithFormat:@"%@/webapi/auth.cgi?api=SYNO.API.Auth&method=Logout&version=2&session=SurveillanceStation", sessionURL];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+}
 
 
 - (void)cmdCancel{
@@ -59,9 +86,80 @@
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     if (flag) {
-        NSLog(@"audioPlayerDidFinishPlaying successfully");
+        //NSLog(@"audioPlayerDidFinishPlaying successfully");
     }
 }
 
+- (void) doAPIrequest: (NSURL *)url {
+    //NSLog(@"%@", url.absoluteString);
+    
+    //initialize url that is going to be fetched.
+    
+    //initialize a request from url
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //initialize a connection from request
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    self.connection = connection;
+    
+    //start the connection
+    [connection start];
+}
+
+/*
+ this method might be calling more than one times according to incoming data size
+ */
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    
+    [self.receivedData appendData:data];
+    
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
+}
+/*
+ if there is an error occured, this method will be called by connection
+ */
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    
+    NSLog(@"%@" , error);
+}
+
+/*
+ if data is successfully received, this method will be called by connection
+ */
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    
+    //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
+    //NSError* error;
+    //initialize convert the received data to string with UTF8 encoding
+    NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
+                                              encoding:NSUTF8StringEncoding];
+    //NSLog(@"%@", htmlSTR);
+    NSString *urlConnection = connection.originalRequest.URL.absoluteString;
+    //NSLog(@"%@", urlConnection );
+    NSString *urlServer = [r GetServerURL];
+    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/getSID", urlServer]]) {
+        NSError* error;
+        NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+
+        sessionID = json[@"SID"];
+        sessionURL = json[@"url"];
+        sessionCam = json[@"IDCamDoorbell"];
+        
+        NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
+        
+        /* SHOW IN WEBVIEW */
+        NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
+        [self.web loadHTMLString:html baseURL:nil];
+        
+    }
+    else {
+        //NSLog(@"%@", htmlSTR);
+    }
+    
+}
 
 @end

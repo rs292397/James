@@ -20,26 +20,30 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rocket.png" translatesAutoresizingMaskIntoConstraints="NO" id="iTw-cL-AO6">
                                 <rect key="frame" x="444" y="320" width="137" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="137" id="Eie-jO-XxB"/>
-                                    <constraint firstAttribute="height" constant="128" id="tMo-hG-VzN"/>
+                                    <constraint firstAttribute="width" constant="137" id="I4o-De-rAN"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5HU-AY-Ifb">
-                                <rect key="frame" x="494" y="474" width="37" height="37"/>
-                            </activityIndicatorView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.30000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Ftp-ex-rsd">
+                                <rect key="frame" x="414" y="502" width="197" height="3"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="197" id="vWO-5g-8KO"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="iTw-cL-AO6" secondAttribute="centerX" id="4Z4-kG-5ws"/>
-                            <constraint firstAttribute="centerY" secondItem="iTw-cL-AO6" secondAttribute="centerY" id="LAr-Tg-7cy"/>
-                            <constraint firstAttribute="centerX" secondItem="5HU-AY-Ifb" secondAttribute="centerX" id="UZC-rM-zJb"/>
-                            <constraint firstItem="5HU-AY-Ifb" firstAttribute="top" secondItem="iTw-cL-AO6" secondAttribute="bottom" constant="26" id="pel-nT-vXf"/>
+                            <constraint firstItem="iTw-cL-AO6" firstAttribute="top" secondItem="oQA-uf-Nkp" secondAttribute="bottom" constant="300" id="IY7-G5-Caj"/>
+                            <constraint firstItem="iTw-cL-AO6" firstAttribute="centerY" secondItem="3uy-VN-xz5" secondAttribute="centerY" id="LRd-Aa-dIe"/>
+                            <constraint firstItem="SES-wv-75a" firstAttribute="top" secondItem="Ftp-ex-rsd" secondAttribute="bottom" constant="264" id="q9L-E5-GWK"/>
+                            <constraint firstItem="Ftp-ex-rsd" firstAttribute="centerX" secondItem="3uy-VN-xz5" secondAttribute="centerX" id="tuh-HX-JdD"/>
+                            <constraint firstItem="iTw-cL-AO6" firstAttribute="centerX" secondItem="Ftp-ex-rsd" secondAttribute="centerX" id="wey-vb-KdP"/>
                         </constraints>
                     </view>
                     <keyCommands/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="splashActivityIndicatorView" destination="5HU-AY-Ifb" id="yv7-qL-ijP"/>
+                        <outlet property="progressView" destination="Ftp-ex-rsd" id="1Y3-5a-eDj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMP-oK-nRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -291,13 +295,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plD-Gi-2Q5">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
-                                <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Device" id="or8-aX-7Ff"/>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bll-78-Cna">
                                 <rect key="frame" x="0.0" y="52" width="540" height="560"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -373,6 +370,13 @@
                                     <outlet property="delegate" destination="Dsb-GO-Mwb" id="tXw-kE-iMf"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plD-Gi-2Q5">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Device" id="or8-aX-7Ff"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -407,19 +411,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r3E-NZ-0EN">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3E-NZ-0EN">
                                 <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                 <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Doorbell" id="pSo-kR-7sg"/>
                                 </items>
                             </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RL6-q3-ChQ">
+                                <rect key="frame" x="0.0" y="50" width="540" height="405"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RL6-q3-ChQ" firstAttribute="top" secondItem="r3E-NZ-0EN" secondAttribute="bottom" constant="6" id="Bqz-tp-qnZ"/>
+                            <constraint firstItem="r3E-NZ-0EN" firstAttribute="top" secondItem="aQQ-em-3yg" secondAttribute="top" id="DkH-DP-99a"/>
+                            <constraint firstItem="RL6-q3-ChQ" firstAttribute="trailing" secondItem="r3E-NZ-0EN" secondAttribute="trailing" id="GzZ-Vn-NRv"/>
+                            <constraint firstItem="ugT-7G-Bnl" firstAttribute="top" secondItem="RL6-q3-ChQ" secondAttribute="bottom" constant="165" id="OFn-KY-U3E"/>
+                            <constraint firstItem="RL6-q3-ChQ" firstAttribute="leading" secondItem="r3E-NZ-0EN" secondAttribute="leading" id="Sdx-TT-iKk"/>
+                            <constraint firstItem="r3E-NZ-0EN" firstAttribute="leading" secondItem="aQQ-em-3yg" secondAttribute="leading" id="XgS-jm-k7g"/>
+                            <constraint firstAttribute="trailing" secondItem="r3E-NZ-0EN" secondAttribute="trailing" id="hsa-IS-kJe"/>
+                        </constraints>
                     </view>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="navbaritem" destination="pSo-kR-7sg" id="dOE-lL-GiY"/>
+                        <outlet property="web" destination="RL6-q3-ChQ" id="H2o-0T-RZd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtK-40-XkE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,7 +14,7 @@
     
 }
 
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView* splashActivityIndicatorView;
+@property (strong, nonatomic) IBOutlet UIProgressView* progressView;
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
 
