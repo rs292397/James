@@ -11,9 +11,9 @@
 
 @interface rcktCamerasViewController : UIViewController {
     NSString *sid;
-    /*
-    NSData *endMarkerData;
-    */
+    
+    //NSData *endMarkerData;
+    
     rckt *r;
 }
 
