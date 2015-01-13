@@ -44,6 +44,9 @@
                   @"Scenarios" : @[
                           @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
                           ],
+                  @"Doorbell" : @[
+                          @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"scenario_icon.png"]
+                          ],
                   @"Settings" : @[
                           @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
                           ]
@@ -58,7 +61,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewDidAppear:(BOOL)animated {
-    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:2];
+    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:3];
     [self tableView:self.rootTableView didSelectRowAtIndexPath:index];
 
 }
