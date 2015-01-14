@@ -76,15 +76,19 @@
     
     NSString *deviceName = [[UIDevice currentDevice] name];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    //Create userdefaults if not exist
+    if ([prefs objectForKey:@"NOTIFY_DOORBELL"]==nil)
+        [prefs setBool:NO forKey:@"NOTIFY_DOORBELL"];
+
+    
     [prefs setObject:[NSString stringWithFormat:@"%@", [deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"]] forKey:@"DEVICEID"];
     [prefs synchronize];
     
     count = 0;
-    
     r = [[rckt alloc] init];
     NSString *urlServer = [r GetServerURL];
-//    NSString *postData = [NSString stringWithFormat:@"{\"deviceToken\":\"%@\", \"notifyDoorbell\":\"%hhd\"}", [prefs objectForKey:@"NOTIFICATION_TOKEN"], [prefs boolForKey:@"NOTIFICATION_DOORBELL"]];
-    NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":\"%hhd\"}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],YES];
+    NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":%hhd}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],[prefs boolForKey:@"NOTIFY_DOORBELL"]];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
     if (url != nil)
         [self doAPIrequestPUT:url postData:postData];

@@ -57,15 +57,14 @@
  //   UIScreen *mainScreen = [UIScreen mainScreen];
  //   [mainScreen setBrightness:0];
     NSString *urlServer = [r GetServerURL];
-    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/getSID", urlServer];
-    //NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Login&version=2&account=roland&passwd=levi&session=SurveillanceStation"];
+    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-    //    NSString *urlServer = [[rckt alloc] GetServerURL];
     
 }
 
 -(void)closeCam {
-    NSString *str = [NSString stringWithFormat:@"%@/webapi/auth.cgi?api=SYNO.API.Auth&method=Logout&version=2&session=SurveillanceStation", sessionURL];
+    NSString *urlServer = [r GetServerURL];
+    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/logout/%@", urlServer, sessionID];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
 }
 
@@ -140,7 +139,7 @@
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@", urlConnection );
     NSString *urlServer = [r GetServerURL];
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/getSID", urlServer]]) {
+    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer]]) {
         NSError* error;
         NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
@@ -149,12 +148,18 @@
         sessionURL = json[@"url"];
         sessionCam = json[@"IDCamDoorbell"];
         
-        NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
+        if (sessionCam.integerValue>0) {
+            NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
+            
+            /* SHOW IN WEBVIEW */
+            NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
+            [self.web loadHTMLString:html baseURL:nil];
+        }
         
-        /* SHOW IN WEBVIEW */
-        NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
-        [self.web loadHTMLString:html baseURL:nil];
         
+    }
+    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/logout", urlServer]]) {
+        //NSLog(@"Logout: %@", sessionID);
     }
     else {
         //NSLog(@"%@", htmlSTR);

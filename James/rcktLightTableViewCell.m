@@ -26,7 +26,7 @@
         
  //   [self.action addTarget:self action:@selector(didTapButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.onOff addTarget:self action:@selector(didSwitchOnOff:) forControlEvents:UIControlEventTouchUpInside];
-    [self.slider addTarget:self action:@selector(didSlider:) forControlEvents:UIControlEventTouchUpInside];
+    [self.slider addTarget:self action:@selector(didSlider:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     [self.colorTap addTarget:self action:@selector(didTapColor:) forControlEvents:UIControlEventTouchUpInside];
 }
 

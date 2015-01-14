@@ -30,6 +30,7 @@
 		93250D081A654BBB00C2AAB6 /* rcktMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */; };
 		932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932D79E41A1FD473004721C1 /* AVFoundation.framework */; };
 		933059AD1A221272004016BA /* ring.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933059AC1A221272004016BA /* ring.caf */; };
+		933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */; };
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
 		934445CF1A2B8286002CC4EB /* ring3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934445CE1A2B8286002CC4EB /* ring3.caf */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
@@ -111,6 +112,8 @@
 		93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktMessageTableViewCell.m; sourceTree = "<group>"; };
 		932D79E41A1FD473004721C1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		933059AC1A221272004016BA /* ring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring.caf; sourceTree = "<group>"; };
+		933FE7C61A67127F003418AD /* rcktSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSwitchTableViewCell.h; sourceTree = "<group>"; };
+		933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSwitchTableViewCell.m; sourceTree = "<group>"; };
 		9342C23D19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDevicesViewController.h; sourceTree = "<group>"; };
 		9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSettingsDevicesViewController.m; sourceTree = "<group>"; };
 		934445CE1A2B8286002CC4EB /* ring3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring3.caf; sourceTree = "<group>"; };
@@ -265,6 +268,8 @@
 				93010E3919BA168D00751375 /* rcktPickerTableViewCell.m */,
 				93250D061A654BBB00C2AAB6 /* rcktMessageTableViewCell.h */,
 				93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */,
+				933FE7C61A67127F003418AD /* rcktSwitchTableViewCell.h */,
+				933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */,
 				930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */,
 				93C90F8F19D4B931002E21A2 /* rcktDeviceFormsheet.m in Sources */,
+				933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */,
 				93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */,
 				93010E3A19BA168D00751375 /* rcktPickerTableViewCell.m in Sources */,
 				930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */,

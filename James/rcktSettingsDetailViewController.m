@@ -9,6 +9,7 @@
 #import "rcktSettingsDetailViewController.h"
 #import "rckt.h"
 #import "rcktLabelTableViewCell.h"
+#import "rcktSwitchTableViewCell.h"
 
 @interface rcktSettingsDetailViewController ()
 
@@ -31,9 +32,13 @@
     // Do any additional setup after loading the view.
     [self navigationItem].title = @"Settings";
     settingsItems = @{@"Physical Devices" : @[
-                          @[@"segueSettingsDevices", @"Devices", @"*.png"]
-                          ]//,
-                  };
+                          @[@"menu", @"segueSettingsDevices", @"Devices", @"*.png"]
+                          ],
+                      @"General" : @[
+                              @[@"item", @"NOTIFY_DOORBELL", @"Allow Notifications from Doorbell", @"*.png"],
+                              @[@"menu", @"segueSettingsLayout", @"Layout", @"*.png"]
+                              ]
+                      };
     
     settingsItemSectionTitles = [[settingsItems allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
@@ -84,18 +89,43 @@
 */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    rcktLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"labelTableViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell;
     
     NSString *sectionTitle = [settingsItemSectionTitles objectAtIndex:indexPath.section];
     NSArray *sectionSettingsItems = [settingsItems objectForKey:sectionTitle];
     NSArray *sectionSettingsItem = [sectionSettingsItems objectAtIndex:indexPath.row];
     
+    if ([[sectionSettingsItem objectAtIndex:0] isEqualToString:@"menu"]) {
+        rcktLabelTableViewCell *menuCell = [tableView dequeueReusableCellWithIdentifier:@"labelTableViewCell" forIndexPath:indexPath];
+            
+        // Configure the cell...
+        menuCell.key.text = [sectionSettingsItem objectAtIndex:1];
+        menuCell.lbl.text = [sectionSettingsItem objectAtIndex:2];
+        menuCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        //cell.img.image = [UIImage imageNamed:[sectionSettingsItem objectAtIndex:2]];
+        cell = menuCell;
+    }
+    else if ([[sectionSettingsItem objectAtIndex:0] isEqualToString:@"item"]) {
+        rcktSwitchTableViewCell *itemCell = [tableView dequeueReusableCellWithIdentifier:@"switchTableViewCell" forIndexPath:indexPath];
+        itemCell.key.text = [sectionSettingsItem objectAtIndex:1];
+        itemCell.lbl.text = [sectionSettingsItem objectAtIndex:2];
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [itemCell.swtch setOn:[prefs boolForKey:@"NOTIFY_DOORBELL"]];
+        __weak rcktSwitchTableViewCell *weakCell=itemCell;
+        
+        [itemCell setDidSwitchOnOffBlock:^(id sender) {
+            UISwitch *s = (UISwitch*) sender;
+            NSString *key = [NSString stringWithFormat:@"%@", weakCell.key.text];
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            [prefs setBool:s.on forKey:key];
+            [prefs synchronize];
+        }];
+
+        cell = itemCell;
+
+    }
     
-    // Configure the cell...
-    cell.key.text = [sectionSettingsItem objectAtIndex:0];
-    cell.lbl.text = [sectionSettingsItem objectAtIndex:1];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    //cell.img.image = [UIImage imageNamed:[sectionSettingsItem objectAtIndex:2]];
+    
     
     return cell;
     

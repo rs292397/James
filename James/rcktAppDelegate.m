@@ -64,7 +64,8 @@
 
     if ([userInfo objectForKey:@"category"]) {
         if ([[userInfo objectForKey:@"category"] isEqualToString:@"Doorbell"]) {
-            [self showDoorbellFormsheet: (application.applicationState == UIApplicationStateActive)];
+            rckt *r = [[rckt alloc] init];
+            [r showDoorbellFormsheet: (application.applicationState == UIApplicationStateActive)];
         }
     }
     
@@ -156,39 +157,10 @@
     localNotification.alertBody = [NSString stringWithFormat:@"Somebody is at the front door %@", dateTime];
     //localNotification.soundName = UILocalNotificationDefaultSoundName;
     localNotification.soundName = @"ring2.caf";
-    localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1;
+    //localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1;
     [application scheduleLocalNotification:localNotification];
 }
 
--(void)showDoorbellFormsheet: (Boolean) playMusic{
-    UIApplication *application = [UIApplication sharedApplication];
-    
-    if ([[application keyWindow].rootViewController isKindOfClass:[UISplitViewController class]]) {
-        UISplitViewController *svc = (UISplitViewController*)[application keyWindow].rootViewController;
-        UIViewController *pvc = svc.presentedViewController;
-        rcktDoorbellFormSheet *fs = nil;
-        
-        
-        if ([pvc isKindOfClass:[rcktDoorbellFormSheet class]])
-            fs = (rcktDoorbellFormSheet*) pvc;
-        else {
-            UIViewController *vc = svc.viewControllers[1];
-            UIStoryboard *storyboard;
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-                storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            else
-                storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-            
-            fs = (rcktDoorbellFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellFormsheet"];
-            [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-            [vc presentViewController:fs animated:YES completion:nil];
-        }
-        
-        if (playMusic)
-            [fs playDoorbellSound];
-
-    }
-}
 
 
 

@@ -11,6 +11,7 @@
 @interface rckt : NSObject
 
 - (NSString*)GetServerURL;
+- (void)showDoorbellFormsheet: (Boolean) playMusic;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

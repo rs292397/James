@@ -13,15 +13,14 @@
     UIRefreshControl *refreshControl;
 }
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
 @property (nonatomic, strong) NSMutableArray *messagesArray;
 @property (strong, nonatomic) IBOutlet UITableView *messagesTableView;
-@property (strong, nonatomic) IBOutlet UIWebView *live;
 @property (strong, nonatomic) IBOutlet UIImageView *img;
 
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
 
--(IBAction)btnLiveViewClick:(id)sender;
 -(IBAction)switchNtoficationChange:(id)sender;
 
 

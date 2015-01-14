@@ -61,8 +61,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewDidAppear:(BOOL)animated {
-    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:3];
-    [self tableView:self.rootTableView didSelectRowAtIndexPath:index];
+    //NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:3];
+    //[self tableView:self.rootTableView didSelectRowAtIndexPath:index];
 
 }
 #pragma mark - Table view data source

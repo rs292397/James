@@ -13,6 +13,7 @@
 
     
 #import "rckt.h"
+#import "rcktDoorbellFormSheet.h"
 
 @implementation rckt
 
@@ -22,7 +23,7 @@
     //NSString *deviceName = [[UIDevice currentDevice] name];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"],[prefs objectForKey:@"DEVICETOKEN"]];
-//    return [NSString stringWithFormat:@"http://192.168.1.115:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+//    return [NSString stringWithFormat:@"http://192.168.1.104:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
     return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
 }
 
@@ -67,6 +68,36 @@
         [testView.layer insertSublayer:layer atIndex:0];
         testView.backgroundColor = UIColor.clearColor;
         cell.backgroundView = testView;
+    }
+}
+
+-(void)showDoorbellFormsheet: (Boolean) playMusic{
+    UIApplication *application = [UIApplication sharedApplication];
+    
+    if ([[application keyWindow].rootViewController isKindOfClass:[UISplitViewController class]]) {
+        UISplitViewController *svc = (UISplitViewController*)[application keyWindow].rootViewController;
+        UIViewController *pvc = svc.presentedViewController;
+        rcktDoorbellFormSheet *fs = nil;
+        
+        
+        if ([pvc isKindOfClass:[rcktDoorbellFormSheet class]])
+            fs = (rcktDoorbellFormSheet*) pvc;
+        else {
+            UIViewController *vc = svc.viewControllers[1];
+            UIStoryboard *storyboard;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            else
+                storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+            
+            fs = (rcktDoorbellFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellFormsheet"];
+            [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+            [vc presentViewController:fs animated:YES completion:nil];
+        }
+        
+        if (playMusic)
+            [fs playDoorbellSound];
+        
     }
 }
 

@@ -24,9 +24,14 @@
     self.receivedData = data;
     urlServer = [[[rckt alloc] init] GetServerURL];
 
+    UINavigationItem *navitm = self.navbaritem;
+    navitm.title = [NSString stringWithFormat:@"Doorbell Messages"];
+    UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Live Cam" style:UIBarButtonItemStyleDone target:self action:@selector(cmdLiveCam)];
+    navitm.rightBarButtonItem = br;
+    
     //Login to surveillancestation and activate stream in webview
-    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
-    NSLog(@"%@", str);
+    //NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
+    NSString *str = [NSString stringWithFormat:@"%@/getMessagesByType/1", urlServer];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
 }
 
@@ -35,10 +40,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) viewDidDisappear:(BOOL)animated {
-    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/logout", urlServer];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-}
 
 /*
 #pragma mark - Navigation
@@ -50,9 +51,28 @@
 }
 */
 
--(IBAction)btnLiveViewClick:(id)sender {
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Logout&version=2&session=SurveillanceStation"];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+-(void)cmdLiveCam {
+    [[[rckt alloc] init] showDoorbellFormsheet:NO];
+}
+
+-(void)fetchMessages:(NSDictionary*) data {
+    NSString *key = [NSString stringWithFormat:@"message"];
+    id itm = [data valueForKey:key];
+
+    _messagesArray = [[NSMutableArray alloc] init];
+    if ([itm isKindOfClass:[NSArray class]]) {
+        _messagesArray = [data objectForKey:key];
+    }
+    else if ([itm isKindOfClass:[NSDictionary class]]) {
+        [_messagesArray addObject:[data objectForKey:key]];
+    }
+    [self.messagesTableView reloadData];
+    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self tableView:self.messagesTableView didSelectRowAtIndexPath:index];
+    
+}
+
+-(IBAction)switchNtoficationChange:(id)sender {
 }
 
 #pragma mark - Table view data source
@@ -79,13 +99,20 @@
     rcktMessageTableViewCell *cell = [tableView
                                     dequeueReusableCellWithIdentifier:CellIdentifier
                                     forIndexPath:indexPath];
-//    cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
-//    cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
-//    cell.img.image = [UIImage imageNamed:@"scenario_icon.png"];
-//    if ([item[@"state"] isEqualToString:@"true"])
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    else
-//        cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"YYYY-MM-dd'T'HH:mm:ssZ"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"Europe/Amsterdam"]];
+    NSDate *dte = [dateFormat dateFromString:[NSString stringWithFormat:@"%@", item[@"dateTime"]]];
+    [dateFormat setDateFormat:@"EEEE"];
+    cell.lblDay.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:dte]];
+    [dateFormat setDateFormat:@"dd MMMM YYYY"];
+    cell.lblDate.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:dte]];
+    [dateFormat setDateFormat:@"HH:mm"];
+    cell.lblTime.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:dte]];
+
+    
 
     return cell;
 }
@@ -98,7 +125,7 @@
 #pragma mark - TableView delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *itm = [self.messagesArray objectAtIndex:indexPath.row];
     NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, itm[@"ID"]];
     [self doAPIrequest:[NSURL URLWithString:url]];
@@ -159,6 +186,7 @@
     //NSLog(@"%@", urlConnection );
     
     if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer]]) {
+        /*
         NSLog(@"%@", htmlSTR);
         NSError* error;
         NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
@@ -167,13 +195,18 @@
         NSString *sessionURL = json[@"url"];
         NSString *sessionCam = json[@"IDCamDoorbell"];
         NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
-        /* SHOW IN WEBVIEW */
+        // SHOW IN WEBVIEW
         NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
         [self.live loadHTMLString:html baseURL:nil];
+        */
     }
 
     else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getMessagesByType", urlServer]]) {
-        NSLog(@"%@", htmlSTR);
+        //NSLog(@"%@", htmlSTR);
+        NSError* error;
+        NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+        [self fetchMessages:json];
     }
 
     else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getMessageImage", urlServer]]) {

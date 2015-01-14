@@ -11,7 +11,9 @@
 @interface rcktMessageTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *key;
-@property (weak, nonatomic) IBOutlet UILabel *lbl;
+@property (weak, nonatomic) IBOutlet UILabel *lblDay;
+@property (weak, nonatomic) IBOutlet UILabel *lblDate;
+@property (weak, nonatomic) IBOutlet UILabel *lblTime;
 
 
 @end
