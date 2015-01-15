@@ -13,7 +13,9 @@
     IBOutlet UISegmentedControl *seg;
     UIRefreshControl *refreshControl;
     NSString *urlServer;
-    rckt *r;
+    bool areaHasSwitch;
+    NSString *areaSwitchID;
+    bool areaSwitchState;
 }
 
 @property (nonatomic, strong) NSString *areaID;
@@ -26,7 +28,7 @@
 
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
-@property (nonatomic, strong) UIActivityIndicatorView *actionIndicator;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 - (void) reload: (NSString*)id description:(NSString*) description;
 - (IBAction)segChange:(id)sender;

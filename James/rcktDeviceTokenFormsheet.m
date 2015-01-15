@@ -61,7 +61,11 @@
     }
     [prefs synchronize];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    else
+        storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"rcktSplash"];
     [self presentViewController:controller animated:NO completion:nil];
     [(rcktSplashViewController *)controller initialize];

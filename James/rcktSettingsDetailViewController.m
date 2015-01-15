@@ -10,6 +10,7 @@
 #import "rckt.h"
 #import "rcktLabelTableViewCell.h"
 #import "rcktSwitchTableViewCell.h"
+#import "rcktSplashViewController.h"
 
 @interface rcktSettingsDetailViewController ()
 
@@ -30,17 +31,28 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    rckt *r = [rckt alloc];
+    urlServer = [r GetServerURL];
+    self.activityIndicator = [r getActivityIndicator:self.view];
+    [self.view addSubview:self.activityIndicator];
+
+    prefs = [NSUserDefaults standardUserDefaults];
+
     [self navigationItem].title = @"Settings";
     settingsItems = @{@"Physical Devices" : @[
                           @[@"menu", @"segueSettingsDevices", @"Devices", @"*.png"]
                           ],
                       @"General" : @[
-                              @[@"item", @"NOTIFY_DOORBELL", @"Allow Notifications from Doorbell", @"*.png"],
-                              @[@"menu", @"segueSettingsLayout", @"Layout", @"*.png"]
+                              @[@"item", @"NOTIFY_DOORBELL", @"Allow Notifications from Doorbell", @"*.png"]
                               ]
                       };
     
     settingsItemSectionTitles = [[settingsItems allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
+    //initialize new mutable data
+    NSMutableData *data = [[NSMutableData alloc] init];
+    self.receivedData = data;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,16 +121,19 @@
         rcktSwitchTableViewCell *itemCell = [tableView dequeueReusableCellWithIdentifier:@"switchTableViewCell" forIndexPath:indexPath];
         itemCell.key.text = [sectionSettingsItem objectAtIndex:1];
         itemCell.lbl.text = [sectionSettingsItem objectAtIndex:2];
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [itemCell.swtch setOn:[prefs boolForKey:@"NOTIFY_DOORBELL"]];
         __weak rcktSwitchTableViewCell *weakCell=itemCell;
         
         [itemCell setDidSwitchOnOffBlock:^(id sender) {
             UISwitch *s = (UISwitch*) sender;
             NSString *key = [NSString stringWithFormat:@"%@", weakCell.key.text];
-            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
             [prefs setBool:s.on forKey:key];
             [prefs synchronize];
+
+            NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":%s}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],[prefs boolForKey:@"NOTIFY_DOORBELL"]? "true" : "false"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [[rckt alloc] GetServerURL]]];
+            [self doAPIrequestPUT:url postData:postData];
+
         }];
 
         cell = itemCell;
@@ -149,5 +164,96 @@
 }
 
 
+- (void) doAPIrequest: (NSURL *)url {
+    //NSLog(@"%@", url.absoluteString);
+    [self.activityIndicator startAnimating];
+  
+    //initialize url that is going to be fetched.
+    //initialize a request from url
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //initialize a connection from request
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    self.connection = connection;
+    
+    //start the connection
+    [connection start];
+}
+
+- (void) doAPIrequestPUT: (NSURL*) url postData:(NSString*) postData{
+    
+    //NSLog(@"%@", url.absoluteString);
+    [self.activityIndicator startAnimating];
+    
+    //initialize url that is going to be fetched.
+    
+    //initialize a request from url
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //set http method
+    [request setHTTPMethod:@"PUT"];
+    //initialize a post data
+    //NSString *postData = [NSString stringWithFormat:@"j_username=role&j_password=tomcat"];
+    //set request content type we MUST set this value.
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    //set post data of request
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //initialize a connection from request
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    self.connection = connection;
+    
+    //start the connection
+    [connection start];
+    
+}
+
+/*
+ this method might be calling more than one times according to incoming data size
+ */
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    [self.receivedData appendData:data];
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.receivedData setLength:0];
+}
+/*
+ if there is an error occured, this method will be called by connection
+ */
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    
+    NSLog(@"%@" , error);
+}
+
+/*
+ if data is successfully received, this method will be called by connection
+ */
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    
+    //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
+    NSError* error;
+    //initialize convert the received data to string with UTF8 encoding
+    NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
+    //NSLog(@"%@", htmlSTR);
+    NSString *urlConnection = connection.originalRequest.URL.absoluteString;
+    if ([[[rckt alloc] GetServerURL] isEqualToString:urlConnection]) {
+        NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+        NSString *keyCode = [json valueForKey:@"code"];
+        if (keyCode!=nil) {
+            NSInteger code = [keyCode integerValue];
+            if (code<0) {
+                NSLog(@"fout");
+            } else {
+                [prefs setObject:[NSString stringWithFormat:@"%@", [json valueForKey:@"message"]] forKey:@"DEVICETOKEN"];
+                [prefs synchronize];
+          }
+        }
+    }
+    [self.activityIndicator stopAnimating];
+
+}
 
 @end

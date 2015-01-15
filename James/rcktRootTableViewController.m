@@ -35,22 +35,23 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    rootItems = @{@"Lights" : @[
+    rootItems = @{@"bLights" : @[
                           @[@"LIGHTS_DETAILVIEW", @"Lights", @"light_icon.png"]
                           ],
-                  @"Cameras" : @[
-                          @[@"CAMERAS_DETAILVIEW", @"Cameras", @"scenario_icon.png"]
-                          ],
-                  @"Scenarios" : @[
+//                  @"Cameras" : @[
+//                          @[@"CAMERAS_DETAILVIEW", @"Cameras", @"scenario_icon.png"]
+//                          ],
+                  @"aScenarios" : @[
                           @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
                           ],
-                  @"Doorbell" : @[
+                  @"cDoorbell" : @[
                           @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"scenario_icon.png"]
                           ],
-                  @"Settings" : @[
+                  @"dSettings" : @[
                           @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
                           ]
                   };
+
 
     rootItemSectionTitles = [[rootItems allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }

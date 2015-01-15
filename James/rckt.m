@@ -101,5 +101,15 @@
     }
 }
 
+-(UIActivityIndicatorView*) getActivityIndicator: (UIView*) view {
+    
+    UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    aiv.alpha = 1.0;
+    aiv.center = CGPointMake(view.frame.size.width/2.0, view.frame.size.height/2.0);
+    aiv.hidesWhenStopped = YES;
+    return aiv;
+
+}
+
 
 @end

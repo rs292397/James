@@ -12,8 +12,15 @@
     
     NSDictionary *settingsItems;
     NSArray *settingsItemSectionTitles;
+    
+    NSString *urlServer;
+    NSUserDefaults *prefs;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *settingsTableView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *receivedData;
 
 @end

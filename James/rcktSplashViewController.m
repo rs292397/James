@@ -88,7 +88,7 @@
     count = 0;
     r = [[rckt alloc] init];
     NSString *urlServer = [r GetServerURL];
-    NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":%hhd}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],[prefs boolForKey:@"NOTIFY_DOORBELL"]];
+    NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":%s}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],[prefs boolForKey:@"NOTIFY_DOORBELL"]? "true" : "false"];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
     if (url != nil)
         [self doAPIrequestPUT:url postData:postData];

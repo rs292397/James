@@ -10,6 +10,7 @@
 #import "rcktColorFormsheet.h"
 #import "rcktSaveSceneFormsheet.h"
 #import "rcktLabelTableViewCell.h"
+#import "rcktSwitchTableViewCell.h"
 #import "rcktLightTableViewCell.h"
 #import "rckt.h" 
 
@@ -33,14 +34,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    r = [[rckt alloc] init];
-    urlServer = [[rckt alloc] GetServerURL];
-
-    self.actionIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.actionIndicator.alpha = 1.0;
-    self.actionIndicator.center = CGPointMake(self.view.frame.size.width/2.0, self.view.frame.size.height/2.0);
-    self.actionIndicator.hidesWhenStopped = YES;
-    [self.view addSubview:self.actionIndicator];
+    rckt *r = [rckt alloc];
+    urlServer = [r GetServerURL];
+    self.activityIndicator = [r getActivityIndicator:self.view];
+    [self.view addSubview:self.activityIndicator];
     
     //Refresh control tableview
     refreshControl = [[UIRefreshControl alloc] init];
@@ -53,7 +50,8 @@
     //initialize new mutable data
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
+    
+    [self fetchData];
 }
 
 
@@ -115,10 +113,18 @@
         [list addObject:[json objectForKey:key]];
     }
     _lightsArray = [[NSMutableArray alloc] init];
+    bool areaButtonCheck = NO;
     for (NSDictionary *itm in list) {
         NSDictionary *area = itm[@"area"];
-        if ([area[@"ID"] isEqualToString:areaID])
+        if ([area[@"ID"] isEqualToString:areaID]) {
+            if (!areaButtonCheck) {
+                areaButtonCheck = YES;
+                NSDictionary *areaButton = area[@"button"];
+                areaHasSwitch = (areaButton!=nil);
+                areaSwitchState = [areaButton[@"state"] isEqualToString:@"true"];
+            }
             [_lightsArray addObject:itm];
+        }
     }
     [self.lightsTableView reloadData];
 }
@@ -143,22 +149,41 @@
         [list addObject:[json objectForKey:key]];
     }
     _scenesArray = [[NSMutableArray alloc] init];
+    bool areaButtonCheck = NO;
     for (NSDictionary *itm in list) {
         NSDictionary *area = itm[@"area"];
-        if ([area[@"ID"] isEqualToString:areaID])
+        if ([area[@"ID"] isEqualToString:areaID]) {
+            if (!areaButtonCheck) {
+                areaButtonCheck = YES;
+                NSDictionary *areaButton = area[@"button"];
+                areaHasSwitch = (areaButton!=nil);
+                if (areaHasSwitch) {
+                    areaSwitchID = areaButton[@"ID"];
+                    areaSwitchState = [areaButton[@"state"] isEqualToString:@"true"];
+                }
+            }
             [_scenesArray addObject:itm];
+        }
     }
     [self.lightsTableView reloadData];
 }
 - (IBAction)segChange:(id)sender {
+//    [self fetchData];
+    NSString *type;
+    if (seg.selectedSegmentIndex == 0)
+        type=@"Scenes";
+    else
+        type=@"Lights";
+    
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAll%@", urlServer, type]]];
     [self fetchData];
-//    if (seg.selectedSegmentIndex == 0)
-//        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
 }
 
 - (void)fetchData {
     UINavigationItem *navitm = [self navigationItem];
-    navitm.title = [NSString stringWithFormat:@"%@", _areaDescription];
+    if (_areaDescription!=nil) {
+        navitm.title = [NSString stringWithFormat:@"%@", _areaDescription];
+    }
     if (seg.selectedSegmentIndex == 0) {
         navitm.rightBarButtonItem = nil;
         [self fetchScenesData:self.areaID];
@@ -196,7 +221,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    if (seg.selectedSegmentIndex==0)
+        return 2;
+    else
+        return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -209,7 +237,10 @@
     // Return the number of rows in the section.
     NSInteger numberOfRows = 0;
     if (seg.selectedSegmentIndex==0)
-        numberOfRows = _scenesArray.count;
+        if (section == 0)
+            numberOfRows = areaHasSwitch ? 1 : 0;
+        else
+            numberOfRows = _scenesArray.count;
     else if (seg.selectedSegmentIndex==1)
         numberOfRows = _lightsArray.count;
     return numberOfRows;
@@ -229,16 +260,35 @@
     static NSString *CellIdentifier = @"sceneTableViewCell";
     //SCENES SELECTED
     if (seg.selectedSegmentIndex==0) {
-        // Fetch Item
-        NSDictionary *item = [self.scenesArray objectAtIndex:indexPath.row];
-        CellIdentifier = @"sceneTableViewCell";
-        rcktLabelTableViewCell *cell = [tableView
-                                        dequeueReusableCellWithIdentifier:CellIdentifier
-                                        forIndexPath:indexPath];
-        cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
-        cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
-        cell.img.image = [UIImage imageNamed:@"switch_icon.png"];
+        UITableViewCell *cell;
+        if (indexPath.section == 0) {
+            CellIdentifier = @"switchTableViewCell";
+            rcktSwitchTableViewCell *itmCell = [tableView
+                                               dequeueReusableCellWithIdentifier:CellIdentifier
+                                               forIndexPath:indexPath];
+            itmCell.key.text = @"0";
+            itmCell.lbl.text = @"Switch";
+            [itmCell.swtch setOn:areaSwitchState];
+            
+            [itmCell setDidSwitchOnOffBlock:^(id sender) {
+                NSString *url = [NSString stringWithFormat:@"%@/controlButton/%@", urlServer, areaSwitchID];
+                [self doAPIrequest:[NSURL URLWithString:url]];
+            }];
 
+            cell = itmCell;
+        }
+        else {
+            // Fetch Item
+            NSDictionary *item = [self.scenesArray objectAtIndex:indexPath.row];
+            CellIdentifier = @"sceneTableViewCell";
+            rcktLabelTableViewCell *itmCell = [tableView
+                                            dequeueReusableCellWithIdentifier:CellIdentifier
+                                            forIndexPath:indexPath];
+            itmCell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
+            itmCell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
+            itmCell.img.image = [UIImage imageNamed:@"switch_icon.png"];
+            cell = itmCell;
+        }
         return cell;
     
     //LIGHTS SELECTED
@@ -431,10 +481,10 @@
                 [alert show];
             }
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
-        } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/control",urlServer]]) {
+        } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/controlScene",urlServer]]) {
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         }
-        [self.actionIndicator stopAnimating];
+        [self.activityIndicator stopAnimating];
     }
 }
 
@@ -477,9 +527,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if (seg.selectedSegmentIndex==0) {
+    if (seg.selectedSegmentIndex==0 && indexPath.section==1) {
         NSDictionary *itm = [self.scenesArray objectAtIndex:indexPath.row];
-        [self.actionIndicator startAnimating];
+        [self.activityIndicator startAnimating];
         NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, itm[@"ID"]];
         [self doAPIrequest: [NSURL URLWithString:url]];
     }
