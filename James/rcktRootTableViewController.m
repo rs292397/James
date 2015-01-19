@@ -96,7 +96,6 @@
     cell.key.text = [sectionRootItem objectAtIndex:0];
     cell.lbl.text = [sectionRootItem objectAtIndex:1];
     cell.img.image = [UIImage imageNamed:[sectionRootItem objectAtIndex:2]];
-    
     return cell;
 }
 

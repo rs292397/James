@@ -51,6 +51,17 @@
     navitm.rightBarButtonItem = br;
 }
 
+- (void)addCancelButtonToNavbar {
+    UINavigationItem *navitm = self.navbaritem;
+    UIBarButtonItem *bl = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cmdCancel)];
+    navitm.leftBarButtonItem = bl;
+}
+
+- (void)cmdCancel{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 - (void)saveSettings {
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];

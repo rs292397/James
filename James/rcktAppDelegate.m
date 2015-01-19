@@ -18,6 +18,8 @@
 {
     // Override point for customization after application launch.
     
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
         [application registerForRemoteNotifications];
@@ -69,6 +71,13 @@
         }
     }
     
+//    NSString *badge = @"";
+//    NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+//    if( [apsInfo objectForKey:@"badge"] != NULL)
+//    {
+//        badge = [apsInfo objectForKey:@"badge"];
+//    }
+
     /*
     if ( application.applicationState == UIApplicationStateActive)
     {
@@ -91,11 +100,7 @@
         }
         
         
-        if( [apsInfo objectForKey:@"badge"] != NULL)
-        {
-            badge = [apsInfo objectForKey:@"badge"];
-        }
-        
+     
         
         if( [apsInfo objectForKey:@"sound"] != NULL)
         {
@@ -141,6 +146,8 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     //[self showDoorbellFormsheet:application];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

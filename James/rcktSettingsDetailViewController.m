@@ -11,6 +11,7 @@
 #import "rcktLabelTableViewCell.h"
 #import "rcktSwitchTableViewCell.h"
 #import "rcktSplashViewController.h"
+#import "rcktDeviceTokenFormsheet.h"
 
 @interface rcktSettingsDetailViewController ()
 
@@ -43,6 +44,7 @@
                           @[@"menu", @"segueSettingsDevices", @"Devices", @"*.png"]
                           ],
                       @"General" : @[
+                              @[@"form", @"formDeviceTokenFormsheet", @"Server settings", @"*.png"],
                               @[@"item", @"NOTIFY_DOORBELL", @"Allow Notifications from Doorbell", @"*.png"]
                               ]
                       };
@@ -107,13 +109,14 @@
     NSArray *sectionSettingsItems = [settingsItems objectForKey:sectionTitle];
     NSArray *sectionSettingsItem = [sectionSettingsItems objectAtIndex:indexPath.row];
     
-    if ([[sectionSettingsItem objectAtIndex:0] isEqualToString:@"menu"]) {
+    if ([[sectionSettingsItem objectAtIndex:0] isEqualToString:@"menu"] || [[sectionSettingsItem objectAtIndex:0] isEqualToString:@"form"]) {
         rcktLabelTableViewCell *menuCell = [tableView dequeueReusableCellWithIdentifier:@"labelTableViewCell" forIndexPath:indexPath];
             
         // Configure the cell...
         menuCell.key.text = [sectionSettingsItem objectAtIndex:1];
         menuCell.lbl.text = [sectionSettingsItem objectAtIndex:2];
-        menuCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if ([[sectionSettingsItem objectAtIndex:0] isEqualToString:@"menu"])
+            menuCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         //cell.img.image = [UIImage imageNamed:[sectionSettingsItem objectAtIndex:2]];
         cell = menuCell;
     }
@@ -139,9 +142,6 @@
         cell = itemCell;
 
     }
-    
-    
-    
     return cell;
     
 }
@@ -156,10 +156,29 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.class == [rcktLabelTableViewCell class]) {
         NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
-        [self performSegueWithIdentifier:key sender:@"me"];
+        if ([key hasPrefix:@"segue"])
+            [self performSegueWithIdentifier:key sender:@"me"];
+        else if ([key hasPrefix:@"form"]) {
+
+            UIStoryboard *storyboard;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            else
+                storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+            
+            
+            UIViewController *vc =[storyboard instantiateViewControllerWithIdentifier:[NSString stringWithFormat:@"%@", [key substringFromIndex:4]]];
+            [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+            [self presentViewController:vc animated:YES completion:nil];
+            
+            if ([vc isKindOfClass:[rcktDeviceTokenFormsheet class]])
+                [(rcktDeviceTokenFormsheet*)vc addCancelButtonToNavbar];
+
+        }
     }
 }
 

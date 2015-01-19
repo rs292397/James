@@ -60,8 +60,9 @@
     id itm = [data valueForKey:key];
 
     _messagesArray = [[NSMutableArray alloc] init];
-    if ([itm isKindOfClass:[NSArray class]]) {
-        _messagesArray = [data objectForKey:key];
+    if ([itm isKindOfClass:[NSMutableArray class]]) {
+        for (NSDictionary *itm in [data objectForKey:key])
+            [_messagesArray addObject:itm];
     }
     else if ([itm isKindOfClass:[NSDictionary class]]) {
         [_messagesArray addObject:[data objectForKey:key]];
@@ -87,6 +88,11 @@
 {
     // Return the number of rows in the section.
     return _messagesArray.count;
+}
+
+-(UITableViewCellEditingStyle) tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return UITableViewCellEditingStyleDelete;
 }
 
 
@@ -122,6 +128,37 @@
  [[rckt alloc] tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
  }
  */
+
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+            
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell.class == [rcktMessageTableViewCell class]) {
+            [tableView beginUpdates];
+            NSArray *indexPaths = @[indexPath];
+            [self.messagesArray removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+            [tableView endUpdates];
+            NSString *key = [NSString stringWithFormat:@"%@",((rcktMessageTableViewCell*)cell).key.text];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteObject/message/%@", urlServer,key]]];
+                
+                
+        }
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
 #pragma mark - TableView delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

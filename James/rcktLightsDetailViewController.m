@@ -70,7 +70,7 @@
     if (itm!=nil) {
         [self.scenesArray addObject:itm];
         [self.lightsTableView beginUpdates];
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.scenesArray count]-1 inSection:0];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.scenesArray count]-1 inSection:1];
         NSArray *indexPaths = @[index];
         [self.lightsTableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         [self.lightsTableView endUpdates];
@@ -384,6 +384,62 @@
 }
 */
 
+- (CGFloat)tableView: (UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (seg.selectedSegmentIndex==0)
+        return 60;
+    else
+        return 110;
+
+}
+
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (seg.selectedSegmentIndex==0) {
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            // Delete the row from the data source
+            
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell.class == [rcktLabelTableViewCell class]) {
+                [tableView beginUpdates];
+                NSArray *indexPaths = @[indexPath];
+                [self.scenesArray removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+                [tableView endUpdates];
+                NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
+                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", urlServer,key]]];
+                
+                
+            }
+        } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+}
+
+
+#pragma mark - TableView delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (seg.selectedSegmentIndex==0 && indexPath.section==1) {
+        NSDictionary *itm = [self.scenesArray objectAtIndex:indexPath.row];
+        [self.activityIndicator startAnimating];
+        NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, itm[@"ID"]];
+        [self doAPIrequest: [NSURL URLWithString:url]];
+    }
+}
+
+
 - (void) doAPIrequest: (NSURL *)url {
     //NSLog(@"%@", url.absoluteString);
     
@@ -489,50 +545,5 @@
 }
 
 
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-     // Return NO if you do not want the specified item to be editable.
-     return YES;
- }
-
-
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-     if (seg.selectedSegmentIndex==0) {
-         if (editingStyle == UITableViewCellEditingStyleDelete) {
-             // Delete the row from the data source
-             
-             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-             if (cell.class == [rcktLabelTableViewCell class]) {
-                 [tableView beginUpdates];
-                 NSArray *indexPaths = @[indexPath];
-                 [self.scenesArray removeObjectAtIndex:indexPath.row];
-                 [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-                 [tableView endUpdates];
-                 NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
-                 [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", urlServer,key]]];
-                 
-                 
-             }
-         } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-         }
-     }
- }
-
-
-#pragma mark - TableView delegate
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    if (seg.selectedSegmentIndex==0 && indexPath.section==1) {
-        NSDictionary *itm = [self.scenesArray objectAtIndex:indexPath.row];
-        [self.activityIndicator startAnimating];
-        NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, itm[@"ID"]];
-        [self doAPIrequest: [NSURL URLWithString:url]];
-    }
-}
 
 @end

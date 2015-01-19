@@ -332,9 +332,9 @@
     //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
     //NSError* error;
     //initialize convert the received data to string with UTF8 encoding
-    //NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
-    //                                          encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", htmlSTR);
+    NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
+                                              encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", htmlSTR);
     rcktLightsDetailViewController *vc;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UISplitViewController *svc = (UISplitViewController*)[self presentingViewController];

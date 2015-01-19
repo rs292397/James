@@ -73,32 +73,42 @@
 
 -(void)showDoorbellFormsheet: (Boolean) playMusic{
     UIApplication *application = [UIApplication sharedApplication];
+
+    UISplitViewController *svc;
+    UIViewController *pvc;
     
-    if ([[application keyWindow].rootViewController isKindOfClass:[UISplitViewController class]]) {
-        UISplitViewController *svc = (UISplitViewController*)[application keyWindow].rootViewController;
-        UIViewController *pvc = svc.presentedViewController;
-        rcktDoorbellFormSheet *fs = nil;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && [[application keyWindow].rootViewController isKindOfClass:[UISplitViewController class]]) {
+        svc = (UISplitViewController*)[application keyWindow].rootViewController;
+        pvc = svc.presentedViewController;
+    }
+    else if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone) {
+        pvc = [application keyWindow].rootViewController.presentedViewController;
+    }
+    
+    rcktDoorbellFormSheet *fs = nil;
         
         
-        if ([pvc isKindOfClass:[rcktDoorbellFormSheet class]])
-            fs = (rcktDoorbellFormSheet*) pvc;
+    if ([pvc isKindOfClass:[rcktDoorbellFormSheet class]])
+        fs = (rcktDoorbellFormSheet*) pvc;
+    else {
+        UIViewController *vc;
+        UIStoryboard *storyboard;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            vc = svc.viewControllers[1];
+            storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        }
         else {
-            UIViewController *vc = svc.viewControllers[1];
-            UIStoryboard *storyboard;
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-                storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            else
-                storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-            
-            fs = (rcktDoorbellFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellFormsheet"];
-            [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-            [vc presentViewController:fs animated:YES completion:nil];
+            vc = [application keyWindow].rootViewController.presentedViewController;
+            storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         }
         
-        if (playMusic)
-            [fs playDoorbellSound];
-        
+        fs = (rcktDoorbellFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellFormsheet"];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        [vc presentViewController:fs animated:YES completion:nil];
     }
+        
+    if (playMusic)
+        [fs playDoorbellSound];
 }
 
 -(UIActivityIndicatorView*) getActivityIndicator: (UIView*) view {
