@@ -44,10 +44,13 @@
                   @"aScenarios" : @[
                           @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
                           ],
-                  @"cDoorbell" : @[
-                          @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"scenario_icon.png"]
+                  @"cShades" : @[
+                          @[@"SHADES_DETAILVIEW", @"Shades", @"shade_icon.png"]
                           ],
-                  @"dSettings" : @[
+                  @"dDoorbell" : @[
+                          @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"doorbell_icon.png"]
+                          ],
+                  @"eSettings" : @[
                           @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
                           ]
                   };

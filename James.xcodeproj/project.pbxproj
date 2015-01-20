@@ -34,6 +34,14 @@
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
 		934445CF1A2B8286002CC4EB /* ring3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934445CE1A2B8286002CC4EB /* ring3.caf */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
+		936706E41A6EDF7A000C3E4B /* doorbell_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706E31A6EDF7A000C3E4B /* doorbell_icon.png */; };
+		936706E61A6EDFF9000C3E4B /* shade_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706E51A6EDFF9000C3E4B /* shade_icon.png */; };
+		936706E91A6EE3F3000C3E4B /* rcktShadesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */; };
+		936706EC1A6EE860000C3E4B /* rcktShadeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */; };
+		936706F11A6EF826000C3E4B /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706ED1A6EF826000C3E4B /* Close.png */; };
+		936706F21A6EF826000C3E4B /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706EE1A6EF826000C3E4B /* Down.png */; };
+		936706F31A6EF826000C3E4B /* Open.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706EF1A6EF826000C3E4B /* Open.png */; };
+		936706F41A6EF826000C3E4B /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706F01A6EF826000C3E4B /* Up.png */; };
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
 		939DB44C19C771BD00BAE483 /* rcktRootCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */; };
 		939DB45019C774B800BAE483 /* rcktLabelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44F19C774B800BAE483 /* rcktLabelCollectionViewCell.m */; };
@@ -119,6 +127,16 @@
 		934445CE1A2B8286002CC4EB /* ring3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring3.caf; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
+		936706E31A6EDF7A000C3E4B /* doorbell_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorbell_icon.png; path = ../../../../../Pictures/doorbell_icon.png; sourceTree = "<group>"; };
+		936706E51A6EDFF9000C3E4B /* shade_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shade_icon.png; path = ../../../../../Pictures/shade_icon.png; sourceTree = "<group>"; };
+		936706E71A6EE3F3000C3E4B /* rcktShadesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadesViewController.h; sourceTree = "<group>"; };
+		936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShadesViewController.m; sourceTree = "<group>"; };
+		936706EA1A6EE860000C3E4B /* rcktShadeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadeTableViewCell.h; sourceTree = "<group>"; };
+		936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShadeTableViewCell.m; sourceTree = "<group>"; };
+		936706ED1A6EF826000C3E4B /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Close.png; path = ../../../../../Pictures/Close.png; sourceTree = "<group>"; };
+		936706EE1A6EF826000C3E4B /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Down.png; path = ../../../../../Pictures/Down.png; sourceTree = "<group>"; };
+		936706EF1A6EF826000C3E4B /* Open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Open.png; path = ../../../../../Pictures/Open.png; sourceTree = "<group>"; };
+		936706F01A6EF826000C3E4B /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = ../../../../../Pictures/Up.png; sourceTree = "<group>"; };
 		939DB44819C76B5300BAE483 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		939DB44A19C771BD00BAE483 /* rcktRootCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktRootCollectionViewController.h; sourceTree = "<group>"; };
 		939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktRootCollectionViewController.m; sourceTree = "<group>"; };
@@ -198,6 +216,12 @@
 		9303E9D319609B1700BAF3B2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				936706ED1A6EF826000C3E4B /* Close.png */,
+				936706EE1A6EF826000C3E4B /* Down.png */,
+				936706EF1A6EF826000C3E4B /* Open.png */,
+				936706F01A6EF826000C3E4B /* Up.png */,
+				936706E51A6EDFF9000C3E4B /* shade_icon.png */,
+				936706E31A6EDF7A000C3E4B /* doorbell_icon.png */,
 				930F101619E190AC00C9AF32 /* settings_icon.png */,
 				93FD5C8419B6656F00C45491 /* drcolorpicker-brightnessguide.png */,
 				93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */,
@@ -249,6 +273,8 @@
 				93082DB11979CE9E00465F68 /* rcktSettingsDetailViewController.m */,
 				93250D031A6542C900C2AAB6 /* rcktDoorbellViewController.h */,
 				93250D041A6542C900C2AAB6 /* rcktDoorbellViewController.m */,
+				936706E71A6EE3F3000C3E4B /* rcktShadesViewController.h */,
+				936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */,
 			);
 			name = DetailViews;
 			sourceTree = "<group>";
@@ -270,6 +296,8 @@
 				93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */,
 				933FE7C61A67127F003418AD /* rcktSwitchTableViewCell.h */,
 				933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */,
+				936706EA1A6EE860000C3E4B /* rcktShadeTableViewCell.h */,
+				936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -521,19 +549,25 @@
 				93FD203A1A222CF8009746C5 /* ring2.caf in Resources */,
 				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
 				930F101719E190AC00C9AF32 /* settings_icon.png in Resources */,
+				936706F31A6EF826000C3E4B /* Open.png in Resources */,
 				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
 				934445CF1A2B8286002CC4EB /* ring3.caf in Resources */,
+				936706F41A6EF826000C3E4B /* Up.png in Resources */,
 				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
 				933059AD1A221272004016BA /* ring.caf in Resources */,
+				936706F21A6EF826000C3E4B /* Down.png in Resources */,
 				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
 				93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */,
 				93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */,
 				93082DA31979B92400465F68 /* switch_icon.png in Resources */,
 				939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */,
+				936706E61A6EDFF9000C3E4B /* shade_icon.png in Resources */,
 				93FE277919576A1C00977594 /* Images.xcassets in Resources */,
 				93082DA51979B93200465F68 /* scenario_icon.png in Resources */,
+				936706E41A6EDF7A000C3E4B /* doorbell_icon.png in Resources */,
 				93FE276B19576A1C00977594 /* InfoPlist.strings in Resources */,
 				93FE277419576A1C00977594 /* Main.storyboard in Resources */,
+				936706F11A6EF826000C3E4B /* Close.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,11 +605,13 @@
 				93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */,
 				93010E3A19BA168D00751375 /* rcktPickerTableViewCell.m in Sources */,
 				930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */,
+				936706E91A6EE3F3000C3E4B /* rcktShadesViewController.m in Sources */,
 				9308E8F719B39E8C00756CC6 /* rcktLightTableViewCell.m in Sources */,
 				9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */,
 				93FD20471A224E09009746C5 /* DDLog.m in Sources */,
 				93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */,
 				93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */,
+				936706EC1A6EE860000C3E4B /* rcktShadeTableViewCell.m in Sources */,
 				93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */,
 				93250D051A6542C900C2AAB6 /* rcktDoorbellViewController.m in Sources */,
 				93FD20381A221D6C009746C5 /* rcktDoorbellFormSheet.m in Sources */,

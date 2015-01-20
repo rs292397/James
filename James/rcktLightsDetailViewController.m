@@ -386,11 +386,14 @@
 
 - (CGFloat)tableView: (UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (seg.selectedSegmentIndex==0)
-        return 60;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (seg.selectedSegmentIndex==0)
+            return 60;
+        else
+            return 110;
+    }
     else
-        return 110;
-
+        return 60;
 }
 
 // Override to support conditional editing of the table view.
