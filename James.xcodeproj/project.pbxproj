@@ -29,10 +29,13 @@
 		93250D051A6542C900C2AAB6 /* rcktDoorbellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D041A6542C900C2AAB6 /* rcktDoorbellViewController.m */; };
 		93250D081A654BBB00C2AAB6 /* rcktMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */; };
 		932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932D79E41A1FD473004721C1 /* AVFoundation.framework */; };
-		933059AD1A221272004016BA /* ring.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933059AC1A221272004016BA /* ring.caf */; };
+		933F66761A72B4C600ADCB75 /* ring1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933F66731A72B4C600ADCB75 /* ring1.caf */; };
+		933F66771A72B4C600ADCB75 /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933F66741A72B4C600ADCB75 /* ring2.caf */; };
+		933F66781A72B4C600ADCB75 /* ring11.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933F66751A72B4C600ADCB75 /* ring11.caf */; };
 		933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */; };
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
-		934445CF1A2B8286002CC4EB /* ring3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934445CE1A2B8286002CC4EB /* ring3.caf */; };
+		9348ACB71A72C15C00F7CE43 /* camera_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9348ACB61A72C15C00F7CE43 /* camera_icon.png */; };
+		9348ACBA1A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348ACB91A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
 		936706E41A6EDF7A000C3E4B /* doorbell_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706E31A6EDF7A000C3E4B /* doorbell_icon.png */; };
 		936706E61A6EDFF9000C3E4B /* shade_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706E51A6EDFF9000C3E4B /* shade_icon.png */; };
@@ -50,7 +53,6 @@
 		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
 		93F6730019AFA277009DE745 /* area_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93F672FF19AFA277009DE745 /* area_icon.png */; };
 		93FD20381A221D6C009746C5 /* rcktDoorbellFormSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */; };
-		93FD203A1A222CF8009746C5 /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 93FD20391A222CF8009746C5 /* ring2.caf */; };
 		93FD20411A2245E0009746C5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FD20401A2245E0009746C5 /* CFNetwork.framework */; };
 		93FD20441A224B66009746C5 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20431A224B66009746C5 /* GCDAsyncUdpSocket.m */; };
 		93FD20471A224E09009746C5 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20461A224E09009746C5 /* DDLog.m */; };
@@ -119,12 +121,16 @@
 		93250D061A654BBB00C2AAB6 /* rcktMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktMessageTableViewCell.h; sourceTree = "<group>"; };
 		93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktMessageTableViewCell.m; sourceTree = "<group>"; };
 		932D79E41A1FD473004721C1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		933059AC1A221272004016BA /* ring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring.caf; sourceTree = "<group>"; };
+		933F66731A72B4C600ADCB75 /* ring1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring1.caf; sourceTree = "<group>"; };
+		933F66741A72B4C600ADCB75 /* ring2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring2.caf; sourceTree = "<group>"; };
+		933F66751A72B4C600ADCB75 /* ring11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring11.caf; sourceTree = "<group>"; };
 		933FE7C61A67127F003418AD /* rcktSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSwitchTableViewCell.h; sourceTree = "<group>"; };
 		933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSwitchTableViewCell.m; sourceTree = "<group>"; };
 		9342C23D19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDevicesViewController.h; sourceTree = "<group>"; };
 		9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSettingsDevicesViewController.m; sourceTree = "<group>"; };
-		934445CE1A2B8286002CC4EB /* ring3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring3.caf; sourceTree = "<group>"; };
+		9348ACB61A72C15C00F7CE43 /* camera_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_icon.png; path = ../../../../../Pictures/camera_icon.png; sourceTree = "<group>"; };
+		9348ACB81A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktCameraCollectionViewCell.h; sourceTree = "<group>"; };
+		9348ACB91A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktCameraCollectionViewCell.m; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
 		936706E31A6EDF7A000C3E4B /* doorbell_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorbell_icon.png; path = ../../../../../Pictures/doorbell_icon.png; sourceTree = "<group>"; };
@@ -151,7 +157,6 @@
 		93F672FF19AFA277009DE745 /* area_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = area_icon.png; path = ../../../../../Pictures/area_icon.png; sourceTree = "<group>"; };
 		93FD20361A221D6C009746C5 /* rcktDoorbellFormSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDoorbellFormSheet.h; sourceTree = "<group>"; };
 		93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDoorbellFormSheet.m; sourceTree = "<group>"; };
-		93FD20391A222CF8009746C5 /* ring2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring2.caf; sourceTree = "<group>"; };
 		93FD20401A2245E0009746C5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		93FD20421A224B66009746C5 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		93FD20431A224B66009746C5 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
@@ -216,6 +221,7 @@
 		9303E9D319609B1700BAF3B2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9348ACB61A72C15C00F7CE43 /* camera_icon.png */,
 				936706ED1A6EF826000C3E4B /* Close.png */,
 				936706EE1A6EF826000C3E4B /* Down.png */,
 				936706EF1A6EF826000C3E4B /* Open.png */,
@@ -329,6 +335,8 @@
 			children = (
 				939DB44E19C774B800BAE483 /* rcktLabelCollectionViewCell.h */,
 				939DB44F19C774B800BAE483 /* rcktLabelCollectionViewCell.m */,
+				9348ACB81A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.h */,
+				9348ACB91A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m */,
 			);
 			name = CollectionViewCells;
 			sourceTree = "<group>";
@@ -343,9 +351,9 @@
 		93FD203B1A2233ED009746C5 /* Ringtones */ = {
 			isa = PBXGroup;
 			children = (
-				934445CE1A2B8286002CC4EB /* ring3.caf */,
-				93FD20391A222CF8009746C5 /* ring2.caf */,
-				933059AC1A221272004016BA /* ring.caf */,
+				933F66731A72B4C600ADCB75 /* ring1.caf */,
+				933F66741A72B4C600ADCB75 /* ring2.caf */,
+				933F66751A72B4C600ADCB75 /* ring11.caf */,
 			);
 			name = Ringtones;
 			sourceTree = "<group>";
@@ -546,17 +554,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93FD203A1A222CF8009746C5 /* ring2.caf in Resources */,
 				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
 				930F101719E190AC00C9AF32 /* settings_icon.png in Resources */,
+				933F66781A72B4C600ADCB75 /* ring11.caf in Resources */,
+				933F66761A72B4C600ADCB75 /* ring1.caf in Resources */,
 				936706F31A6EF826000C3E4B /* Open.png in Resources */,
 				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
-				934445CF1A2B8286002CC4EB /* ring3.caf in Resources */,
+				9348ACB71A72C15C00F7CE43 /* camera_icon.png in Resources */,
 				936706F41A6EF826000C3E4B /* Up.png in Resources */,
 				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
-				933059AD1A221272004016BA /* ring.caf in Resources */,
 				936706F21A6EF826000C3E4B /* Down.png in Resources */,
 				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
+				933F66771A72B4C600ADCB75 /* ring2.caf in Resources */,
 				93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */,
 				93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */,
 				93082DA31979B92400465F68 /* switch_icon.png in Resources */,
@@ -614,6 +623,7 @@
 				936706EC1A6EE860000C3E4B /* rcktShadeTableViewCell.m in Sources */,
 				93082DBE1979D55E00465F68 /* rcktScenariosDetailViewController.m in Sources */,
 				93250D051A6542C900C2AAB6 /* rcktDoorbellViewController.m in Sources */,
+				9348ACBA1A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m in Sources */,
 				93FD20381A221D6C009746C5 /* rcktDoorbellFormSheet.m in Sources */,
 				939DB45019C774B800BAE483 /* rcktLabelCollectionViewCell.m in Sources */,
 			);

@@ -11,24 +11,16 @@
 
 @interface rcktCamerasViewController : UIViewController {
     NSString *sid;
-    
-    //NSData *endMarkerData;
-    
+    NSString *sessionID;
+    NSString *sessionURL;
+    NSString *sessionCam;
     rckt *r;
 }
 
-
-@property (strong, nonatomic) IBOutlet UIButton *btnLogin;
-@property (strong, nonatomic) IBOutlet UIButton *btnStream;
-@property (strong, nonatomic) IBOutlet UIButton *btnCloseStream;
-@property (strong, nonatomic) IBOutlet UIButton *btnLogout;
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
-@property (strong, nonatomic) IBOutlet UIWebView *web;
-@property (strong, nonatomic) IBOutlet UIImageView *img;
+@property (strong, nonatomic) IBOutlet UIWebView *cam;
+@property (strong, nonatomic) IBOutlet UICollectionView *cams;
+@property (nonatomic, strong) NSMutableArray *camerasArray;
 
--(IBAction)btnLoginClick:(id)sender;
--(IBAction)btnStreamClick:(id)sender;
--(IBAction)btnCloseStreamClick:(id)sender;
--(IBAction)btnLogoutClick:(id)sender;
 @end

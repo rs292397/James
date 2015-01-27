@@ -71,7 +71,7 @@
     }
 }
 
--(void)showDoorbellFormsheet: (Boolean) playMusic{
+-(void)showDoorbellFormsheet: (Boolean) playMusic sound: (NSString*)sound{
     UIApplication *application = [UIApplication sharedApplication];
 
     UISplitViewController *svc;
@@ -108,7 +108,7 @@
     }
         
     if (playMusic)
-        [fs playDoorbellSound];
+        [fs playDoorbellSound: sound];
 }
 
 -(UIActivityIndicatorView*) getActivityIndicator: (UIView*) view {

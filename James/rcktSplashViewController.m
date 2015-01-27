@@ -38,7 +38,7 @@
     //   [_splashActivityIndicatorView startAnimating];
     //_splashActivityIndicatorView.hidesWhenStopped = TRUE;
     _progressView.progress = 0.0f;
-    countToDo = 6;
+    countToDo = 8;
     [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
 }
 
@@ -47,7 +47,7 @@
     if (count < countToDo) {
         float progress = (float)count/(float)countToDo;
         _progressView.progress = (float) progress;
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateProgressBar) userInfo:nil repeats:NO];
+//        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateProgressBar) userInfo:nil repeats:NO];
         
     }
     else {
@@ -190,6 +190,7 @@
     //NSLog(@"%@",urlConnection);
     //NSLog(@"%@", urlServer);
     count += 1;
+    [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
 
     if ([urlServer isEqualToString:urlConnection]) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.receivedData options:kNilOptions error:&error];
@@ -230,6 +231,12 @@
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllButtons/3",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"SCENARIOS"];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getFrontDoor", urlServer]]];
+        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getFrontDoor",urlServer]]) {
+            [prefs setObject:htmlSTR forKey:@"FRONTDOOR"];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllCameras/0", urlServer]]];
+        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllCameras/0",urlServer]]) {
+            [prefs setObject:htmlSTR forKey:@"CAMERAS"];
         }
         [prefs synchronize];
 

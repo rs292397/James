@@ -67,7 +67,14 @@
     if ([userInfo objectForKey:@"category"]) {
         if ([[userInfo objectForKey:@"category"] isEqualToString:@"Doorbell"]) {
             rckt *r = [[rckt alloc] init];
-            [r showDoorbellFormsheet: (application.applicationState == UIApplicationStateActive)];
+            NSString *sound = @"";
+            
+            if ( application.applicationState == UIApplicationStateActive) {
+                NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+                if( [apsInfo objectForKey:@"sound"] != NULL)
+                    sound = [apsInfo objectForKey:@"sound"];
+            }
+            [r showDoorbellFormsheet: (application.applicationState == UIApplicationStateActive) sound: sound];
         }
     }
     
@@ -156,18 +163,18 @@
 }
 
 
-
+/*
 -(void)notificationDoorbell: (UIApplication*) application {
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     NSDate *dateTime = [NSDate date];
     localNotification.fireDate = dateTime;
     localNotification.alertBody = [NSString stringWithFormat:@"Somebody is at the front door %@", dateTime];
     //localNotification.soundName = UILocalNotificationDefaultSoundName;
-    localNotification.soundName = @"ring2.caf";
+    localNotification.soundName = @"ring1.caf";
     //localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1;
     [application scheduleLocalNotification:localNotification];
 }
-
+*/
 
 
 

@@ -22,6 +22,17 @@
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
     r = [[rckt alloc] init];
+    
+    NSError *error;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *jsonData = [[prefs objectForKey:@"FRONTDOOR"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+    id itm = [json valueForKey:@"cam"];
+    if ([itm isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *cam = [json objectForKey:@"cam"];
+        sessionCam = [cam objectForKey:@"ID"];
+        sessionCamRatio = [[cam objectForKey:@"resolutionWidth"] floatValue] / [[cam objectForKey:@"resolutionHeight"] floatValue];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,9 +84,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)playDoorbellSound {
+- (void)playDoorbellSound: (NSString*) sound {
     
-    NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"ring2.caf"];
+    NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sound];
     NSError* error;
     
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&error];
@@ -146,13 +157,13 @@
 
         sessionID = json[@"SID"];
         sessionURL = json[@"url"];
-        sessionCam = json[@"IDCamDoorbell"];
-        
+
         if (sessionCam.integerValue>0) {
             NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
             
             /* SHOW IN WEBVIEW */
-            NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
+            NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"%fpx\" />", str, _web.frame.size.width*sessionCamRatio];
+//            [_web setFrame:CGRectMake(_web.frame.origin.x, _web.frame.origin.y, _web.frame.size.width, _web.frame.size.width*sessionCamRatio)];
             [self.web loadHTMLString:html baseURL:nil];
         }
         

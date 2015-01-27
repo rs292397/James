@@ -9,6 +9,7 @@
 #import "rcktCamerasViewController.h"
 #import "rckt.h"
 #import "CoreGraphics/CoreGraphics.h"
+#import "rcktCameraCollectionViewCell.h"
 
 
 @interface rcktCamerasViewController ()  
@@ -27,7 +28,7 @@
     return self;
 }
 -(void) viewDidDisappear:(BOOL)animated {
-    [self btnLogoutClick:nil];
+    [self closeCam];
 }
 
 - (void)viewDidLoad {
@@ -38,24 +39,48 @@
     self.receivedData = data;
     r = [[rckt alloc] init];
     
-    // UIImageView
-    /*
-    endMarkerData=nil;
-    if (endMarkerData == nil) {
-        uint8_t endMarker[2] = {0xFF, 0xD9};
-        endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
-    }
-    */
-    //[self btnLoginClick:nil];
+
     
-    
-    
+    NSString *urlServer = [r GetServerURL];
+    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)closeCam {
+    NSString *urlServer = [r GetServerURL];
+    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/logout/%@", urlServer, sessionID];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+    NSLog(@"closeCam");
+}
+
+- (void)fetchData {
+    
+    NSError* error;
+    //initialize convert the received data to string with UTF8 encoding
+    //NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
+    //                                          encoding:NSUTF8StringEncoding];
+    NSString *key = [NSString stringWithFormat:@"camera"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *jsonData = [[prefs objectForKey:@"CAMERAS"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+    id itm = [json valueForKey:key];
+    if ([itm isKindOfClass:[NSArray class]]) {
+        _camerasArray = [json objectForKey:key];
+    }
+    else if ([itm isKindOfClass:[NSDictionary class]]) {
+        _camerasArray = [[NSMutableArray alloc] init];
+        [_camerasArray addObject:[json objectForKey:key]];
+    }
+    [self.cams reloadData];
+}
+
 
 /*
 #pragma mark - Navigation
@@ -67,52 +92,6 @@
 }
 */
 
-
--(IBAction)btnLoginClick:(id)sender {
-
-    NSString *urlServer = [r GetServerURL];
-    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/getSID", urlServer];
-    //NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Login&version=2&account=roland&passwd=levi&session=SurveillanceStation"];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-//    NSString *urlServer = [[rckt alloc] GetServerURL];
-    
-}
-
-
--(IBAction)btnStreamClick:(id)sender {
-
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/SurveillanceStation/camera.cgi?api=SYNO.SurveillanceStation.Camera&method=GetSnapshot&version=1&cameraId=1&_sid=%@",sid];
-    
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-    
-/*
-    
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=1&format=mjpeg&_sid=%@",sid];
-    
-    //SHOW IN WEBVIEW
-    NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
-    [self.web loadHTMLString:html baseURL:nil];
-
-     UIImageView
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-    
-*/
-}
-
--(IBAction)btnCloseStreamClick:(id)sender {
-    //[self.connection cancel];
-    //NSLog(@"cam selected");
-    NSLog(@"getMessage");
-    NSString *urlServer = [r GetServerURL];
-    NSString *str = [NSString stringWithFormat:@"%@/getMessage/31", urlServer];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-    
-}
-
--(IBAction)btnLogoutClick:(id)sender {
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/auth.cgi?api=SYNO.API.Auth&method=Logout&version=2&session=SurveillanceStation"];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-}
 
 - (void) doAPIrequest: (NSURL *)url {
     //NSLog(@"%@", url.absoluteString);
@@ -138,21 +117,6 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
 
    [self.receivedData appendData:data];
-                                 //UIImageview
-    /*
-       NSRange endRange = [self.receivedData rangeOfData: endMarkerData options:0 range:NSMakeRange(0,self.receivedData.length)];
-       NSInteger endLocation = endRange.location + endRange.length;
-       if (self.receivedData.length>=endLocation) {
-           NSData *imageData = [self.receivedData subdataWithRange:NSMakeRange(0,endLocation)];
-           UIImage *receivedImage = [UIImage imageWithData:imageData];
-           if (receivedImage) {
-               self.img.image = receivedImage;
-               uint8_t endMarker[2] = {0xFF, 0xD9};
-               endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
-            
-           }
-       }
-     */
 }
     
 
@@ -177,73 +141,69 @@
     //initialize convert the received data to string with UTF8 encoding
     NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
                                               encoding:NSUTF8StringEncoding];
-    
     //NSLog(@"%@", htmlSTR);
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@", urlConnection );
     NSString *urlServer = [r GetServerURL];
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/getSID", urlServer]]) {
+    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer]]) {
         NSError* error;
         NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-        sid = json[@"SID"];
-        //NSString *str = [NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/SurveillanceStation/camera.cgi?api=SYNO.SurveillanceStation.Camera&method=List&version=2&_sid=%@",sid];
-        //[self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
-        //[self btnStreamClick:nil];
-
-        NSLog(@"%@",sid);
-        NSString *sessionID = json[@"SID"];
-        NSString *sessionURL = json[@"url"];
-        NSString *sessionCam = json[@"IDCamDoorbell"];
         
-        NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
-        
-        /* SHOW IN WEBVIEW */
-        NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
-        [self.web loadHTMLString:html baseURL:nil];
-
+        sessionID = json[@"SID"];
+        sessionURL = json[@"url"];
+        [self fetchData];
     }
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/SurveillanceStation/camera.cgi"]]) {
-        UIImage *img = [[UIImage alloc] initWithData:self.receivedData];
-        if (img) {
-            NSLog(@"Snapshot");
-            
-            [_img setImage:img];
-        }
-    }
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"http://192.168.1.90:5000/webapi/SurveillanceStation/videoStreaming.cgi"]]) {
-        
-        NSLog(@"%@", htmlSTR);
-        
-        
-    }
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getMessage", urlServer]]) {
-        
-        NSLog(@"Message Received");
-        NSError* error;
-        NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-        NSString *imgS = json[@"img"];
-        
-        NSData* imageData = [[NSData alloc] initWithBase64EncodedString:imgS options:0];
-        //NSData *x = [[NSData alloc] initWithBase64EncodedString:htmlSTR options:0];
-        UIImage *img = [[UIImage alloc] initWithData:imageData];
-        if (img) {
-            NSLog(@"Snapshot");
-            
-            [_img setImage:img];
-        }
-        
-        
+    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/logout", urlServer]]) {
+        //NSLog(@"Logout: %@", sessionID);
     }
     else {
-        NSLog(@"%@", htmlSTR);
-        
+        //NSLog(@"%@", htmlSTR);
     }
-    
+}
 
-    
+- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
 
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _camerasArray.count;
+}
+
+
+- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary *item = [self.camerasArray objectAtIndex:indexPath.row];
+
+    rcktCameraCollectionViewCell *cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"cameraCollectionViewCell" forIndexPath:indexPath];
+
+    cell.key.text = [NSString stringWithFormat:@"%d", indexPath.row];
+    cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
+    NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, item[@"ID"], sessionID];
+    
+    // SHOW IN WEBVIEW
+    NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
+    [cell.cam loadHTMLString:html baseURL:nil];
+
+    __weak rcktCameraCollectionViewCell *weakCell=cell;
+    
+    [cell setDidTapBlock:^(id sender) {
+        
+        NSDictionary *item = [self.camerasArray objectAtIndex:[weakCell.lbl.text integerValue]];
+
+        NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, item[@"ID"], sessionID];
+        // SHOW IN WEBVIEW
+        float ratio = [item[@"resolutionWidth"] floatValue] / [item[@"resolutionHeight"] floatValue];
+        NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"%fpx\" height=\"%fpx\" />", str, _cam.frame.size.width, _cam.frame.size.width*ratio];
+        
+        NSLog(@"%fx%f", _cam.frame.size.width, _cam.frame.size.height);
+        UINavigationItem *navitm = [self navigationItem];
+            navitm.title = [NSString stringWithFormat:@"%@", item[@"description"]];
+        [_cam setFrame:CGRectMake(_cam.frame.origin.x, 8, _cam.frame.size.width, _cam.frame.size.width)];
+        NSLog(@"%fx%f", _cam.frame.size.width, _cam.frame.size.height);
+        [_cam loadHTMLString:html baseURL:nil];
+    }];
+    return cell;
 }
 
 

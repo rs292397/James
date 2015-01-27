@@ -52,7 +52,7 @@
 */
 
 -(void)cmdLiveCam {
-    [[[rckt alloc] init] showDoorbellFormsheet:NO];
+    [[[rckt alloc] init] showDoorbellFormsheet:NO sound:@""];
 }
 
 -(void)fetchMessages:(NSDictionary*) data {

@@ -38,19 +38,19 @@
     rootItems = @{@"bLights" : @[
                           @[@"LIGHTS_DETAILVIEW", @"Lights", @"light_icon.png"]
                           ],
-//                  @"Cameras" : @[
-//                          @[@"CAMERAS_DETAILVIEW", @"Cameras", @"scenario_icon.png"]
-//                          ],
+                  @"dCameras" : @[
+                          @[@"CAMERAS_DETAILVIEW", @"Cameras", @"camera_icon.png"]
+                          ],
                   @"aScenarios" : @[
                           @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"]
                           ],
                   @"cShades" : @[
                           @[@"SHADES_DETAILVIEW", @"Shades", @"shade_icon.png"]
                           ],
-                  @"dDoorbell" : @[
+                  @"eDoorbell" : @[
                           @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"doorbell_icon.png"]
                           ],
-                  @"eSettings" : @[
+                  @"zSettings" : @[
                           @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
                           ]
                   };

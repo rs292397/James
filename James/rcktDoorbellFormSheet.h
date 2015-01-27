@@ -15,6 +15,7 @@
     NSString *sessionID;
     NSString *sessionURL;
     NSString *sessionCam;
+    float sessionCamRatio;
 }
 
 @property (strong, nonatomic) AVAudioPlayer *player;
@@ -24,6 +25,6 @@
 @property (strong, nonatomic) IBOutlet UIWebView *web;
 
 
--(void)playDoorbellSound;
+-(void)playDoorbellSound:(NSString*)sound;
 
 @end
