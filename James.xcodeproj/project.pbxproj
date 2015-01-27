@@ -8,13 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		93010E3A19BA168D00751375 /* rcktPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93010E3919BA168D00751375 /* rcktPickerTableViewCell.m */; };
-		9302F89E1961F40900BAAAF4 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 9302F89D1961F40900BAAAF4 /* rocket.png */; };
 		9303E9D21960997E00BAF3B2 /* rcktSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */; };
 		93082D9D1979B1BD00465F68 /* rckt.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082D9C1979B1BD00465F68 /* rckt.m */; };
-		93082D9F1979B91100465F68 /* light_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082D9E1979B91100465F68 /* light_icon.png */; };
-		93082DA11979B91B00465F68 /* scene_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA01979B91B00465F68 /* scene_icon.png */; };
-		93082DA31979B92400465F68 /* switch_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA21979B92400465F68 /* switch_icon.png */; };
-		93082DA51979B93200465F68 /* scenario_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93082DA41979B93200465F68 /* scenario_icon.png */; };
 		93082DA81979C40E00465F68 /* rcktLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DA71979C40E00465F68 /* rcktLabelTableViewCell.m */; };
 		93082DB21979CE9E00465F68 /* rcktSettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DB11979CE9E00465F68 /* rcktSettingsDetailViewController.m */; };
 		93082DB51979D53200465F68 /* rcktLightsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93082DB41979D53200465F68 /* rcktLightsDetailViewController.m */; };
@@ -23,35 +18,40 @@
 		930BAE6219B8D0D3008447E3 /* rcktSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 930BAE6119B8D0D3008447E3 /* rcktSceneTableViewCell.m */; };
 		930D6FB4197851810073D6BD /* rcktStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FB3197851810073D6BD /* rcktStringTableViewCell.m */; };
 		930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930D6FBC197873730073D6BD /* rcktRootTableViewController.m */; };
-		930F101719E190AC00C9AF32 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930F101619E190AC00C9AF32 /* settings_icon.png */; };
 		930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */; };
 		93206CE21A0F9E8200784062 /* rcktCamerasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93206CE11A0F9E8200784062 /* rcktCamerasViewController.m */; };
 		93250D051A6542C900C2AAB6 /* rcktDoorbellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D041A6542C900C2AAB6 /* rcktDoorbellViewController.m */; };
 		93250D081A654BBB00C2AAB6 /* rcktMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */; };
 		932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932D79E41A1FD473004721C1 /* AVFoundation.framework */; };
-		933F66761A72B4C600ADCB75 /* ring1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933F66731A72B4C600ADCB75 /* ring1.caf */; };
-		933F66771A72B4C600ADCB75 /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933F66741A72B4C600ADCB75 /* ring2.caf */; };
-		933F66781A72B4C600ADCB75 /* ring11.caf in Resources */ = {isa = PBXBuildFile; fileRef = 933F66751A72B4C600ADCB75 /* ring11.caf */; };
 		933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */; };
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
-		9348ACB71A72C15C00F7CE43 /* camera_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9348ACB61A72C15C00F7CE43 /* camera_icon.png */; };
 		9348ACBA1A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348ACB91A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m */; };
+		934DA0A61A77E70B00674B9A /* area_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0991A77E70B00674B9A /* area_icon.png */; };
+		934DA0A71A77E70B00674B9A /* camera_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA09A1A77E70B00674B9A /* camera_icon.png */; };
+		934DA0A81A77E70B00674B9A /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA09B1A77E70B00674B9A /* Close.png */; };
+		934DA0A91A77E70B00674B9A /* doorbell_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA09C1A77E70B00674B9A /* doorbell_icon.png */; };
+		934DA0AA1A77E70B00674B9A /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA09D1A77E70B00674B9A /* Down.png */; };
+		934DA0AB1A77E70B00674B9A /* light_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA09E1A77E70B00674B9A /* light_icon.png */; };
+		934DA0AC1A77E70B00674B9A /* Open.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA09F1A77E70B00674B9A /* Open.png */; };
+		934DA0AD1A77E70B00674B9A /* scenario_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0A01A77E70B00674B9A /* scenario_icon.png */; };
+		934DA0AE1A77E70B00674B9A /* scene_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0A11A77E70B00674B9A /* scene_icon.png */; };
+		934DA0AF1A77E70B00674B9A /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0A21A77E70B00674B9A /* settings_icon.png */; };
+		934DA0B01A77E70B00674B9A /* shade_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0A31A77E70B00674B9A /* shade_icon.png */; };
+		934DA0B11A77E70B00674B9A /* switch_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0A41A77E70B00674B9A /* switch_icon.png */; };
+		934DA0B21A77E70B00674B9A /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0A51A77E70B00674B9A /* Up.png */; };
+		934DA0B41A77E72700674B9A /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B31A77E72700674B9A /* rocket.png */; };
+		934DA0B81A77E74D00674B9A /* ring1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B51A77E74D00674B9A /* ring1.caf */; };
+		934DA0B91A77E74D00674B9A /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B61A77E74D00674B9A /* ring2.caf */; };
+		934DA0BA1A77E74D00674B9A /* ring11.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B71A77E74D00674B9A /* ring11.caf */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
-		936706E41A6EDF7A000C3E4B /* doorbell_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706E31A6EDF7A000C3E4B /* doorbell_icon.png */; };
-		936706E61A6EDFF9000C3E4B /* shade_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706E51A6EDFF9000C3E4B /* shade_icon.png */; };
 		936706E91A6EE3F3000C3E4B /* rcktShadesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */; };
 		936706EC1A6EE860000C3E4B /* rcktShadeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */; };
-		936706F11A6EF826000C3E4B /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706ED1A6EF826000C3E4B /* Close.png */; };
-		936706F21A6EF826000C3E4B /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706EE1A6EF826000C3E4B /* Down.png */; };
-		936706F31A6EF826000C3E4B /* Open.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706EF1A6EF826000C3E4B /* Open.png */; };
-		936706F41A6EF826000C3E4B /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 936706F01A6EF826000C3E4B /* Up.png */; };
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
 		939DB44C19C771BD00BAE483 /* rcktRootCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */; };
 		939DB45019C774B800BAE483 /* rcktLabelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44F19C774B800BAE483 /* rcktLabelCollectionViewCell.m */; };
 		93C90F8F19D4B931002E21A2 /* rcktDeviceFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C90F8E19D4B931002E21A2 /* rcktDeviceFormsheet.m */; };
 		93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */; };
 		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
-		93F6730019AFA277009DE745 /* area_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93F672FF19AFA277009DE745 /* area_icon.png */; };
 		93FD20381A221D6C009746C5 /* rcktDoorbellFormSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */; };
 		93FD20411A2245E0009746C5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FD20401A2245E0009746C5 /* CFNetwork.framework */; };
 		93FD20441A224B66009746C5 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD20431A224B66009746C5 /* GCDAsyncUdpSocket.m */; };
@@ -85,15 +85,10 @@
 /* Begin PBXFileReference section */
 		93010E3819BA168D00751375 /* rcktPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktPickerTableViewCell.h; sourceTree = "<group>"; };
 		93010E3919BA168D00751375 /* rcktPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktPickerTableViewCell.m; sourceTree = "<group>"; };
-		9302F89D1961F40900BAAAF4 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket.png; path = ../../../../../Pictures/rocket.png; sourceTree = "<group>"; };
 		9303E9D01960997E00BAF3B2 /* rcktSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSplashViewController.h; sourceTree = "<group>"; };
 		9303E9D11960997E00BAF3B2 /* rcktSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSplashViewController.m; sourceTree = "<group>"; };
 		93082D9B1979B1BD00465F68 /* rckt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rckt.h; sourceTree = "<group>"; };
 		93082D9C1979B1BD00465F68 /* rckt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rckt.m; sourceTree = "<group>"; };
-		93082D9E1979B91100465F68 /* light_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_icon.png; path = ../../../../../Pictures/light_icon.png; sourceTree = "<group>"; };
-		93082DA01979B91B00465F68 /* scene_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scene_icon.png; path = ../../../../../Pictures/scene_icon.png; sourceTree = "<group>"; };
-		93082DA21979B92400465F68 /* switch_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_icon.png; path = ../../../../../Pictures/switch_icon.png; sourceTree = "<group>"; };
-		93082DA41979B93200465F68 /* scenario_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scenario_icon.png; path = ../../../../../Pictures/scenario_icon.png; sourceTree = "<group>"; };
 		93082DA61979C40E00465F68 /* rcktLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLabelTableViewCell.h; sourceTree = "<group>"; };
 		93082DA71979C40E00465F68 /* rcktLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLabelTableViewCell.m; sourceTree = "<group>"; };
 		93082DB01979CE9E00465F68 /* rcktSettingsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDetailViewController.h; sourceTree = "<group>"; };
@@ -111,7 +106,6 @@
 		930D6FB3197851810073D6BD /* rcktStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktStringTableViewCell.m; sourceTree = "<group>"; };
 		930D6FBB197873730073D6BD /* rcktRootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktRootTableViewController.h; sourceTree = "<group>"; };
 		930D6FBC197873730073D6BD /* rcktRootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktRootTableViewController.m; sourceTree = "<group>"; };
-		930F101619E190AC00C9AF32 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		930FEF2F19B78B9C001AC958 /* rcktColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktColorPickerView.h; sourceTree = "<group>"; };
 		930FEF3019B78B9C001AC958 /* rcktColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktColorPickerView.m; sourceTree = "<group>"; };
 		93206CE01A0F9E8200784062 /* rcktCamerasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktCamerasViewController.h; sourceTree = "<group>"; };
@@ -121,28 +115,35 @@
 		93250D061A654BBB00C2AAB6 /* rcktMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktMessageTableViewCell.h; sourceTree = "<group>"; };
 		93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktMessageTableViewCell.m; sourceTree = "<group>"; };
 		932D79E41A1FD473004721C1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		933F66731A72B4C600ADCB75 /* ring1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring1.caf; sourceTree = "<group>"; };
-		933F66741A72B4C600ADCB75 /* ring2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring2.caf; sourceTree = "<group>"; };
-		933F66751A72B4C600ADCB75 /* ring11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ring11.caf; sourceTree = "<group>"; };
 		933FE7C61A67127F003418AD /* rcktSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSwitchTableViewCell.h; sourceTree = "<group>"; };
 		933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSwitchTableViewCell.m; sourceTree = "<group>"; };
 		9342C23D19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSettingsDevicesViewController.h; sourceTree = "<group>"; };
 		9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSettingsDevicesViewController.m; sourceTree = "<group>"; };
-		9348ACB61A72C15C00F7CE43 /* camera_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_icon.png; path = ../../../../../Pictures/camera_icon.png; sourceTree = "<group>"; };
 		9348ACB81A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktCameraCollectionViewCell.h; sourceTree = "<group>"; };
 		9348ACB91A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktCameraCollectionViewCell.m; sourceTree = "<group>"; };
+		934DA0991A77E70B00674B9A /* area_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = area_icon.png; path = Images/area_icon.png; sourceTree = "<group>"; };
+		934DA09A1A77E70B00674B9A /* camera_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_icon.png; path = Images/camera_icon.png; sourceTree = "<group>"; };
+		934DA09B1A77E70B00674B9A /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Close.png; path = Images/Close.png; sourceTree = "<group>"; };
+		934DA09C1A77E70B00674B9A /* doorbell_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorbell_icon.png; path = Images/doorbell_icon.png; sourceTree = "<group>"; };
+		934DA09D1A77E70B00674B9A /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Down.png; path = Images/Down.png; sourceTree = "<group>"; };
+		934DA09E1A77E70B00674B9A /* light_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_icon.png; path = Images/light_icon.png; sourceTree = "<group>"; };
+		934DA09F1A77E70B00674B9A /* Open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Open.png; path = Images/Open.png; sourceTree = "<group>"; };
+		934DA0A01A77E70B00674B9A /* scenario_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scenario_icon.png; path = Images/scenario_icon.png; sourceTree = "<group>"; };
+		934DA0A11A77E70B00674B9A /* scene_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scene_icon.png; path = Images/scene_icon.png; sourceTree = "<group>"; };
+		934DA0A21A77E70B00674B9A /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings_icon.png; path = Images/settings_icon.png; sourceTree = "<group>"; };
+		934DA0A31A77E70B00674B9A /* shade_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shade_icon.png; path = Images/shade_icon.png; sourceTree = "<group>"; };
+		934DA0A41A77E70B00674B9A /* switch_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_icon.png; path = Images/switch_icon.png; sourceTree = "<group>"; };
+		934DA0A51A77E70B00674B9A /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = Images/Up.png; sourceTree = "<group>"; };
+		934DA0B31A77E72700674B9A /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket.png; path = Images/rocket.png; sourceTree = "<group>"; };
+		934DA0B51A77E74D00674B9A /* ring1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ring1.caf; path = Ringtones/ring1.caf; sourceTree = "<group>"; };
+		934DA0B61A77E74D00674B9A /* ring2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ring2.caf; path = Ringtones/ring2.caf; sourceTree = "<group>"; };
+		934DA0B71A77E74D00674B9A /* ring11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ring11.caf; path = Ringtones/ring11.caf; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
-		936706E31A6EDF7A000C3E4B /* doorbell_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = doorbell_icon.png; path = ../../../../../Pictures/doorbell_icon.png; sourceTree = "<group>"; };
-		936706E51A6EDFF9000C3E4B /* shade_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shade_icon.png; path = ../../../../../Pictures/shade_icon.png; sourceTree = "<group>"; };
 		936706E71A6EE3F3000C3E4B /* rcktShadesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadesViewController.h; sourceTree = "<group>"; };
 		936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShadesViewController.m; sourceTree = "<group>"; };
 		936706EA1A6EE860000C3E4B /* rcktShadeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadeTableViewCell.h; sourceTree = "<group>"; };
 		936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShadeTableViewCell.m; sourceTree = "<group>"; };
-		936706ED1A6EF826000C3E4B /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Close.png; path = ../../../../../Pictures/Close.png; sourceTree = "<group>"; };
-		936706EE1A6EF826000C3E4B /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Down.png; path = ../../../../../Pictures/Down.png; sourceTree = "<group>"; };
-		936706EF1A6EF826000C3E4B /* Open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Open.png; path = ../../../../../Pictures/Open.png; sourceTree = "<group>"; };
-		936706F01A6EF826000C3E4B /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = ../../../../../Pictures/Up.png; sourceTree = "<group>"; };
 		939DB44819C76B5300BAE483 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		939DB44A19C771BD00BAE483 /* rcktRootCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktRootCollectionViewController.h; sourceTree = "<group>"; };
 		939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktRootCollectionViewController.m; sourceTree = "<group>"; };
@@ -154,7 +155,6 @@
 		93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDeviceTokenFormsheet.m; sourceTree = "<group>"; };
 		93F672FC19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktMasterNavAreasTableViewController.h; sourceTree = "<group>"; };
 		93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktMasterNavAreasTableViewController.m; sourceTree = "<group>"; };
-		93F672FF19AFA277009DE745 /* area_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = area_icon.png; path = ../../../../../Pictures/area_icon.png; sourceTree = "<group>"; };
 		93FD20361A221D6C009746C5 /* rcktDoorbellFormSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDoorbellFormSheet.h; sourceTree = "<group>"; };
 		93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDoorbellFormSheet.m; sourceTree = "<group>"; };
 		93FD20401A2245E0009746C5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -221,22 +221,22 @@
 		9303E9D319609B1700BAF3B2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				9348ACB61A72C15C00F7CE43 /* camera_icon.png */,
-				936706ED1A6EF826000C3E4B /* Close.png */,
-				936706EE1A6EF826000C3E4B /* Down.png */,
-				936706EF1A6EF826000C3E4B /* Open.png */,
-				936706F01A6EF826000C3E4B /* Up.png */,
-				936706E51A6EDFF9000C3E4B /* shade_icon.png */,
-				936706E31A6EDF7A000C3E4B /* doorbell_icon.png */,
-				930F101619E190AC00C9AF32 /* settings_icon.png */,
+				934DA0B31A77E72700674B9A /* rocket.png */,
+				934DA0991A77E70B00674B9A /* area_icon.png */,
+				934DA09A1A77E70B00674B9A /* camera_icon.png */,
+				934DA09B1A77E70B00674B9A /* Close.png */,
+				934DA09C1A77E70B00674B9A /* doorbell_icon.png */,
+				934DA09D1A77E70B00674B9A /* Down.png */,
+				934DA09E1A77E70B00674B9A /* light_icon.png */,
+				934DA09F1A77E70B00674B9A /* Open.png */,
+				934DA0A01A77E70B00674B9A /* scenario_icon.png */,
+				934DA0A11A77E70B00674B9A /* scene_icon.png */,
+				934DA0A21A77E70B00674B9A /* settings_icon.png */,
+				934DA0A31A77E70B00674B9A /* shade_icon.png */,
+				934DA0A41A77E70B00674B9A /* switch_icon.png */,
+				934DA0A51A77E70B00674B9A /* Up.png */,
 				93FD5C8419B6656F00C45491 /* drcolorpicker-brightnessguide.png */,
 				93FD5C8219B664D700C45491 /* drcolorpicker-colormap.png */,
-				93F672FF19AFA277009DE745 /* area_icon.png */,
-				93082DA41979B93200465F68 /* scenario_icon.png */,
-				93082DA21979B92400465F68 /* switch_icon.png */,
-				93082DA01979B91B00465F68 /* scene_icon.png */,
-				93082D9E1979B91100465F68 /* light_icon.png */,
-				9302F89D1961F40900BAAAF4 /* rocket.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -250,7 +250,6 @@
 				930D6FBA1978733D0073D6BD /* Navigation */,
 				939DB44D19C7748900BAE483 /* CollectionViewCells */,
 				930D6FB1197851450073D6BD /* TableViewCells */,
-				9303E9D319609B1700BAF3B2 /* Images */,
 				9303E9CF1960995C00BAF3B2 /* Splash */,
 			);
 			name = James;
@@ -351,9 +350,9 @@
 		93FD203B1A2233ED009746C5 /* Ringtones */ = {
 			isa = PBXGroup;
 			children = (
-				933F66731A72B4C600ADCB75 /* ring1.caf */,
-				933F66741A72B4C600ADCB75 /* ring2.caf */,
-				933F66751A72B4C600ADCB75 /* ring11.caf */,
+				934DA0B51A77E74D00674B9A /* ring1.caf */,
+				934DA0B61A77E74D00674B9A /* ring2.caf */,
+				934DA0B71A77E74D00674B9A /* ring11.caf */,
 			);
 			name = Ringtones;
 			sourceTree = "<group>";
@@ -424,8 +423,9 @@
 		93FE276619576A1C00977594 /* rckt */ = {
 			isa = PBXGroup;
 			children = (
-				93FD203C1A22360B009746C5 /* TCP */,
+				9303E9D319609B1700BAF3B2 /* Images */,
 				93FD203B1A2233ED009746C5 /* Ringtones */,
+				93FD203C1A22360B009746C5 /* TCP */,
 				93F7CE481975A8E600F4E8C7 /* Library */,
 				9307EAA3195B52540050BBEC /* James */,
 				93FE276F19576A1C00977594 /* rcktAppDelegate.h */,
@@ -554,29 +554,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93F6730019AFA277009DE745 /* area_icon.png in Resources */,
-				930F101719E190AC00C9AF32 /* settings_icon.png in Resources */,
-				933F66781A72B4C600ADCB75 /* ring11.caf in Resources */,
-				933F66761A72B4C600ADCB75 /* ring1.caf in Resources */,
-				936706F31A6EF826000C3E4B /* Open.png in Resources */,
-				93082D9F1979B91100465F68 /* light_icon.png in Resources */,
-				9348ACB71A72C15C00F7CE43 /* camera_icon.png in Resources */,
-				936706F41A6EF826000C3E4B /* Up.png in Resources */,
-				93082DA11979B91B00465F68 /* scene_icon.png in Resources */,
-				936706F21A6EF826000C3E4B /* Down.png in Resources */,
-				9302F89E1961F40900BAAAF4 /* rocket.png in Resources */,
-				933F66771A72B4C600ADCB75 /* ring2.caf in Resources */,
+				934DA0B91A77E74D00674B9A /* ring2.caf in Resources */,
+				934DA0AF1A77E70B00674B9A /* settings_icon.png in Resources */,
+				934DA0B11A77E70B00674B9A /* switch_icon.png in Resources */,
+				934DA0A61A77E70B00674B9A /* area_icon.png in Resources */,
+				934DA0A71A77E70B00674B9A /* camera_icon.png in Resources */,
+				934DA0B01A77E70B00674B9A /* shade_icon.png in Resources */,
+				934DA0AA1A77E70B00674B9A /* Down.png in Resources */,
+				934DA0AD1A77E70B00674B9A /* scenario_icon.png in Resources */,
 				93FD5C8519B6656F00C45491 /* drcolorpicker-brightnessguide.png in Resources */,
+				934DA0AC1A77E70B00674B9A /* Open.png in Resources */,
+				934DA0A91A77E70B00674B9A /* doorbell_icon.png in Resources */,
+				934DA0BA1A77E74D00674B9A /* ring11.caf in Resources */,
 				93FD5C8319B664D700C45491 /* drcolorpicker-colormap.png in Resources */,
-				93082DA31979B92400465F68 /* switch_icon.png in Resources */,
+				934DA0B21A77E70B00674B9A /* Up.png in Resources */,
 				939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */,
-				936706E61A6EDFF9000C3E4B /* shade_icon.png in Resources */,
 				93FE277919576A1C00977594 /* Images.xcassets in Resources */,
-				93082DA51979B93200465F68 /* scenario_icon.png in Resources */,
-				936706E41A6EDF7A000C3E4B /* doorbell_icon.png in Resources */,
 				93FE276B19576A1C00977594 /* InfoPlist.strings in Resources */,
+				934DA0B81A77E74D00674B9A /* ring1.caf in Resources */,
+				934DA0A81A77E70B00674B9A /* Close.png in Resources */,
+				934DA0AB1A77E70B00674B9A /* light_icon.png in Resources */,
+				934DA0B41A77E72700674B9A /* rocket.png in Resources */,
 				93FE277419576A1C00977594 /* Main.storyboard in Resources */,
-				936706F11A6EF826000C3E4B /* Close.png in Resources */,
+				934DA0AE1A77E70B00674B9A /* scene_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
