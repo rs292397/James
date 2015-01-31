@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import "rckt.h"
 
 @interface rcktCamerasViewController : UIViewController {
@@ -20,7 +21,9 @@
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
 @property (strong, nonatomic) IBOutlet UIWebView *cam;
+@property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (strong, nonatomic) IBOutlet UICollectionView *cams;
 @property (nonatomic, strong) NSMutableArray *camerasArray;
+@property (retain, strong) MPMoviePlayerController *player;
 
 @end

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -423,13 +422,13 @@
                                 </items>
                             </navigationBar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RL6-q3-ChQ">
-                                <rect key="frame" x="0.0" y="50" width="540" height="405"/>
+                                <rect key="frame" x="0.0" y="44" width="540" height="411"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RL6-q3-ChQ" firstAttribute="top" secondItem="r3E-NZ-0EN" secondAttribute="bottom" constant="6" id="Bqz-tp-qnZ"/>
+                            <constraint firstItem="RL6-q3-ChQ" firstAttribute="top" secondItem="r3E-NZ-0EN" secondAttribute="bottom" id="Bqz-tp-qnZ"/>
                             <constraint firstItem="r3E-NZ-0EN" firstAttribute="top" secondItem="aQQ-em-3yg" secondAttribute="top" id="DkH-DP-99a"/>
                             <constraint firstItem="RL6-q3-ChQ" firstAttribute="trailing" secondItem="r3E-NZ-0EN" secondAttribute="trailing" id="GzZ-Vn-NRv"/>
                             <constraint firstItem="ugT-7G-Bnl" firstAttribute="top" secondItem="RL6-q3-ChQ" secondAttribute="bottom" constant="165" id="OFn-KY-U3E"/>
@@ -1342,12 +1341,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="703" height="704"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1AZ-dw-rdR">
-                                <rect key="frame" x="16" y="8" width="466" height="350"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1AZ-dw-rdR" secondAttribute="height" multiplier="233:175" id="VEv-pf-Wo0"/>
-                                </constraints>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kMY-tw-R1T">
                                 <rect key="frame" x="0.0" y="411" width="703" height="293"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1420,14 +1413,20 @@
                                     <outlet property="delegate" destination="wfa-sj-eUF" id="tmW-Ha-YYr"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1AZ-dw-rdR">
+                                <rect key="frame" x="101" y="8" width="500" height="282"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="282" id="0Kt-0R-EyX"/>
+                                    <constraint firstAttribute="width" constant="500" id="GKq-mF-jQS"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kMY-tw-R1T" firstAttribute="leading" secondItem="gZY-aA-0vK" secondAttribute="leading" id="7GU-1U-cYj"/>
                             <constraint firstAttribute="trailing" secondItem="kMY-tw-R1T" secondAttribute="trailing" id="ASN-1t-PU1"/>
+                            <constraint firstAttribute="centerX" secondItem="1AZ-dw-rdR" secondAttribute="centerX" id="Gk3-BC-yLP"/>
                             <constraint firstItem="kMY-tw-R1T" firstAttribute="bottom" secondItem="iKj-Fz-0jk" secondAttribute="top" id="ZWA-aF-lWC"/>
-                            <constraint firstItem="1AZ-dw-rdR" firstAttribute="leading" secondItem="gZY-aA-0vK" secondAttribute="leadingMargin" constant="-4" id="aPf-lV-Yqf"/>
-                            <constraint firstItem="kMY-tw-R1T" firstAttribute="top" secondItem="1AZ-dw-rdR" secondAttribute="bottom" constant="53" id="hnP-XO-yxX"/>
                             <constraint firstItem="1AZ-dw-rdR" firstAttribute="top" secondItem="Uo6-Vx-k54" secondAttribute="bottom" constant="8" symbolic="YES" id="tAn-1L-54l"/>
                         </constraints>
                     </view>

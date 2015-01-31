@@ -33,6 +33,13 @@
         sessionCam = [cam objectForKey:@"ID"];
         sessionCamRatio = [[cam objectForKey:@"resolutionWidth"] floatValue] / [[cam objectForKey:@"resolutionHeight"] floatValue];
     }
+
+
+}
+
+- (void)willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self showCam];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +48,7 @@
 }
 
 -(void) viewDidDisappear:(BOOL)animated {
-    [self closeCam];
+    //[self closeCam];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -67,9 +74,17 @@
     
  //   UIScreen *mainScreen = [UIScreen mainScreen];
  //   [mainScreen setBrightness:0];
-    NSString *urlServer = [r GetServerURL];
-    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+//    NSString *urlServer = [r GetServerURL];
+//    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
+//    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", [prefs objectForKey:@"CAM_URL"], sessionCam, [prefs objectForKey:@"CAM_SID"]];
+    /* SHOW IN WEBVIEW */
+    //NSLog(@"%@", str);
+    NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"%fpx\" />", str, _web.frame.size.width/sessionCamRatio];
+    //            [_web setFrame:CGRectMake(_web.frame.origin.x, _web.frame.origin.y, _web.frame.size.width, _web.frame.size.width*sessionCamRatio)];
+    [self.web loadHTMLString:html baseURL:nil];
+
     
 }
 
@@ -160,10 +175,9 @@
 
         if (sessionCam.integerValue>0) {
             NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, sessionCam, sessionID];
-            
             /* SHOW IN WEBVIEW */
-            NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"%fpx\" />", str, _web.frame.size.width*sessionCamRatio];
-//            [_web setFrame:CGRectMake(_web.frame.origin.x, _web.frame.origin.y, _web.frame.size.width, _web.frame.size.width*sessionCamRatio)];
+            NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"%fpx\" />", str, _web.frame.size.width/sessionCamRatio];
+            [_web setFrame:CGRectMake(_web.frame.origin.x, _web.frame.origin.y, _web.frame.size.width, _web.frame.size.width/sessionCamRatio)];
             [self.web loadHTMLString:html baseURL:nil];
         }
         

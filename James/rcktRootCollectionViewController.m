@@ -30,11 +30,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     rootItems = @[
-                  @[@"AREAS_VIEW", @"Lights", @"light_icon.png"],
                   @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"],
-                  @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"scenario_icon.png"],
+                  @[@"AREAS_VIEW", @"Lights", @"light_icon.png"],
+                  @[@"SHADES_DETAILVIEW", @"Shades", @"shade_icon.png"],
+                  @[@"CAMERAS_DETAILVIEW", @"Cameras", @"camera_icon.png"],
+                  @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"doorbell_icon.png"],
                   @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
                   ];
+    
     self.navigationItem.title = @"James";
 }
 

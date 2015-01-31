@@ -38,7 +38,7 @@
     //   [_splashActivityIndicatorView startAnimating];
     //_splashActivityIndicatorView.hidesWhenStopped = TRUE;
     _progressView.progress = 0.0f;
-    countToDo = 8;
+    countToDo = 10;
     [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
 }
 
@@ -80,7 +80,33 @@
     //Create userdefaults if not exist
     if ([prefs objectForKey:@"NOTIFY_DOORBELL"]==nil)
         [prefs setBool:NO forKey:@"NOTIFY_DOORBELL"];
+    if ([prefs objectForKey:@"NOTIFICATION_TOKEN"]==nil)
+        [prefs setObject:@"" forKey:@"NOTIFACTION_TOKEN"];
+    if ([prefs objectForKey:@"DEVICE_TOKEN"]==nil)
+        [prefs setObject:@"1234567890" forKey:@"DEVICE_TOKEN"];
+    if ([prefs objectForKey:@"AREAS"]==nil)
+        [prefs setObject:@"" forKey:@"AREAS"];
+    if ([prefs objectForKey:@"LIGHTS"]==nil)
+        [prefs setObject:@"" forKey:@"LIGHTS"];
+    if ([prefs objectForKey:@"SHADES"]==nil)
+        [prefs setObject:@"" forKey:@"SHADES"];
+    if ([prefs objectForKey:@"SCENES"]==nil)
+        [prefs setObject:@"" forKey:@"SCENES"];
+    if ([prefs objectForKey:@"SCENARIOS"]==nil)
+        [prefs setObject:@"" forKey:@"SCENARIOS"];
+    if ([prefs objectForKey:@"FRONTDOOR"]==nil)
+        [prefs setObject:@"" forKey:@"FRONTDOOR"];
+    if ([prefs objectForKey:@"CAMERAS"]==nil)
+        [prefs setObject:@"" forKey:@"CAMERAS"];
+    if ([prefs objectForKey:@"CAM_SID"]==nil)
+        [prefs setObject:@"" forKey:@"CAM_SID"];
+    if ([prefs objectForKey:@"CAM_URL"]==nil)
+        [prefs setObject:@"" forKey:@"CAM_URL"];
 
+    
+    
+    
+    
     
     [prefs setObject:[NSString stringWithFormat:@"%@", [deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"]] forKey:@"DEVICEID"];
     [prefs synchronize];
@@ -191,6 +217,7 @@
     //NSLog(@"%@", urlServer);
     count += 1;
     [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
     if ([urlServer isEqualToString:urlConnection]) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.receivedData options:kNilOptions error:&error];
@@ -208,16 +235,21 @@
                 
                 NSString *urlServer = [[rckt alloc] GetServerURL];
                 //Get All Objects
-                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", urlServer]]];
-
+                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/surveillanceStation/logout/%@", urlServer, [prefs objectForKey:@"CAM_SID"]]]];
             }
         } else {
             [self presentForm];
             NSLog(@"Wrong URL");
         }
     } else {
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
+        if ([urlConnection hasPrefix: [NSString stringWithFormat:@"%@/surveillanceStation/logout",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer]]];
+        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/surveillanceStation/login",urlServer]]) {
+            NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.receivedData options:kNilOptions error:&error];
+            [prefs setObject:json[@"SID"] forKey:@"CAM_SID"];
+            [prefs setObject:json[@"url"] forKey:@"CAM_URL"];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", urlServer]]];
+        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"AREAS"];
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllLights",urlServer]]) {

@@ -71,15 +71,25 @@
         [prefs setObject:[NSString stringWithFormat:@"%@",cell.txt.text] forKey:cell.key.text];
     }
     [prefs synchronize];
-    
+    UIViewController *vc = self.presentingViewController;
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([vc isKindOfClass:[rcktSplashViewController class]]) {
+            [(rcktSplashViewController*)vc initialize];
+        }
+    }];
+/*
     UIStoryboard *storyboard;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     else
         storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"rcktSplash"];
-    [self presentViewController:controller animated:NO completion:nil];
-    [(rcktSplashViewController *)controller initialize];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.parentViewController presentViewController:controller animated:YES completion:^{
+            [(rcktSplashViewController *)controller initialize];
+        }];
+    }];
+  */
     
 }
 

@@ -9,6 +9,7 @@
 #import "rcktDoorbellViewController.h"
 #import "rckt.h"
 #import "rcktMessageTableViewCell.h"
+#import "rcktDoorbellImageFormSheet.h"
 
 @interface rcktDoorbellViewController ()
 
@@ -69,7 +70,8 @@
     }
     [self.messagesTableView reloadData];
     NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self tableView:self.messagesTableView didSelectRowAtIndexPath:index];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        [self tableView:self.messagesTableView didSelectRowAtIndexPath:index];
     
 }
 
@@ -117,6 +119,10 @@
     cell.lblDate.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:dte]];
     [dateFormat setDateFormat:@"HH:mm"];
     cell.lblTime.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:dte]];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    }
 
     
 
@@ -162,11 +168,10 @@
 #pragma mark - TableView delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *itm = [self.messagesArray objectAtIndex:indexPath.row];
-    NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, itm[@"ID"]];
-    [self doAPIrequest:[NSURL URLWithString:url]];
-
+        //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+        NSDictionary *itm = [self.messagesArray objectAtIndex:indexPath.row];
+        NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, itm[@"ID"]];
+        [self doAPIrequest:[NSURL URLWithString:url]];
 }
 
 
@@ -257,8 +262,21 @@
         //NSData *x = [[NSData alloc] initWithBase64EncodedString:htmlSTR options:0];
 //        UIImage *img = [[UIImage alloc] initWithData:imageData];
         UIImage *img = [[UIImage alloc] initWithData:self.receivedData];
-        if (img)
-            [_img setImage:img];
+        if (img) {
+            //float ratio =  img.size.height/img.size.width;
+            //[_img setFrame:CGRectMake(0, 0, 10, 10)];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                [_img setImage:img];
+            }
+            else {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+                rcktDoorbellImageFormSheet *vc = (rcktDoorbellImageFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellImageFormSheet"];
+                [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+                [vc setImage:img];
+                [self presentViewController:vc animated:YES completion:nil];
+            }
+        }
+
     }
     else {
         //NSLog(@"%@", htmlSTR);

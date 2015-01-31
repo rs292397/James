@@ -12,12 +12,17 @@
 #import "rcktCameraCollectionViewCell.h"
 
 
-@interface rcktCamerasViewController ()  
+@interface rcktCamerasViewController ()
+
 
 @end
 
 
 @implementation rcktCamerasViewController
+
+@synthesize player;
+#define END_MARKER_BYTES { 0xFF, 0xD9 }
+static NSData *_endMarkerData = nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +33,7 @@
     return self;
 }
 -(void) viewDidDisappear:(BOOL)animated {
-    [self closeCam];
+    //[self closeCam];
 }
 
 - (void)viewDidLoad {
@@ -39,11 +44,16 @@
     self.receivedData = data;
     r = [[rckt alloc] init];
     
-
+    //UIImageView
+    if (_endMarkerData == nil) {
+        uint8_t endMarker[2] = END_MARKER_BYTES;
+        _endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
+    }
     
-    NSString *urlServer = [r GetServerURL];
-    NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+    //NSString *urlServer = [r GetServerURL];
+    //NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
+    //[self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
+    [self fetchData];
 
 }
 
@@ -94,11 +104,12 @@
 
 
 - (void) doAPIrequest: (NSURL *)url {
-    //NSLog(@"%@", url.absoluteString);
+    NSLog(@"%@", url.absoluteString);
     
     //initialize url that is going to be fetched.
     
     //initialize a request from url
+    //[_connection cancel];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     //initialize a connection from request
@@ -117,8 +128,21 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
 
    [self.receivedData appendData:data];
-}
+    NSRange endRange = [_receivedData rangeOfData:_endMarkerData
+                                          options:0
+                                            range:NSMakeRange(0, _receivedData.length)];
     
+    int endLocation = endRange.location + endRange.length;
+    if (_receivedData.length >= endLocation) {
+        NSData *imageData = [_receivedData subdataWithRange:NSMakeRange(0, endLocation)];
+        UIImage *receivedImage = [UIImage imageWithData:imageData];
+        if (receivedImage) {
+            NSLog(@"z");
+            self.image.image = receivedImage;
+        }
+    }
+}
+
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     [self.receivedData setLength:0];
@@ -154,7 +178,7 @@
         sessionURL = json[@"url"];
         [self fetchData];
     }
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/logout", urlServer]]) {
+    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/logout", urlServer ]]) {
         //NSLog(@"Logout: %@", sessionID);
     }
     else {
@@ -174,34 +198,50 @@
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *item = [self.camerasArray objectAtIndex:indexPath.row];
-
+    
     rcktCameraCollectionViewCell *cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"cameraCollectionViewCell" forIndexPath:indexPath];
-
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"%@",[prefs objectForKey:@"CAM_SID"]);
     cell.key.text = [NSString stringWithFormat:@"%d", indexPath.row];
     cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
-    NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, item[@"ID"], sessionID];
+    NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", [prefs objectForKey:@"CAM_URL"], item[@"ID"], [prefs objectForKey:@"CAM_SID"]];
     
     // SHOW IN WEBVIEW
     NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"100%%\" height=\"100%%\" />", str];
     [cell.cam loadHTMLString:html baseURL:nil];
-
     __weak rcktCameraCollectionViewCell *weakCell=cell;
     
     [cell setDidTapBlock:^(id sender) {
         
-        NSDictionary *item = [self.camerasArray objectAtIndex:[weakCell.lbl.text integerValue]];
+        NSDictionary *item = [self.camerasArray objectAtIndex:[weakCell.key.text integerValue]];
 
-        NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", sessionURL, item[@"ID"], sessionID];
+        NSString *str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/videoStreaming.cgi?api=SYNO.SurveillanceStation.VideoStream&method=Stream&version=1&cameraId=%@&format=mjpeg&_sid=%@", [prefs objectForKey:@"CAM_URL"], item[@"ID"], [prefs objectForKey:@"CAM_SID"]];
+        
+        //str = @"http://devimages.apple.com/iphone/samples/bipbop/gear1/prog_index.m3u8";
+        //str = [NSString stringWithFormat:@"%@/webapi/SurveillanceStation/streaming.cgi?api=SYNO.SurveillanceStation.Streaming&method=LiveStream&version=1&cameraId=%@&_sid=%@", [prefs objectForKey:@"CAM_URL"], item[@"ID"], [prefs objectForKey:@"CAM_SID"]];
+        //NSLog(@"%@",str);
+        //[self doAPIrequest:[NSURL URLWithString:str]];
+        
+        
         // SHOW IN WEBVIEW
         float ratio = [item[@"resolutionWidth"] floatValue] / [item[@"resolutionHeight"] floatValue];
-        NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"%fpx\" height=\"%fpx\" />", str, _cam.frame.size.width, _cam.frame.size.width*ratio];
-        
-        NSLog(@"%fx%f", _cam.frame.size.width, _cam.frame.size.height);
+        NSString *html = [NSString stringWithFormat:@"<img name=\"cam\" src=\"%@\" width=\"%fpx\" height=\"%fpx\" />", str, _cam.frame.size.width, _cam.frame.size.width/ratio];
+        //html = [NSString stringWithFormat:@"<video name=\"cam\" src=\"%@\" width=\"%fpx\" height=\"%fpx\" ></video>", str, _cam.frame.size.width, _cam.frame.size.width/ratio];
         UINavigationItem *navitm = [self navigationItem];
             navitm.title = [NSString stringWithFormat:@"%@", item[@"description"]];
         [_cam setFrame:CGRectMake(_cam.frame.origin.x, 8, _cam.frame.size.width, _cam.frame.size.width)];
-        NSLog(@"%fx%f", _cam.frame.size.width, _cam.frame.size.height);
         [_cam loadHTMLString:html baseURL:nil];
+        /*
+        player = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:str]];
+        player.view.frame = CGRectMake(10, 10, 300, 200);
+        
+        player.movieSourceType = MPMovieSourceTypeUnknown;
+        
+        [player prepareToPlay];
+        [self.view addSubview:player.view];
+        [player play];
+        */
     }];
     return cell;
 }
