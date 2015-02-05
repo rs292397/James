@@ -1,20 +1,19 @@
 //
-//  rcktDoorbellFormSheet.m
+//  rcktCameraFormSheet.m
 //  James
 //
-//  Created by Modesty & Roland on 23/11/14.
-//  Copyright (c) 2014 Rckt. All rights reserved.
+//  Created by Modesty en Roland on 05/02/15.
+//  Copyright (c) 2015 Rckt. All rights reserved.
 //
 
-#import "rcktDoorbellFormSheet.h"
+#import "rcktCameraFormSheet.h"
 #import "rckt.h"
-#import "CoreGraphics/CoreGraphics.h"
 
-@interface rcktDoorbellFormSheet ()
+@interface rcktCameraFormSheet ()
 
 @end
 
-@implementation rcktDoorbellFormSheet
+@implementation rcktCameraFormSheet
 
 #define END_MARKER_BYTES { 0xFF, 0xD9 }
 static NSData *_endMarkerData = nil;
@@ -24,7 +23,6 @@ static NSData *_endMarkerData = nil;
     // Do any additional setup after loading the view.
     self.activityIndicator = [[rckt alloc] getActivityIndicator:_image];
     [_image addSubview:self.activityIndicator];
-    [self.activityIndicator startAnimating];
     
     
     //initialize new mutable data
@@ -36,22 +34,9 @@ static NSData *_endMarkerData = nil;
         uint8_t endMarker[2] = END_MARKER_BYTES;
         _endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
     }
-    
-    NSError *error;
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *jsonData = [[prefs objectForKey:@"FRONTDOOR"] dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-    NSString *str;
-    id itm = [json valueForKey:@"cam"];
-    if ([itm isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *cam = [json objectForKey:@"cam"];
-        str = [NSString stringWithFormat:@"%@",cam[@"URLstream"]];
-        //str = [NSString stringWithFormat:@"%@/getCameraStream/5",[[rckt alloc] GetServerURL]];
-        ratio = [[cam objectForKey:@"resolutionHeight"] floatValue] / [[cam objectForKey:@"resolutionWidth"] floatValue];
-    }
-    [self doAPIrequest:[NSURL URLWithString:str]];
-    [self addImageToView];
 
+    [self doAPIrequest:[NSURL URLWithString:URLstream]];
+    [self addImageToView];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -70,15 +55,6 @@ static NSData *_endMarkerData = nil;
 -(void) viewDidDisappear:(BOOL)animated {
     [self closeCam];
 }
-
-- (void) viewDidAppear:(BOOL)animated {
-    UINavigationItem *navitm = self.navbaritem;
-    UIBarButtonItem *bl = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(cmdCancel)];
-    navitm.leftBarButtonItem = bl;
-    //[self playDoorbellSound];
-}
-
-
 /*
 #pragma mark - Navigation
 
@@ -89,7 +65,6 @@ static NSData *_endMarkerData = nil;
 }
 */
 
-
 -(void)closeCam {
     [_connection cancel];
 }
@@ -97,22 +72,6 @@ static NSData *_endMarkerData = nil;
 
 - (void)cmdCancel{
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)playDoorbellSound: (NSString*) sound {
-    
-    NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:sound];
-    NSError* error;
-    
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&error];
-    self.player.delegate = self;
-    [self.player play];
-}
-
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    if (flag) {
-        //NSLog(@"audioPlayerDidFinishPlaying successfully");
-    }
 }
 
 - (void) doAPIrequest: (NSURL *)url {
@@ -175,8 +134,18 @@ static NSData *_endMarkerData = nil;
     
 }
 -(void)addImageToView {
-    [_image setFrame: CGRectMake(_image.frame.origin.x, _image.frame.origin.y, _image.frame.size.width, _image.frame.size.width * ratio)];
+    float height = _image.frame.size.width * ratio;
+    [_image setFrame: CGRectMake(0, (self.view.frame.size.height-height)/2, _image.frame.size.width, height)];
     [_image setImage:_img];
+}
+
+-(void)setStreamValues: (NSString*)url ratio:(float)r {
+    URLstream = url;
+    ratio = r;
+}
+
+-(IBAction)close:(id)sender{
+    [self cmdCancel];
 }
 
 @end

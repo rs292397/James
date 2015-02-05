@@ -11,18 +11,16 @@
 #import "rckt.h"
 
 @interface rcktDoorbellFormSheet : UIViewController <AVAudioPlayerDelegate> {
-    rckt *r;
-    NSString *sessionID;
-    NSString *sessionURL;
-    NSString *sessionCam;
-    float sessionCamRatio;
+    float ratio;
 }
 
 @property (strong, nonatomic) AVAudioPlayer *player;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
-@property (strong, nonatomic) IBOutlet UIWebView *web;
+@property (strong, nonatomic) IBOutlet UIImageView *image;
+@property (strong, nonatomic) UIImage *img;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 
 -(void)playDoorbellSound:(NSString*)sound;

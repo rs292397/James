@@ -51,6 +51,7 @@
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
 		939DB44C19C771BD00BAE483 /* rcktRootCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */; };
 		939DB45019C774B800BAE483 /* rcktLabelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 939DB44F19C774B800BAE483 /* rcktLabelCollectionViewCell.m */; };
+		93AC1A281A8412B90089BA7D /* rcktCameraFormSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AC1A271A8412B90089BA7D /* rcktCameraFormSheet.m */; };
 		93C90F8F19D4B931002E21A2 /* rcktDeviceFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C90F8E19D4B931002E21A2 /* rcktDeviceFormsheet.m */; };
 		93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ECE38A19B792E0007A92EC /* rcktDeviceTokenFormsheet.m */; };
 		93F672FE19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F672FD19AF9D7C009DE745 /* rcktMasterNavAreasTableViewController.m */; };
@@ -154,6 +155,8 @@
 		939DB44B19C771BD00BAE483 /* rcktRootCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktRootCollectionViewController.m; sourceTree = "<group>"; };
 		939DB44E19C774B800BAE483 /* rcktLabelCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktLabelCollectionViewCell.h; sourceTree = "<group>"; };
 		939DB44F19C774B800BAE483 /* rcktLabelCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktLabelCollectionViewCell.m; sourceTree = "<group>"; };
+		93AC1A261A8412B90089BA7D /* rcktCameraFormSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktCameraFormSheet.h; sourceTree = "<group>"; };
+		93AC1A271A8412B90089BA7D /* rcktCameraFormSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktCameraFormSheet.m; sourceTree = "<group>"; };
 		93C90F8D19D4B931002E21A2 /* rcktDeviceFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDeviceFormsheet.h; sourceTree = "<group>"; };
 		93C90F8E19D4B931002E21A2 /* rcktDeviceFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDeviceFormsheet.m; sourceTree = "<group>"; };
 		93ECE38919B792E0007A92EC /* rcktDeviceTokenFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDeviceTokenFormsheet.h; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 				93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */,
 				93605AC51A7D7BD100084C10 /* rcktDoorbellImageFormSheet.h */,
 				93605AC61A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m */,
+				93AC1A261A8412B90089BA7D /* rcktCameraFormSheet.h */,
+				93AC1A271A8412B90089BA7D /* rcktCameraFormSheet.m */,
 			);
 			name = Formsheets;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 				93ECE38B19B792E0007A92EC /* rcktDeviceTokenFormsheet.m in Sources */,
 				930D6FBD197873730073D6BD /* rcktRootTableViewController.m in Sources */,
 				93C90F8F19D4B931002E21A2 /* rcktDeviceFormsheet.m in Sources */,
+				93AC1A281A8412B90089BA7D /* rcktCameraFormSheet.m in Sources */,
 				933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */,
 				93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */,
 				93605AC71A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m in Sources */,

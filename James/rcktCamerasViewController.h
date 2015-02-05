@@ -7,23 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import "rckt.h"
 
 @interface rcktCamerasViewController : UIViewController {
-    NSString *sid;
-    NSString *sessionID;
-    NSString *sessionURL;
-    NSString *sessionCam;
-    rckt *r;
+    float ratio;
+    NSString *URLstream;
 }
 
+
+@property (weak, nonatomic) IBOutlet UINavigationItem *navbaritem;
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
-@property (strong, nonatomic) IBOutlet UIWebView *cam;
 @property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (strong, nonatomic) IBOutlet UICollectionView *cams;
 @property (nonatomic, strong) NSMutableArray *camerasArray;
-@property (retain, strong) MPMoviePlayerController *player;
+@property (strong, nonatomic) UIImage *img;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
+-(IBAction)openFullScreen:(id)sender;
 
 @end

@@ -38,7 +38,7 @@
     //   [_splashActivityIndicatorView startAnimating];
     //_splashActivityIndicatorView.hidesWhenStopped = TRUE;
     _progressView.progress = 0.0f;
-    countToDo = 10;
+    countToDo = 8;
     [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
 }
 
@@ -235,21 +235,14 @@
                 
                 NSString *urlServer = [[rckt alloc] GetServerURL];
                 //Get All Objects
-                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/surveillanceStation/logout/%@", urlServer, [prefs objectForKey:@"CAM_SID"]]]];
+                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", urlServer]]];
             }
         } else {
             [self presentForm];
             NSLog(@"Wrong URL");
         }
     } else {
-        if ([urlConnection hasPrefix: [NSString stringWithFormat:@"%@/surveillanceStation/logout",urlServer]]) {
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/surveillanceStation/login",urlServer]]) {
-            NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.receivedData options:kNilOptions error:&error];
-            [prefs setObject:json[@"SID"] forKey:@"CAM_SID"];
-            [prefs setObject:json[@"url"] forKey:@"CAM_URL"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
+        if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"AREAS"];
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllLights",urlServer]]) {
@@ -266,8 +259,8 @@
             [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getFrontDoor", urlServer]]];
         } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getFrontDoor",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"FRONTDOOR"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllCameras/0", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllCameras/0",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllCameras", urlServer]]];
+        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllCameras",urlServer]]) {
             [prefs setObject:htmlSTR forKey:@"CAMERAS"];
         }
         [prefs synchronize];
