@@ -9,7 +9,7 @@
 #import "rcktDoorbellViewController.h"
 #import "rckt.h"
 #import "rcktMessageTableViewCell.h"
-#import "rcktDoorbellImageFormSheet.h"
+#import "rcktCameraFormSheet.h"
 
 @interface rcktDoorbellViewController ()
 
@@ -20,6 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.activityIndicator = [[rckt alloc] getActivityIndicator:_img];
+    [_img addSubview:self.activityIndicator];
+
+    
     //initialize new mutable data
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
@@ -69,9 +73,6 @@
         [_messagesArray addObject:[data objectForKey:key]];
     }
     [self.messagesTableView reloadData];
-    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-        [self tableView:self.messagesTableView didSelectRowAtIndexPath:index];
     
 }
 
@@ -123,6 +124,12 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         cell.accessoryType = UITableViewCellAccessoryDetailButton;
     }
+    else if (indexPath.section==0 && indexPath.row==0) {
+        [self.activityIndicator startAnimating];
+        NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, cell.key.text];
+        [self doAPIrequest:[NSURL URLWithString:url]];
+    }
+
 
     
 
@@ -169,9 +176,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
         //[tableView deselectRowAtIndexPath:indexPath animated:YES];
-        NSDictionary *itm = [self.messagesArray objectAtIndex:indexPath.row];
-        NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, itm[@"ID"]];
-        [self doAPIrequest:[NSURL URLWithString:url]];
+    [self.activityIndicator startAnimating];
+    NSDictionary *itm = [self.messagesArray objectAtIndex:indexPath.row];
+    NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, itm[@"ID"]];
+    [self doAPIrequest:[NSURL URLWithString:url]];
 }
 
 
@@ -262,18 +270,19 @@
         //NSData *x = [[NSData alloc] initWithBase64EncodedString:htmlSTR options:0];
 //        UIImage *img = [[UIImage alloc] initWithData:imageData];
         UIImage *img = [[UIImage alloc] initWithData:self.receivedData];
+        [self.activityIndicator stopAnimating];
         if (img) {
             //float ratio =  img.size.height/img.size.width;
             //[_img setFrame:CGRectMake(0, 0, 10, 10)];
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                 [_img setImage:img];
-            }
+                            }
             else {
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-                rcktDoorbellImageFormSheet *vc = (rcktDoorbellImageFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"DoorbellImageFormSheet"];
+                rcktCameraFormSheet *vc = (rcktCameraFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"CameraFormSheet"];
                 [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-                [vc setImage:img];
-                [self presentViewController:vc animated:YES completion:nil];
+                [vc setImageValues:img ratio:img.size.height/img.size.width];
+                [self.navigationController pushViewController:vc animated:YES];
             }
         }
 
@@ -287,6 +296,25 @@
     
     
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    if ([touch view] == _img) {
+        UIStoryboard *storyboard;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            rcktCameraFormSheet *vc = (rcktCameraFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"CameraFormSheet"];
+            [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+            UIImage *img = [_img image];
+            [vc setImageValues:img ratio:img.size.height/img.size.width];
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+        
+    }
+}
+
+
+
 
 
 @end

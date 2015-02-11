@@ -29,15 +29,26 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    rootItems = @[
-                  @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"],
-                  @[@"AREAS_VIEW", @"Lights", @"light_icon.png"],
-                  @[@"SHADES_DETAILVIEW", @"Shades", @"shade_icon.png"],
-                  @[@"CAMERAS_DETAILVIEW", @"Cameras", @"camera_icon.png"],
-                  @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"doorbell_icon.png"],
-                  @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
-                  ];
-    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        rootItems = @[
+                      @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"],
+                      @[@"LIGHTS_DETAILVIEW", @"Lights", @"light_icon.png"],
+                      @[@"SHADES_DETAILVIEW", @"Shades", @"shade_icon.png"],
+                      @[@"CAMERAS_DETAILVIEW", @"Cameras", @"camera_icon.png"],
+                      @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"doorbell_icon.png"],
+                      @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
+                      ];
+    }
+    else {
+        rootItems = @[
+                      @[@"SCENARIOS_DETAILVIEW", @"Scenarios", @"scenario_icon.png"],
+                      @[@"AREAS_VIEW", @"Lights", @"light_icon.png"],
+                      @[@"SHADES_DETAILVIEW", @"Shades", @"shade_icon.png"],
+                      @[@"CAMERAS_DETAILVIEW", @"Cameras", @"camera_icon.png"],
+                      @[@"DOORBELL_DETAILVIEW", @"Doorbell", @"doorbell_icon.png"],
+                      @[@"SETTINGS_DETAILVIEW", @"Settings", @"settings_icon.png"]
+                      ];
+    }
     self.navigationItem.title = @"James";
 }
 
@@ -87,10 +98,27 @@
     [cell setDidTapBlock:^(id sender) {
         
         NSString *key = weakCell.key.text;
-        //NSLog(@"Selected: %@",key);
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-        UIViewController *sfvc = [storyboard instantiateViewControllerWithIdentifier:key];
-        [self.navigationController pushViewController:sfvc animated:YES];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            //NSLog(@"Selected: %@",key);
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UINavigationController *sfvc = (UINavigationController*)[storyboard instantiateViewControllerWithIdentifier:key];
+            UINavigationController *nav = (UINavigationController*) self.parentViewController;
+            UISplitViewController *svc = (UISplitViewController*) nav.parentViewController;
+            
+            if ([key isEqualToString:@"LIGHTS_DETAILVIEW"]) {
+                [self performSegueWithIdentifier:@"segueMasterNavAreas" sender:@"me"];
+            }
+            
+            NSArray *va = [[NSArray alloc] initWithObjects:[svc.viewControllers objectAtIndex:0], sfvc, nil];
+            [svc setViewControllers:va];
+        }
+        else {
+            //NSLog(@"Selected: %@",key);
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+            UIViewController *sfvc = [storyboard instantiateViewControllerWithIdentifier:key];
+            [self.navigationController pushViewController:sfvc animated:YES];
+        }
+        
     }];
 
     return cell;

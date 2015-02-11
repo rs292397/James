@@ -45,7 +45,6 @@
 		934DA0B91A77E74D00674B9A /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B61A77E74D00674B9A /* ring2.caf */; };
 		934DA0BA1A77E74D00674B9A /* ring11.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B71A77E74D00674B9A /* ring11.caf */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
-		93605AC71A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93605AC61A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m */; };
 		936706E91A6EE3F3000C3E4B /* rcktShadesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */; };
 		936706EC1A6EE860000C3E4B /* rcktShadeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */; };
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
@@ -144,8 +143,6 @@
 		934DA0B71A77E74D00674B9A /* ring11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ring11.caf; path = Ringtones/ring11.caf; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
-		93605AC51A7D7BD100084C10 /* rcktDoorbellImageFormSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktDoorbellImageFormSheet.h; sourceTree = "<group>"; };
-		93605AC61A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktDoorbellImageFormSheet.m; sourceTree = "<group>"; };
 		936706E71A6EE3F3000C3E4B /* rcktShadesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadesViewController.h; sourceTree = "<group>"; };
 		936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShadesViewController.m; sourceTree = "<group>"; };
 		936706EA1A6EE860000C3E4B /* rcktShadeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadeTableViewCell.h; sourceTree = "<group>"; };
@@ -392,8 +389,6 @@
 				93C90F8E19D4B931002E21A2 /* rcktDeviceFormsheet.m */,
 				93FD20361A221D6C009746C5 /* rcktDoorbellFormSheet.h */,
 				93FD20371A221D6C009746C5 /* rcktDoorbellFormSheet.m */,
-				93605AC51A7D7BD100084C10 /* rcktDoorbellImageFormSheet.h */,
-				93605AC61A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m */,
 				93AC1A261A8412B90089BA7D /* rcktCameraFormSheet.h */,
 				93AC1A271A8412B90089BA7D /* rcktCameraFormSheet.m */,
 			);
@@ -627,7 +622,6 @@
 				93AC1A281A8412B90089BA7D /* rcktCameraFormSheet.m in Sources */,
 				933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */,
 				93FD5BC619B64E6D00C45491 /* rcktColorFormsheet.m in Sources */,
-				93605AC71A7D7BD100084C10 /* rcktDoorbellImageFormSheet.m in Sources */,
 				93010E3A19BA168D00751375 /* rcktPickerTableViewCell.m in Sources */,
 				930FEF3119B78B9C001AC958 /* rcktColorPickerView.m in Sources */,
 				936706E91A6EE3F3000C3E4B /* rcktShadesViewController.m in Sources */,

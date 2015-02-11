@@ -17,11 +17,11 @@
 @property (nonatomic, strong) NSMutableArray *messagesArray;
 @property (strong, nonatomic) IBOutlet UITableView *messagesTableView;
 @property (strong, nonatomic) IBOutlet UIImageView *img;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *receivedData;
 
--(IBAction)switchNtoficationChange:(id)sender;
 
 
 @end

@@ -21,8 +21,11 @@ static NSData *_endMarkerData = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
     self.activityIndicator = [[rckt alloc] getActivityIndicator:_image];
     [_image addSubview:self.activityIndicator];
+    [self.activityIndicator startAnimating];
     
     
     //initialize new mutable data
@@ -34,8 +37,11 @@ static NSData *_endMarkerData = nil;
         uint8_t endMarker[2] = END_MARKER_BYTES;
         _endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
     }
-
-    [self doAPIrequest:[NSURL URLWithString:URLstream]];
+    if (doStream==YES)
+        [self doAPIrequest:[NSURL URLWithString:URLstream]];
+    else
+        [self.activityIndicator stopAnimating];
+    
     [self addImageToView];
 }
 
@@ -103,7 +109,7 @@ static NSData *_endMarkerData = nil;
                                           options:0
                                             range:NSMakeRange(0, _receivedData.length)];
     
-    int endLocation = endRange.location + endRange.length;
+    long endLocation = endRange.location + endRange.length;
     if (_receivedData.length >= endLocation) {
         NSData *imageData = [_receivedData subdataWithRange:NSMakeRange(0, endLocation)];
         UIImage *receivedImage = [UIImage imageWithData:imageData];
@@ -137,15 +143,36 @@ static NSData *_endMarkerData = nil;
     float height = _image.frame.size.width * ratio;
     [_image setFrame: CGRectMake(0, (self.view.frame.size.height-height)/2, _image.frame.size.width, height)];
     [_image setImage:_img];
+    
+    //NSLog(@"%f x %f", self.view.frame.size.width, height );
+    self.scroll.minimumZoomScale=1;
+    self.scroll.maximumZoomScale=6.0;
+    self.scroll.contentSize=CGSizeMake(_image.frame.size.width, height);
+
 }
 
 -(void)setStreamValues: (NSString*)url ratio:(float)r {
     URLstream = url;
     ratio = r;
+    doStream=YES;
 }
+
+-(void)setImageValues: (UIImage*)img ratio:(float)r {
+    _img = img;
+    ratio = r;
+    doStream=NO;
+}
+
 
 -(IBAction)close:(id)sender{
     [self cmdCancel];
 }
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.image;
+}
+
+
 
 @end

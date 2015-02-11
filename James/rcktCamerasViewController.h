@@ -20,10 +20,10 @@
 @property (retain, nonatomic) NSMutableData *receivedData;
 @property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (strong, nonatomic) IBOutlet UICollectionView *cams;
+@property (strong, nonatomic) IBOutlet UITableView *camsTable;
 @property (nonatomic, strong) NSMutableArray *camerasArray;
 @property (strong, nonatomic) UIImage *img;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
--(IBAction)openFullScreen:(id)sender;
 
 @end

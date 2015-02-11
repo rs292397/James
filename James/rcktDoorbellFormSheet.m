@@ -9,6 +9,7 @@
 #import "rcktDoorbellFormSheet.h"
 #import "rckt.h"
 #import "CoreGraphics/CoreGraphics.h"
+#import "rcktCameraFormSheet.h" 
 
 @interface rcktDoorbellFormSheet ()
 
@@ -41,15 +42,14 @@ static NSData *_endMarkerData = nil;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *jsonData = [[prefs objectForKey:@"FRONTDOOR"] dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-    NSString *str;
     id itm = [json valueForKey:@"cam"];
     if ([itm isKindOfClass:[NSDictionary class]]) {
         NSDictionary *cam = [json objectForKey:@"cam"];
-        str = [NSString stringWithFormat:@"%@",cam[@"URLstream"]];
+        URLstream = [NSString stringWithFormat:@"%@",cam[@"URLstream"]];
         //str = [NSString stringWithFormat:@"%@/getCameraStream/5",[[rckt alloc] GetServerURL]];
         ratio = [[cam objectForKey:@"resolutionHeight"] floatValue] / [[cam objectForKey:@"resolutionWidth"] floatValue];
     }
-    [self doAPIrequest:[NSURL URLWithString:str]];
+    [self doAPIrequest:[NSURL URLWithString:URLstream]];
     [self addImageToView];
 
 }
@@ -144,7 +144,7 @@ static NSData *_endMarkerData = nil;
                                           options:0
                                             range:NSMakeRange(0, _receivedData.length)];
     
-    int endLocation = endRange.location + endRange.length;
+    long endLocation = endRange.location + endRange.length;
     if (_receivedData.length >= endLocation) {
         NSData *imageData = [_receivedData subdataWithRange:NSMakeRange(0, endLocation)];
         UIImage *receivedImage = [UIImage imageWithData:imageData];
@@ -175,8 +175,30 @@ static NSData *_endMarkerData = nil;
     
 }
 -(void)addImageToView {
-    [_image setFrame: CGRectMake(_image.frame.origin.x, _image.frame.origin.y, _image.frame.size.width, _image.frame.size.width * ratio)];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        [_image setFrame: CGRectMake(_image.frame.origin.x, _image.frame.origin.y, _image.frame.size.width, _image.frame.size.width * ratio)];
+    else {
+        float height = _image.frame.size.width * ratio;
+        [_image setFrame: CGRectMake(0, ((self.view.frame.size.height-height)/2)+20, _image.frame.size.width, height)];
+    }
+    
     [_image setImage:_img];
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    if ([touch view] == _image) {
+        UIStoryboard *storyboard;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            rcktCameraFormSheet *vc = (rcktCameraFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"CameraFormSheet"];
+            [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+            [vc setStreamValues:URLstream ratio:ratio];
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+    }
+}
+
 
 @end

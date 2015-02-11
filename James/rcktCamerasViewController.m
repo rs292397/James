@@ -11,6 +11,7 @@
 #import "CoreGraphics/CoreGraphics.h"
 #import "rcktCameraCollectionViewCell.h"
 #import "rcktCameraFormSheet.h"
+#import "rcktLabelTableViewCell.h"
 
 
 @interface rcktCamerasViewController ()
@@ -53,12 +54,6 @@ static NSData *_endMarkerData = nil;
         _endMarkerData = [[NSData alloc] initWithBytes:endMarker length:2];
     }
     
-    UINavigationItem *navitm = self.navbaritem;
-    //navitm.title = [NSString stringWithFormat:@"Doorbell Messages"];
-    UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Full Screen" style:UIBarButtonItemStyleDone target:self action:@selector(openFullScreen:)];
-    navitm.rightBarButtonItem = br;
-
-    
     [self fetchData];
 
 }
@@ -93,6 +88,8 @@ static NSData *_endMarkerData = nil;
         [_camerasArray addObject:[json objectForKey:key]];
     }
     [self.cams reloadData];
+    
+
 }
 
 
@@ -151,7 +148,7 @@ static NSData *_endMarkerData = nil;
                                           options:0
                                             range:NSMakeRange(0, _receivedData.length)];
     
-    int endLocation = endRange.location + endRange.length;
+    long endLocation = endRange.location + endRange.length;
     if (_receivedData.length >= endLocation) {
         NSData *imageData = [_receivedData subdataWithRange:NSMakeRange(0, endLocation)];
         UIImage *receivedImage = [UIImage imageWithData:imageData];
@@ -196,7 +193,7 @@ static NSData *_endMarkerData = nil;
     
     rcktCameraCollectionViewCell *cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"cameraCollectionViewCell" forIndexPath:indexPath];
     
-    cell.key.text = [NSString stringWithFormat:@"%d", indexPath.row];
+    cell.key.text = [NSString stringWithFormat:@"%d",indexPath.row];
     cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
     
     
@@ -214,31 +211,95 @@ static NSData *_endMarkerData = nil;
         [self closeCam];
         [self doAPIrequest:[NSURL URLWithString:URLstream]];
         _img = nil;
+        [_navbaritem setTitle:weakCell.lbl.text];
         [self addImageToView];
 
     }];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && indexPath.section==0 && indexPath.section==0) {
+        [self.activityIndicator startAnimating];
+        URLstream = [NSString stringWithFormat:@"%@",item[@"URLstream"]];
+        ratio = [item[@"resolutionHeight"] floatValue] / [item[@"resolutionWidth"] floatValue];
+        [self closeCam];
+        [self doAPIrequest:[NSURL URLWithString:URLstream]];
+        _img = nil;
+        [_navbaritem setTitle:cell.lbl.text];
+        [self addImageToView];
+    }
+
     return cell;
 }
+
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _camerasArray.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *item = [self.camerasArray objectAtIndex:indexPath.row];
+    static NSString *CellIdentifier = @"labelTableViewCell";
+    rcktLabelTableViewCell *cell = [tableView
+                                    dequeueReusableCellWithIdentifier:CellIdentifier
+                                    forIndexPath:indexPath];
+    
+    cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
+    cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
+    cell.img.image = [UIImage imageNamed:@"camera_icon.png"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+#pragma mark - TableView delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *item = [_camerasArray objectAtIndex:indexPath.row];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    rcktCameraFormSheet *vc = (rcktCameraFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"CameraFormSheet"];
+    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    ratio = [[item objectForKey:@"resolutionHeight"] floatValue] / [[item objectForKey:@"resolutionWidth"] floatValue];
+    [vc setStreamValues:[NSString stringWithFormat:@"%@", item[@"URLstream"]] ratio:ratio];
+    [vc setTitle:[NSString stringWithFormat:@"%@", item[@"description"]]];
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
 
 -(void)addImageToView {
     [_image setFrame: CGRectMake(_image.frame.origin.x, _image.frame.origin.y, _image.frame.size.width, _image.frame.size.width * ratio)];
     [_image setImage:_img];
 }
 
--(IBAction)openFullScreen:(id)sender {
 
-    UIStoryboard *storyboard;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-        storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    else
-        storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    
-    rcktCameraFormSheet *vc = (rcktCameraFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"CameraFormSheet"];
-    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    [vc setStreamValues:URLstream ratio:ratio];
-    [self presentViewController:vc animated:YES completion:nil];
-
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    if ([touch view] == _image) {
+        UIStoryboard *storyboard;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        else
+            storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        
+        rcktCameraFormSheet *vc = (rcktCameraFormSheet*)[storyboard instantiateViewControllerWithIdentifier:@"CameraFormSheet"];
+        [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+        [vc setStreamValues:URLstream ratio:ratio];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
+
 
 
 @end

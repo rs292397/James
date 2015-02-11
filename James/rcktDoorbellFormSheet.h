@@ -11,6 +11,7 @@
 #import "rckt.h"
 
 @interface rcktDoorbellFormSheet : UIViewController <AVAudioPlayerDelegate> {
+    NSString *URLstream;
     float ratio;
 }
 
@@ -24,5 +25,6 @@
 
 
 -(void)playDoorbellSound:(NSString*)sound;
+
 
 @end
