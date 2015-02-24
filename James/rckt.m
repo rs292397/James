@@ -14,18 +14,82 @@
     
 #import "rckt.h"
 #import "rcktDoorbellFormSheet.h"
+#import "rcktAES.h"
 
 @implementation rckt
 
 
-- (NSString*)GetServerURL {
+- (NSString*)GetServerURL2 {
     
     //NSString *deviceName = [[UIDevice currentDevice] name];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"],[prefs objectForKey:@"DEVICETOKEN"]];
-//    return [NSString stringWithFormat:@"http://192.168.1.104:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
-    return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+    return [NSString stringWithFormat:@"http://192.168.1.114:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+//    return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
 }
+
+
+- (NSString*)GetServerURL {
+    
+    rcktAES *AEShandler = [rcktAES alloc];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    NSString *secondStr = [NSString stringWithFormat:@"%@",[prefs objectForKey:@"PASSWORD"]];
+    NSData *strData = [NSData dataWithBytes:[secondStr UTF8String] length:[[secondStr dataUsingEncoding:NSUTF8StringEncoding] length]];
+
+    NSString *firstKey = [AEShandler createKeyFromPassword:secondStr];
+    NSString *secondKey = [self GenerateKey]; //@"0123456789abcdef"; //
+    
+    //NSLog(@"Generated secondkey %@", secondKey);
+    //NSLog(@"Stored firstkey %@", firstKey);
+
+    //First encryption with generated key
+    NSData *encryptedData = [AEShandler AES128Encrypt:strData key:secondKey];
+    if (encryptedData!=nil)
+    {
+        NSString *firstString = [NSString stringWithFormat:@"%@%@", secondKey, [AEShandler hexStringFromData:encryptedData]];
+        strData = [NSData dataWithBytes:[firstString UTF8String] length:[[firstString dataUsingEncoding:NSUTF8StringEncoding] length]];
+        encryptedData = [AEShandler AES128Encrypt:strData key:firstKey];
+        if (encryptedData!=nil) {
+            NSString *encryptedHexString = [AEShandler hexStringFromData:encryptedData];
+            //NSLog(@"Encrypted HexString : %@",encryptedHexString);
+            //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"],[prefs objectForKey:@"DEVICETOKEN"]];
+            return [NSString stringWithFormat:@"http://192.168.1.114:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], encryptedHexString];
+            //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+        }
+        else
+            return nil;
+    }
+    else
+        return nil;
+    
+}
+
+- (void) SetAESkey {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:[prefs objectForKey:@"AESKEYNEW"] forKey:@"AESKEY"];
+    [prefs synchronize];
+}
+
+- (NSString*) GenerateKey {
+    
+    NSString *str = @"";
+    
+    for (int i=0;i<16;i++) {
+        int rndm = arc4random_uniform(62);
+        if (rndm<10) {
+            str = [NSString stringWithFormat:@"%@%c", str,rndm+48];
+        } else if (rndm <36) {
+            str = [NSString stringWithFormat:@"%@%c", str,rndm+55];
+        } else {
+            str = [NSString stringWithFormat:@"%@%c", str,rndm+61];
+        }
+    }
+    return str;
+    
+}
+
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -120,6 +184,7 @@
     return aiv;
 
 }
+
 
 
 @end

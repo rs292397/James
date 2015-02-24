@@ -36,8 +36,8 @@
     
     settings = @{@"Server settings" : @[
                          @[@"SERVERURL", @"URL", @"http://192.168.0.100"],
-                         @[@"DEVICEID", @"ID", @"James iPad"],
-                         @[@"DEVICETOKEN", @"Token", @"A1b2C3d4E5"]
+                         @[@"DEVICEID", @"Name", @"James iPad"],
+                         @[@"PASSWORD", @"Password", @"0123456789abcdef"]
                          ]
                  };
     settingSectionTitles = [[settings allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];

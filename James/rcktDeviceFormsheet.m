@@ -20,12 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    urlServer = [[rckt alloc] GetServerURL];
-
+    
     settings = @{@"A" : @[
                          @[@"KEY", @"Identifier", @"1"],
                          @[@"NAME", @"Name", @"James iPad"],
-                         @[@"TOKEN", @"Token", @"A1b2C3d4E5"]
+                         @[@"PWD", @"Password", @"0123456789abcdef"]
                          ],
                  @"Z" : @[
                          @[@"DELETE", @"Delete Device", @"Delete Device"]
@@ -74,13 +73,13 @@
                 key = [NSString stringWithFormat:@"%@", rcktCell.txt.text];
             else if ([rcktCell.key.text isEqualToString:@"NAME"])
                 name = [NSString stringWithFormat:@"%@", rcktCell.txt.text];
-            else if ([rcktCell.key.text isEqualToString:@"TOKEN"])
+            else if ([rcktCell.key.text isEqualToString:@"PWD"])
                 token = [NSString stringWithFormat:@"%@", rcktCell.txt.text];
             
         }
     }
-    NSString *postData = [NSString stringWithFormat:@"{\"name\":\"%@\", \"token\":\"%@\"}", name, token];
-    NSString *url = [NSString stringWithFormat:@"%@/saveObject/device/%@", urlServer, key];
+    NSString *postData = [NSString stringWithFormat:@"{\"name\":\"%@\", \"pwd\":\"%@\"}", name, token];
+    NSString *url = [NSString stringWithFormat:@"%@/saveObject/device/%@", [[rckt alloc] GetServerURL] , key];
     //NSLog(@"%@", postData);
     //NSLog(@"%@", url);
     [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
@@ -188,7 +187,7 @@
                 cell.txt.text = key;
             else if ([[sectionSetting objectAtIndex:0] isEqualToString:@"NAME"])
                 cell.txt.text = name;
-            else if ([[sectionSetting objectAtIndex:0] isEqualToString:@"TOKEN"])
+            else if ([[sectionSetting objectAtIndex:0] isEqualToString:@"PWD"])
                 cell.txt.text = token;
         }
         return cell;
@@ -212,7 +211,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
     if (buttonIndex==0) {
-        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteObject/device/%@", urlServer,key]]];
+        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteObject/device/%@", [[rckt alloc] GetServerURL],key]]];
     }
 }
 

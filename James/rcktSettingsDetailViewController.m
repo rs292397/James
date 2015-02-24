@@ -7,7 +7,6 @@
 //
 
 #import "rcktSettingsDetailViewController.h"
-#import "rckt.h"
 #import "rcktLabelTableViewCell.h"
 #import "rcktSwitchTableViewCell.h"
 #import "rcktSplashViewController.h"
@@ -32,8 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    rckt *r = [rckt alloc];
-    urlServer = [r GetServerURL];
+    r = [rckt alloc];
+   
     self.activityIndicator = [r getActivityIndicator:self.view];
     [self.view addSubview:self.activityIndicator];
 
@@ -134,7 +133,7 @@
             [prefs synchronize];
 
             NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":%s}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],[prefs boolForKey:@"NOTIFY_DOORBELL"]? "true" : "false"];
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [[rckt alloc] GetServerURL]]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [r GetServerURL]]];
             [self doAPIrequestPUT:url postData:postData];
 
         }];
@@ -256,19 +255,14 @@
     //initialize convert the received data to string with UTF8 encoding
     NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", htmlSTR);
-    NSString *urlConnection = connection.originalRequest.URL.absoluteString;
-    if ([[[rckt alloc] GetServerURL] isEqualToString:urlConnection]) {
-        NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-        NSString *keyCode = [json valueForKey:@"code"];
-        if (keyCode!=nil) {
-            NSInteger code = [keyCode integerValue];
-            if (code<0) {
-                NSLog(@"fout");
-            } else {
-                [prefs setObject:[NSString stringWithFormat:@"%@", [json valueForKey:@"message"]] forKey:@"DEVICETOKEN"];
-                [prefs synchronize];
-          }
+
+    NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+    NSString *keyCode = [json valueForKey:@"code"];
+    if (keyCode!=nil) {
+        NSInteger code = [keyCode integerValue];
+        if (code<0) {
+            NSLog(@"fout");
         }
     }
     [self.activityIndicator stopAnimating];

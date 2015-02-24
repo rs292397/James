@@ -19,8 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    rckt *r = [rckt alloc];
-    urlServer = [r GetServerURL];
+    r = [rckt alloc];
     self.activityIndicator = [r getActivityIndicator:self.view];
     [self.view addSubview:self.activityIndicator];
     
@@ -59,7 +58,7 @@
 
 - (void)refreshTable
 {
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllShades", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllShades", [r GetServerURL]]]];
 }
 
 - (void)fetchData {
@@ -158,16 +157,16 @@
     //NSLog(@"%@", htmlSTR);
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@", urlConnection );
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getAll",urlServer]]) {
+    if ([urlConnection containsString:@"/getAll"]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        if ([urlConnection isEqualToString:[NSString stringWithFormat:@"%@/getAllShades",urlServer]])
+        if ([urlConnection containsString:@"/getAllShades"])
             [prefs setObject:htmlSTR forKey:@"SHADES"];
         [prefs synchronize];
         if (refreshControl.isRefreshing)
             [refreshControl endRefreshing];
         [self fetchData];
     }
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/control",urlServer]]) {
+    else if ([urlConnection containsString: @"/control"]) {
         [self.activityIndicator stopAnimating];
     }
 }
@@ -207,14 +206,14 @@
     [cell setDidTapOpenBlock:^(id sender) {
         NSString *postData;
         postData = [NSString stringWithFormat:@"{\"command\":\"111\"}"];
-        NSString *url = [NSString stringWithFormat:@"%@/controlShade/%@", urlServer, weakCell.key.text];
+        NSString *url = [NSString stringWithFormat:@"%@/controlShade/%@", [r GetServerURL], weakCell.key.text];
         [self.activityIndicator startAnimating];
         [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
     }];
     [cell setDidTapCloseBlock:^(id sender) {
         NSString *postData;
         postData = [NSString stringWithFormat:@"{\"command\":\"110\"}"];
-        NSString *url = [NSString stringWithFormat:@"%@/controlShade/%@", urlServer, weakCell.key.text];
+        NSString *url = [NSString stringWithFormat:@"%@/controlShade/%@", [r GetServerURL], weakCell.key.text];
         [self.activityIndicator startAnimating];
         [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
     }];
@@ -238,7 +237,7 @@
     
     NSDictionary *itm = [self.shadesArray objectAtIndex:indexPath.row];
     [self.activityIndicator startAnimating];
-    NSString *url = [NSString stringWithFormat:@"%@/controlShade/%@", urlServer, itm[@"ID"]];
+    NSString *url = [NSString stringWithFormat:@"%@/controlShade/%@", [r GetServerURL], itm[@"ID"]];
     [self doAPIrequest: [NSURL URLWithString:url]];
     
 }

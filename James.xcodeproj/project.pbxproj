@@ -23,7 +23,6 @@
 		93250D051A6542C900C2AAB6 /* rcktDoorbellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D041A6542C900C2AAB6 /* rcktDoorbellViewController.m */; };
 		93250D081A654BBB00C2AAB6 /* rcktMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93250D071A654BBB00C2AAB6 /* rcktMessageTableViewCell.m */; };
 		932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932D79E41A1FD473004721C1 /* AVFoundation.framework */; };
-		933F304E1A7C1E8900392723 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933F304D1A7C1E8900392723 /* MediaPlayer.framework */; };
 		933FE7C81A67127F003418AD /* rcktSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 933FE7C71A67127F003418AD /* rcktSwitchTableViewCell.m */; };
 		9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342C23E19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m */; };
 		9348ACBA1A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348ACB91A72C3CF00F7CE43 /* rcktCameraCollectionViewCell.m */; };
@@ -45,6 +44,8 @@
 		934DA0B91A77E74D00674B9A /* ring2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B61A77E74D00674B9A /* ring2.caf */; };
 		934DA0BA1A77E74D00674B9A /* ring11.caf in Resources */ = {isa = PBXBuildFile; fileRef = 934DA0B71A77E74D00674B9A /* ring11.caf */; };
 		9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */; };
+		9359906F1A9A17880035F4CA /* rcktAES.m in Sources */ = {isa = PBXBuildFile; fileRef = 9359906E1A9A17880035F4CA /* rcktAES.m */; };
+		935990711A9A195D0035F4CA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935990701A9A195D0035F4CA /* Security.framework */; };
 		936706E91A6EE3F3000C3E4B /* rcktShadesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */; };
 		936706EC1A6EE860000C3E4B /* rcktShadeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936706EB1A6EE860000C3E4B /* rcktShadeTableViewCell.m */; };
 		939DB44919C76B5300BAE483 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939DB44819C76B5300BAE483 /* iPhone.storyboard */; };
@@ -143,6 +144,10 @@
 		934DA0B71A77E74D00674B9A /* ring11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ring11.caf; path = Ringtones/ring11.caf; sourceTree = "<group>"; };
 		9356564119B8E3C7006B4386 /* rcktSaveSceneFormsheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktSaveSceneFormsheet.h; sourceTree = "<group>"; };
 		9356564219B8E3C7006B4386 /* rcktSaveSceneFormsheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktSaveSceneFormsheet.m; sourceTree = "<group>"; };
+		935990681A9A159A0035F4CA /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
+		9359906D1A9A17880035F4CA /* rcktAES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktAES.h; sourceTree = "<group>"; };
+		9359906E1A9A17880035F4CA /* rcktAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktAES.m; sourceTree = "<group>"; };
+		935990701A9A195D0035F4CA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		936706E71A6EE3F3000C3E4B /* rcktShadesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadesViewController.h; sourceTree = "<group>"; };
 		936706E81A6EE3F3000C3E4B /* rcktShadesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rcktShadesViewController.m; sourceTree = "<group>"; };
 		936706EA1A6EE860000C3E4B /* rcktShadeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rcktShadeTableViewCell.h; sourceTree = "<group>"; };
@@ -193,7 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				933F304E1A7C1E8900392723 /* MediaPlayer.framework in Frameworks */,
+				935990711A9A195D0035F4CA /* Security.framework in Frameworks */,
 				93FD20411A2245E0009746C5 /* CFNetwork.framework in Frameworks */,
 				932D79E51A1FD473004721C1 /* AVFoundation.framework in Frameworks */,
 				93FE276319576A1C00977594 /* CoreGraphics.framework in Frameworks */,
@@ -266,6 +271,8 @@
 			children = (
 				93082D9B1979B1BD00465F68 /* rckt.h */,
 				93082D9C1979B1BD00465F68 /* rckt.m */,
+				9359906D1A9A17880035F4CA /* rcktAES.h */,
+				9359906E1A9A17880035F4CA /* rcktAES.m */,
 			);
 			name = Handlers;
 			sourceTree = "<group>";
@@ -417,6 +424,8 @@
 		93FE275F19576A1C00977594 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				935990701A9A195D0035F4CA /* Security.framework */,
+				935990681A9A159A0035F4CA /* libcommonCrypto.dylib */,
 				933F304D1A7C1E8900392723 /* MediaPlayer.framework */,
 				93FD20401A2245E0009746C5 /* CFNetwork.framework */,
 				932D79E41A1FD473004721C1 /* AVFoundation.framework */,
@@ -606,6 +615,7 @@
 				93082DB51979D53200465F68 /* rcktLightsDetailViewController.m in Sources */,
 				9356564319B8E3C7006B4386 /* rcktSaveSceneFormsheet.m in Sources */,
 				93206CE21A0F9E8200784062 /* rcktCamerasViewController.m in Sources */,
+				9359906F1A9A17880035F4CA /* rcktAES.m in Sources */,
 				93082D9D1979B1BD00465F68 /* rckt.m in Sources */,
 				9342C23F19D5E8CE005C93E6 /* rcktSettingsDevicesViewController.m in Sources */,
 				93250D081A654BBB00C2AAB6 /* rcktMessageTableViewCell.m in Sources */,
@@ -760,6 +770,10 @@
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -778,6 +792,10 @@
 				GCC_PREFIX_HEADER = "James/James-Prefix.pch";
 				INFOPLIST_FILE = "James/James-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

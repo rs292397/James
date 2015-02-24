@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h"
 
 @interface rcktSettingsDetailViewController : UIViewController {
     
     NSDictionary *settingsItems;
     NSArray *settingsItemSectionTitles;
     
-    NSString *urlServer;
+    rckt *r;
     NSUserDefaults *prefs;
 }
 

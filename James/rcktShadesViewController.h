@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h"
 
 @interface rcktShadesViewController : UIViewController {
     UIRefreshControl *refreshControl;
-    NSString *urlServer;
+    rckt *r;
 }
 
 @property (nonatomic, strong) NSMutableArray *shadesArray;

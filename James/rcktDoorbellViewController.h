@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h"
 
 @interface rcktDoorbellViewController : UIViewController {
-    NSString *urlServer;
+    rckt *r;
     UIRefreshControl *refreshControl;
 }
 

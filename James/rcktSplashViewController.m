@@ -78,12 +78,13 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
     //Create userdefaults if not exist
+    if ([prefs objectForKey:@"PASSWORD"]==nil)
+        [prefs setObject:@"myPassword" forKey:@"PASSWORD"];
+
     if ([prefs objectForKey:@"NOTIFY_DOORBELL"]==nil)
         [prefs setBool:NO forKey:@"NOTIFY_DOORBELL"];
     if ([prefs objectForKey:@"NOTIFICATION_TOKEN"]==nil)
         [prefs setObject:@"" forKey:@"NOTIFACTION_TOKEN"];
-    if ([prefs objectForKey:@"DEVICE_TOKEN"]==nil)
-        [prefs setObject:@"1234567890" forKey:@"DEVICE_TOKEN"];
     if ([prefs objectForKey:@"AREAS"]==nil)
         [prefs setObject:@"" forKey:@"AREAS"];
     if ([prefs objectForKey:@"LIGHTS"]==nil)
@@ -113,9 +114,8 @@
     
     count = 0;
     r = [[rckt alloc] init];
-    NSString *urlServer = [r GetServerURL];
     NSString *postData = [NSString stringWithFormat:@"{\"iosToken\":\"%@\", \"iosNotifyDoorbell\":%s}", [prefs objectForKey:@"NOTIFICATION_TOKEN"],[prefs boolForKey:@"NOTIFY_DOORBELL"]? "true" : "false"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlServer]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [r GetServerURL]]];
     if (url != nil)
         [self doAPIrequestPUT:url postData:postData];
     else
@@ -203,6 +203,8 @@
  */
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
+    [r SetAESkey];
+    
     //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
     NSError* error;
     //initialize convert the received data to string with UTF8 encoding
@@ -211,15 +213,15 @@
     
     
     //NSLog(@"%@", htmlSTR);
-    NSString *urlServer = [[rckt alloc] GetServerURL];
+    //NSString *urlServer = [[rckt alloc] GetServerURL];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@",urlConnection);
     //NSLog(@"%@", urlServer);
     count += 1;
     [self performSelectorOnMainThread:@selector(animateProgressBar) withObject:nil waitUntilDone:NO];
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
-    if ([urlServer isEqualToString:urlConnection]) {
+    if (count==1) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.receivedData options:kNilOptions error:&error];
         NSString *keyCode = [json valueForKey:@"code"];
         if (keyCode!=nil) {
@@ -228,39 +230,33 @@
                 [self presentForm];
                 NSLog(@"fout");
             } else {
-                NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-                [prefs setObject:[NSString stringWithFormat:@"%@", [json valueForKey:@"message"]] forKey:@"DEVICETOKEN"];
-                [prefs synchronize];
                 NSLog(@"%@",htmlSTR);
-                
-                NSString *urlServer = [[rckt alloc] GetServerURL];
-                //Get All Objects
-                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", urlServer]]];
+                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", [r GetServerURL]]]];
             }
         } else {
             [self presentForm];
             NSLog(@"Wrong URL");
         }
     } else {
-        if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllAreas",urlServer]]) {
+        if ([urlConnection containsString:@"getAllAreas"]) {
             [prefs setObject:htmlSTR forKey:@"AREAS"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllLights",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"getAllLights"]) {
             [prefs setObject:htmlSTR forKey:@"LIGHTS"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllShades", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllShades",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllShades", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"getAllShades"]) {
             [prefs setObject:htmlSTR forKey:@"SHADES"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllScenes",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"getAllScenes"]) {
             [prefs setObject:htmlSTR forKey:@"SCENES"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllButtons/3",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"getAllButtons/3"]) {
             [prefs setObject:htmlSTR forKey:@"SCENARIOS"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getFrontDoor", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getFrontDoor",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getFrontDoor", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"getFrontDoor"]) {
             [prefs setObject:htmlSTR forKey:@"FRONTDOOR"];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllCameras", urlServer]]];
-        } else if ([urlConnection isEqualToString: [NSString stringWithFormat:@"%@/getAllCameras",urlServer]]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllCameras", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"getAllCameras"]) {
             [prefs setObject:htmlSTR forKey:@"CAMERAS"];
         }
         [prefs synchronize];

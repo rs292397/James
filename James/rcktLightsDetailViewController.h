@@ -12,10 +12,10 @@
 @interface rcktLightsDetailViewController : UIViewController {
     IBOutlet UISegmentedControl *seg;
     UIRefreshControl *refreshControl;
-    NSString *urlServer;
     bool areaHasSwitch;
     NSString *areaSwitchID;
     bool areaSwitchState;
+    rckt *r;
 }
 
 @property (nonatomic, strong) NSString *areaID;

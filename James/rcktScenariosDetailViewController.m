@@ -30,7 +30,7 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    urlServer = [[rckt alloc] GetServerURL];
+    r = [rckt alloc];
     //initialize new mutable data
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
@@ -41,7 +41,7 @@
     refreshControl.attributedTitle = refreshString;
     [self.scenariosTableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", [r GetServerURL]]]];
     [self navigationItem].title = @"Scenarios";
 }
 
@@ -69,7 +69,7 @@
 - (void)refreshTable
 {
     //TODO
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllButtons/3", [r GetServerURL]]]];
 }
 
 - (void)fetchData {
@@ -155,7 +155,7 @@
  
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *itm = [self.scenariosArray objectAtIndex:indexPath.row];
-    NSString *url = [NSString stringWithFormat:@"%@/controlButton/%@", urlServer, itm[@"ID"]];
+    NSString *url = [NSString stringWithFormat:@"%@/controlButton/%@", [r GetServerURL], itm[@"ID"]];
     [self doAPIrequest:[NSURL URLWithString:url]];
  
     for (UITableViewCell* cell in [self.scenariosTableView visibleCells]) {
@@ -194,7 +194,7 @@
                                               encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", htmlSTR);
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getAll",urlServer]]) {
+    if ([urlConnection containsString: @"/getAll"]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:htmlSTR forKey:@"SCENARIOS"];
         [prefs synchronize];

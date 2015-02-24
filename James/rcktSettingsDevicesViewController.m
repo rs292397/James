@@ -10,6 +10,7 @@
 #import "rckt.h"
 #import "rcktLabelTableViewCell.h"
 #import "rcktDeviceFormsheet.h"
+#import "rcktAES.h"
 
 @interface rcktSettingsDevicesViewController ()
 
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self navigationItem].title = @"Devices";
-    urlServer = [[rckt alloc] GetServerURL];
+    r = [rckt alloc];
     //initialize new mutable data
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
@@ -34,7 +35,9 @@
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 
     
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllDevices", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllDevices", [r GetServerURL]]]];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,11 +48,11 @@
 - (void)refreshTable
 {
     //TODO
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllDevices", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllDevices", [r GetServerURL]]]];
 }
 
 - (void)didEditObject {
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllDevices", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllDevices", [r GetServerURL]]]];
 }
 
 /*
@@ -127,7 +130,7 @@
             else {
                 NSDictionary *item = [self.devicesArray objectAtIndex:indexPath.row];
                 cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"name"]];
-                cell.lbl02.text = [NSString stringWithFormat:@"%@", item[@"token"]];
+                cell.lbl02.text = [NSString stringWithFormat:@"%@", item[@"pwd"]];
                 cell.key.hidden=NO;
                 cell.key.text = [NSString stringWithFormat:@"%@", item[@"ID"]];
                 
@@ -198,9 +201,8 @@
                                               encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", htmlSTR);
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getAllDevices",urlServer]]) {
+    if ([urlConnection containsString: @"/getAllDevices"]) {
         [self fetchDevicesData:htmlSTR];
-        
     }
 }
 

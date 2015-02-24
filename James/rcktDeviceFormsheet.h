@@ -11,7 +11,7 @@
 @interface rcktDeviceFormsheet : UIViewController <UIAlertViewDelegate> {
     NSDictionary *settings;
     NSArray *settingSectionTitles;
-    NSString *urlServer;
+    
     
     NSString *key;
     NSString *name;

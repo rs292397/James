@@ -20,14 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.activityIndicator = [[rckt alloc] getActivityIndicator:_img];
-    [_img addSubview:self.activityIndicator];
-
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.activityIndicator = [[rckt alloc] getActivityIndicator:_img];
+        [_img addSubview:self.activityIndicator];
+    }
+    else {
+        self.activityIndicator = [[rckt alloc] getActivityIndicator:_messagesTableView];
+        [_messagesTableView addSubview:self.activityIndicator];
+    }
+    
     
     //initialize new mutable data
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
-    urlServer = [[[rckt alloc] init] GetServerURL];
+    
+    r = [rckt alloc];
 
     UINavigationItem *navitm = self.navbaritem;
     navitm.title = [NSString stringWithFormat:@"Doorbell Messages"];
@@ -36,7 +44,7 @@
     
     //Login to surveillancestation and activate stream in webview
     //NSString *str = [NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer];
-    NSString *str = [NSString stringWithFormat:@"%@/getMessagesByType/1", urlServer];
+    NSString *str = [NSString stringWithFormat:@"%@/getMessagesByType/1", [r GetServerURL]];
     [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]];
 }
 
@@ -126,7 +134,7 @@
     }
     else if (indexPath.section==0 && indexPath.row==0) {
         [self.activityIndicator startAnimating];
-        NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, cell.key.text];
+        NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", [r GetServerURL], cell.key.text];
         [self doAPIrequest:[NSURL URLWithString:url]];
     }
 
@@ -163,7 +171,7 @@
             [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
             [tableView endUpdates];
             NSString *key = [NSString stringWithFormat:@"%@",((rcktMessageTableViewCell*)cell).key.text];
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteObject/message/%@", urlServer,key]]];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteObject/message/%@", [r GetServerURL],key]]];
                 
                 
         }
@@ -178,7 +186,7 @@
         //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.activityIndicator startAnimating];
     NSDictionary *itm = [self.messagesArray objectAtIndex:indexPath.row];
-    NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", urlServer, itm[@"ID"]];
+    NSString *url = [NSString stringWithFormat:@"%@/getMessageImage/%@", [r GetServerURL], itm[@"ID"]];
     [self doAPIrequest:[NSURL URLWithString:url]];
 }
 
@@ -235,7 +243,7 @@
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@", urlConnection );
     
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/surveillanceStation/login", urlServer]]) {
+    if ([urlConnection containsString:@"/surveillanceStation/login"]) {
         /*
         NSLog(@"%@", htmlSTR);
         NSError* error;
@@ -251,7 +259,7 @@
         */
     }
 
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getMessagesByType", urlServer]]) {
+    else if ([urlConnection containsString:@"/getMessagesByType"]) {
         //NSLog(@"%@", htmlSTR);
         NSError* error;
         NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
@@ -259,7 +267,7 @@
         [self fetchMessages:json];
     }
 
-    else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getMessageImage", urlServer]]) {
+    else if ([urlConnection containsString:@"/getMessageImage"]) {
         
 //        NSError* error;
 //        NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];

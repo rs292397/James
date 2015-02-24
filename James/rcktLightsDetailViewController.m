@@ -34,8 +34,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    rckt *r = [rckt alloc];
-    urlServer = [r GetServerURL];
+    r = [rckt alloc];
     self.activityIndicator = [r getActivityIndicator:self.view];
     [self.view addSubview:self.activityIndicator];
     
@@ -75,16 +74,16 @@
         [self.lightsTableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         [self.lightsTableView endUpdates];
     }
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", [r GetServerURL]]]];
 }
 
 - (void)refreshTable
 {
     //TODO
     if (seg.selectedSegmentIndex == 0)
-        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
+        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", [r GetServerURL]]]];
     else if (seg.selectedSegmentIndex == 1)
-        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
+        [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", [r GetServerURL]]]];
 }
 
 - (void) reload:(NSString *)id description:(NSString *)description {
@@ -175,7 +174,7 @@
     else
         type=@"Lights";
     
-    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAll%@", urlServer, type]]];
+    [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAll%@", [r GetServerURL], type]]];
     [self fetchData];
 }
 
@@ -271,7 +270,7 @@
             [itmCell.swtch setOn:areaSwitchState];
             
             [itmCell setDidSwitchOnOffBlock:^(id sender) {
-                NSString *url = [NSString stringWithFormat:@"%@/controlButton/%@", urlServer, areaSwitchID];
+                NSString *url = [NSString stringWithFormat:@"%@/controlButton/%@", [r GetServerURL], areaSwitchID];
                 [self doAPIrequest:[NSURL URLWithString:url]];
             }];
 
@@ -323,6 +322,7 @@
         __weak rcktLightTableViewCell *weakCell=cell;
 
         [cell setDidSwitchOnOffBlock:^(id sender) {
+            [self.activityIndicator startAnimating];
             UISwitch *s = (UISwitch*) sender;
             NSString *postData;
             if (s.on)
@@ -330,11 +330,12 @@
             else
                 postData = [NSString stringWithFormat:@"{\"command\":\"1\", \"on\":\"false\", \"bri\": \"0\"}"];
             
-            NSString *url = [NSString stringWithFormat:@"%@/controlLight/%@", urlServer, weakCell.key.text];
+            NSString *url = [NSString stringWithFormat:@"%@/controlLight/%@", [r GetServerURL], weakCell.key.text];
             [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
         }];
         
         [cell setDidSliderBlock:^(id sender) {
+            [self.activityIndicator startAnimating];
             UISlider* s = (UISlider*) sender;
             NSString *postData;
             int val = (int) s.value;
@@ -342,7 +343,7 @@
                 postData = [NSString stringWithFormat:@"{\"command\":\"2\", \"on\":\"true\", \"bri\": \"%d\"}", val];
             else
                 postData = [NSString stringWithFormat:@"{\"command\":\"1\", \"on\":\"false\", \"bri\": \"0\"}"];
-            NSString *url = [NSString stringWithFormat:@"%@/controlLight/%@", urlServer, weakCell.key.text];
+            NSString *url = [NSString stringWithFormat:@"%@/controlLight/%@", [r GetServerURL], weakCell.key.text];
             [self doAPIrequestPUT:[NSURL URLWithString:url] postData:postData];
         }];
         
@@ -418,7 +419,7 @@
                 [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
                 [tableView endUpdates];
                 NSString *key = [NSString stringWithFormat:@"%@",((rcktLabelTableViewCell*)cell).key.text];
-                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", urlServer,key]]];
+                [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/deleteScene/%@", [r GetServerURL],key]]];
                 
                 
             }
@@ -437,7 +438,7 @@
     if (seg.selectedSegmentIndex==0 && indexPath.section==1) {
         NSDictionary *itm = [self.scenesArray objectAtIndex:indexPath.row];
         [self.activityIndicator startAnimating];
-        NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", urlServer, itm[@"ID"]];
+        NSString *url = [NSString stringWithFormat:@"%@/controlScene/%@", [r GetServerURL], itm[@"ID"]];
         [self doAPIrequest: [NSURL URLWithString:url]];
     }
 }
@@ -511,6 +512,8 @@
  */
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
+    [r SetAESkey];
+
     //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
     //NSError* error;
     //initialize convert the received data to string with UTF8 encoding
@@ -519,18 +522,18 @@
     //NSLog(@"%@", htmlSTR);
     NSString *urlConnection = connection.originalRequest.URL.absoluteString;
     //NSLog(@"%@", urlConnection );
-    if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/getAll",urlServer]]) {
+    if ([urlConnection containsString:@"/getAll"]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        if ([urlConnection isEqualToString:[NSString stringWithFormat:@"%@/getAllScenes",urlServer]])
+        if ([urlConnection containsString:@"/getAllScenes"])
             [prefs setObject:htmlSTR forKey:@"SCENES"];
-        else if ([urlConnection isEqualToString:[NSString stringWithFormat:@"%@/getAllLights",urlServer]])
+        else if ([urlConnection containsString:@"/getAllLights"])
             [prefs setObject:htmlSTR forKey:@"LIGHTS"];
         [prefs synchronize];
         if (refreshControl.isRefreshing)
             [refreshControl endRefreshing];
         [self fetchData];
     } else {
-        if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/deleteScene",urlServer]]) {
+        if ([urlConnection containsString:@"deleteScene"]) {
             NSError* error;
             NSData *jsonData = [htmlSTR dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
@@ -539,9 +542,9 @@
                 alert.alertViewStyle = UIAlertViewStyleDefault;
                 [alert show];
             }
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", urlServer]]];
-        } else if ([urlConnection hasPrefix:[NSString stringWithFormat:@"%@/controlScene",urlServer]]) {
-            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", urlServer]]];
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllScenes", [r GetServerURL]]]];
+        } else if ([urlConnection containsString:@"/controlScene"]) {
+            [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllLights", [r GetServerURL]]]];
         }
         [self.activityIndicator stopAnimating];
     }

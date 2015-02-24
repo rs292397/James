@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rckt.h" 
 
 @interface rcktScenariosDetailViewController : UIViewController {
-    NSString *urlServer;
+    rckt *r;
     UIRefreshControl *refreshControl;
 }
 
