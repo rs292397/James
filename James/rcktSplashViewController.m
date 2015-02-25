@@ -104,11 +104,6 @@
     if ([prefs objectForKey:@"CAM_URL"]==nil)
         [prefs setObject:@"" forKey:@"CAM_URL"];
 
-    
-    
-    
-    
-    
     [prefs setObject:[NSString stringWithFormat:@"%@", [deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"]] forKey:@"DEVICEID"];
     [prefs synchronize];
     
@@ -203,7 +198,6 @@
  */
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
-    [r SetAESkey];
     
     //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
     NSError* error;

@@ -512,8 +512,6 @@
  */
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
-    [r SetAESkey];
-
     //NSLog(@"%@", [self.connection.currentRequest.URL absoluteString]);
     //NSError* error;
     //initialize convert the received data to string with UTF8 encoding
