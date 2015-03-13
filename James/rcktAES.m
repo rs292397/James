@@ -169,6 +169,7 @@ NSString *iv = @"AAAAAAAAAAAAAAAA";
         {
             pwd = [pwd stringByAppendingString:@"x"];
         }
+        //NSLog(@"%@",pwd);
         return pwd;
     }
     

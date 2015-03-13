@@ -193,7 +193,7 @@ static NSData *_endMarkerData = nil;
     
     rcktCameraCollectionViewCell *cell = [collectionView  dequeueReusableCellWithReuseIdentifier:@"cameraCollectionViewCell" forIndexPath:indexPath];
     
-    cell.key.text = [NSString stringWithFormat:@"%d",indexPath.row];
+    cell.key.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     cell.lbl.text = [NSString stringWithFormat:@"%@", item[@"description"]];
     
     

@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
     
     settings = @{@"A" : @[
-                         @[@"KEY", @"Identifier", @"1"],
+                         @[@"KEY", @"Identifier", @"0"],
                          @[@"NAME", @"Name", @"James iPad"],
                          @[@"PWD", @"Password", @"0123456789abcdef"]
                          ],
@@ -36,7 +36,7 @@
     navitm.title = [NSString stringWithFormat:@"Device"];
     UIBarButtonItem *bl = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cmdCancel)];
     navitm.leftBarButtonItem = bl;
-    UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(cmdSaveScene)];
+    UIBarButtonItem *br = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(cmdSaveDevice)];
     navitm.rightBarButtonItem = br;
 
     
@@ -63,7 +63,7 @@
     token = dToken;
 }
 
-- (void)cmdSaveScene {
+- (void)cmdSaveDevice {
     
     NSArray *cells = [self.valuesTableView visibleCells];
     for (UITableViewCell *cell in cells) {
@@ -180,11 +180,18 @@
         cell.key.text = [sectionSetting objectAtIndex:0];
         cell.lbl.text = [sectionSetting objectAtIndex:1];
         if ([key isEqualToString:@"0"]) {
-            cell.txt.placeholder = [sectionSetting objectAtIndex:2];
+            if ([[sectionSetting objectAtIndex:0] isEqualToString:@"KEY"]) {
+                cell.txt.text = @"0";
+                cell.txt.enabled = NO;
+            }
+            else
+                cell.txt.placeholder = [sectionSetting objectAtIndex:2];
         }
         else {
-            if ([[sectionSetting objectAtIndex:0] isEqualToString:@"KEY"])
+            if ([[sectionSetting objectAtIndex:0] isEqualToString:@"KEY"]) {
                 cell.txt.text = key;
+                cell.txt.enabled = NO;
+            }
             else if ([[sectionSetting objectAtIndex:0] isEqualToString:@"NAME"])
                 cell.txt.text = name;
             else if ([[sectionSetting objectAtIndex:0] isEqualToString:@"PWD"])

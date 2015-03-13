@@ -24,8 +24,8 @@
     //NSString *deviceName = [[UIDevice currentDevice] name];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"],[prefs objectForKey:@"DEVICETOKEN"]];
-    return [NSString stringWithFormat:@"http://192.168.1.114:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
-//    return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+//    return [NSString stringWithFormat:@"http://192.168.1.114:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+    return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
 }
 
 
@@ -44,9 +44,8 @@
     if (encryptedData!=nil) {
         NSString *encryptedHexString = [AEShandler hexStringFromData:encryptedData];
         //NSLog(@"Encrypted HexString : %@",encryptedHexString);
-        //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[deviceName stringByReplacingOccurrencesOfString:@" " withString:@"_"],[prefs objectForKey:@"DEVICETOKEN"]];
-        return [NSString stringWithFormat:@"http://192.168.1.114:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], encryptedHexString];
-        //return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], [prefs objectForKey:@"DEVICETOKEN"]];
+        //return [NSString stringWithFormat:@"http://192.168.1.114:8080/James/API/%@/%@",[prefs objectForKey:@"DEVICEID"], encryptedHexString];
+        return [NSString stringWithFormat:@"%@/James/API/%@/%@",[prefs objectForKey:@"SERVERURL"],[prefs objectForKey:@"DEVICEID"], encryptedHexString];
     }
     else
         return nil;
@@ -56,10 +55,13 @@
 - (NSString*) GenerateKey {
     
     
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"YYYYMMddhhmmssSSS"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [dateFormat setLocale:usLocale];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    //NSLog(@"%@", [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:date]]);
     return [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:date]];
     
     /*

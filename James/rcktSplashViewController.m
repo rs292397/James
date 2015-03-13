@@ -222,9 +222,9 @@
             NSInteger code = [keyCode integerValue];
             if (code<0) {
                 [self presentForm];
-                NSLog(@"fout");
+                //NSLog(@"%@", [json valueForKey:@"message"]);
             } else {
-                NSLog(@"%@",htmlSTR);
+                //NSLog(@"%@",htmlSTR);
                 [self doAPIrequest: [NSURL URLWithString:[NSString stringWithFormat:@"%@/getAllAreas", [r GetServerURL]]]];
             }
         } else {
